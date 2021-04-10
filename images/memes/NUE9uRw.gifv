@@ -1,0 +1,388 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Imgur</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="copyright" content="Copyright 2021 Imgur, Inc." />
+        <meta id="viewport" name="viewport" content="width=750, user-scalable=yes" />
+        <link rel="stylesheet" type="text/css" href="//s.imgur.com/min/sharePlayer.css?1617642780" />
+
+        <style type="text/css">
+            #content, #video {
+                width:  750px;
+                height: 675px;
+            }
+
+            #chrome, #progress {
+                width: 750px;
+            }
+        </style>
+
+        <link rel="alternate" type="application/json+oembed" href="https://api.imgur.com/oembed.json?url=https://i.imgur.com/NUE9uRw.gifv" title="Imgur" />
+        <link rel="alternate" type="application/xml+oembed" href="https://api.imgur.com/oembed.xml?url=https://i.imgur.com/NUE9uRw.gifv" title="Imgur" />
+
+        <link rel="canonical"                 href="https://i.imgur.com/NUE9uRw.gifv" />
+
+        <meta property="og:site_name"         content="Imgur" />
+                <meta property="og:title"             content="Imgur"/>
+        <meta property="og:description"       content="2024538 views on Imgur" />
+        
+        <meta property="og:type"              content="video.other" />
+                <meta property="og:url"               content="https://i.imgur.com/NUE9uRw.gifv" />
+        <meta property="og:image"             content="https://i.imgur.com/NUE9uRw.jpg?play" />
+        <meta property="og:video:width"       content="750" />
+        <meta property="og:video:height"      content="675" />
+        <meta property="og:video"             content="https://i.imgur.com/NUE9uRw.mp4" />
+        <meta property="og:video:secure_url"  content="https://i.imgur.com/NUE9uRw.mp4" />
+        <meta property="og:video:type"        content="video/mp4" />
+        
+
+        <meta name="twitter:site"                       content="@imgur" />
+        <meta name="twitter:domain"                     content="imgur.com" />
+        <meta name="twitter:app:id:googleplay"          content="com.imgur.mobile" />
+        <meta name="twitter:card"                       content="player" />
+                <meta name="twitter:title"                      content="Imgur"/>
+        <meta name="twitter:description"                content="2024538 views on Imgur" />
+        
+        <meta name="twitter:image"                      content="https://i.imgur.com/NUE9uRw.jpg?play" />
+        <meta name="twitter:player"                     content="https://i.imgur.com/NUE9uRw.gifv?twitter#t" />
+        <meta name="twitter:player:width"               content="750" />
+        <meta name="twitter:player:height"              content="675" />
+        <meta name="twitter:player:stream"              content="https://i.imgur.com/NUE9uRw.mp4" />
+        <meta name="twitter:player:stream:content_type" content="video/mp4">
+        <meta name="monetization" content="$ilp.uphold.com/qgnqweAYkhkH">
+        <!-- Quantcast Choice. Consent Manager Tag v2.0 (for TCF 2.0) -->
+<script type="text/javascript" async=true>
+    (function () {
+        var host = 'imgur.com';
+        var element = document.createElement('script');
+        var firstScript = document.getElementsByTagName('script')[0];
+        var url = 'https://quantcast.mgr.consensu.org'
+            .concat('/choice/', 'f8oruOqDFlMeI', '/', host, '/choice.js')
+        var uspTries = 0;
+        var uspTriesLimit = 3;
+        element.async = true;
+        element.type = 'text/javascript';
+        element.src = url;
+        element.onload = function () {
+            var event = document.createEvent('Event');
+            event.initEvent('cmpLoaded', true, true);
+            window.dispatchEvent(event);
+        };
+        firstScript.parentNode.insertBefore(element, firstScript);
+        function makeStub() {
+            var TCF_LOCATOR_NAME = '__tcfapiLocator';
+            var queue = [];
+            var win = window;
+            var cmpFrame;
+            function addFrame() {
+                var doc = win.document;
+                var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+                if (!otherCMP) {
+                    if (doc.body) {
+                        var iframe = doc.createElement('iframe');
+                        iframe.style.cssText = 'display:none';
+                        iframe.name = TCF_LOCATOR_NAME;
+                        doc.body.appendChild(iframe);
+                    } else {
+                        setTimeout(addFrame, 5);
+                    }
+                }
+                return !otherCMP;
+            }
+            function tcfAPIHandler() {
+                var gdprApplies;
+                var args = arguments;
+                if (!args.length) {
+                    return queue;
+                } else if (args[0] === 'setGdprApplies') {
+                    if (
+                        args.length > 3 &&
+                        args[2] === 2 &&
+                        typeof args[3] === 'boolean'
+                    ) {
+                        gdprApplies = args[3];
+                        if (typeof args[2] === 'function') {
+                            args[2]('set', true);
+                        }
+                    }
+                } else if (args[0] === 'ping') {
+                    var retr = {
+                        gdprApplies: gdprApplies,
+                        cmpLoaded: false,
+                        cmpStatus: 'stub'
+                    };
+                    if (typeof args[2] === 'function') {
+                        args[2](retr);
+                    }
+                } else {
+                    queue.push(args);
+                }
+            }
+            function postMessageEventHandler(event) {
+                var msgIsString = typeof event.data === 'string';
+                var json = {};
+                try {
+                    if (msgIsString) {
+                        json = JSON.parse(event.data);
+                    } else {
+                        json = event.data;
+                    }
+                } catch (ignore) { }
+                var payload = json.__tcfapiCall;
+                if (payload) {
+                    window.__tcfapi(
+                        payload.command,
+                        payload.version,
+                        function (retValue, success) {
+                            var returnMsg = {
+                                __tcfapiReturn: {
+                                    returnValue: retValue,
+                                    success: success,
+                                    callId: payload.callId
+                                }
+                            };
+                            if (msgIsString) {
+                                returnMsg = JSON.stringify(returnMsg);
+                            }
+                            event.source.postMessage(returnMsg, '*');
+                        },
+                        payload.parameter
+                    );
+                }
+            }
+            while (win) {
+                try {
+                    if (win.frames[TCF_LOCATOR_NAME]) {
+                        cmpFrame = win;
+                        break;
+                    }
+                } catch (ignore) { }
+                if (win === window.top) {
+                    break;
+                }
+                win = win.parent;
+            }
+            if (!cmpFrame) {
+                addFrame();
+                win.__tcfapi = tcfAPIHandler;
+                win.addEventListener('message', postMessageEventHandler, false);
+            }
+        };
+        makeStub();
+        var uspStubFunction = function () {
+            var arg = arguments;
+            if (typeof window.__uspapi !== uspStubFunction) {
+                setTimeout(function () {
+                    if (typeof window.__uspapi !== 'undefined') {
+                        window.__uspapi.apply(window.__uspapi, arg);
+                    }
+                }, 500);
+            }
+        };
+        var checkIfUspIsReady = function () {
+            uspTries++;
+            if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+                console.warn('USP is not accessible');
+            } else {
+                clearInterval(uspInterval);
+            }
+        };
+        if (typeof window.__uspapi === 'undefined') {
+            window.__uspapi = uspStubFunction;
+            var uspInterval = setInterval(checkIfUspIsReady, 6000);
+        }
+    })();
+</script>
+<!-- End Quantcast Choice. Consent Manager Tag v2.0 (for TCF 2.0) -->
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+    _atrk_opts = { atrk_acct:"5Knnt1ah9W20em", domain:"imgur.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://certify.alexametrics.com/atrk.gif?account=5Knnt1ah9W20em" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->
+<!-- Quantcast Tag -->
+<script type="text/javascript">
+    var _qevents = _qevents || [];
+    (function() {
+        var elem = document.createElement('script');
+        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+        elem.async = true;
+        elem.type = "text/javascript";
+        var scpt = document.getElementsByTagName('script')[0];
+        scpt.parentNode.insertBefore(elem, scpt);
+    })();
+    _qevents.push({
+        qacct:"p-f8oruOqDFlMeI"
+    });
+</script>
+<noscript>
+    <div style="display:none;"><img src="//pixel.quantserve.com/pixel/p-f8oruOqDFlMeI.gif" border="0" height="1" width="1" alt="Quantcast"/></div>
+</noscript>
+<!-- End Quantcast tag -->
+<!-- Facebook Tag -->
+<script type="text/javascript">
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '742377892535530');
+    fbq('track', 'PageView');
+
+    if (document.location.search === '?reg') {
+        fbq('track', 'CompleteRegistration');
+    }
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=742377892535530&ev=PageView&noscript=1"/></noscript>
+<!-- End Facebook tag -->
+
+
+        <!--[if lte IE 8]><script type="text/javascript" src="//s.imgur.com/min/iepoly.js?1617642780"></script>
+<![endif]-->
+    </head>
+    <body id="body">
+        
+        <div id="content">
+            <script type="text/javascript">
+                window.image        = 'NUE9uRw';
+                window.image_size   = '11181655';
+                window.image_width  = '750';
+                window.image_height = '675';
+                window.cdn_url      = '//i.imgur.com';
+
+                if(navigator.userAgent.match(/Firefox/)) {
+                    document.body.className = document.body.className + ' firefox';
+                }
+            </script>
+            <div class="vid-container">
+                
+                
+                
+                <div class="post-image">
+    
+
+            <div class="video-container">
+            <script type="text/javascript">
+                var videoItem = {
+                    looping:  true,
+                    width:    750,
+                    height:   675,
+                    size:     11181655,
+                    gifUrl:   '//i.imgur.com/NUE9uRw.gif',
+                    forceGif: false,
+                    prefer_video: true,
+                    hash:     'NUE9uRw',
+                    forceLoadAll: false,
+                }
+            </script>
+            <video poster="//i.imgur.com/NUE9uRwh.jpg"
+                preload="auto"
+                autoplay="autoplay"
+                muted="muted"  loop="loop"
+            webkit-playsinline></video>
+            <div class="video-elements">
+                <source src="//i.imgur.com/NUE9uRw.mp4" type="video/mp4">
+            </div>
+            <progress value="0" max="100" min="0"></progress>
+            <div class="video-loader"></div>
+            <script id="scriptNUE9uRw" type="text/javascript" src="//s.imgur.com/min/imageViewerInline.js?1617642780"></script>
+
+            <meta itemprop="thumbnailUrl" content="https://i.imgur.com/NUE9uRwh.jpg" />
+            <meta itemprop="contentURL" content="https://i.imgur.com/NUE9uRw.mp4" />
+            <meta itemprop="embedURL" content="https://i.imgur.com/NUE9uRw.gifv" />
+        </div>
+    
+</div>
+
+            </div>
+            <script type="text/javascript">
+            var pixel_url = '//i.imgur.com/imageview.gif?a=NUE9uRw&r=' + encodeURIComponent(document.referrer);
+            var pixel = document.createElement('img');
+            pixel.src = pixel_url;
+            </script>
+
+            <div id="chrome">
+                <div class="icon">
+                    <a href="//imgur.com/NUE9uRw"><img src="//i.imgur.com/favicon.ico" /></a>
+                </div>
+                <div class="imgur">
+                    <a href="//imgur.com/NUE9uRw">Imgur</a>
+                </div>
+                <div class="controls">
+                    <a href="//imgur.com/download/NUE9uRw">download</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <script type="text/javascript" src="//s.imgur.com/min/sharePlayer.js?1617642780"></script>
+
+        <script>
+    // implemented following recommendations here: https://docs.coil.com/oauth-web-monetization
+    var owmto;
+    function getBtpToken(successCallback) {
+        if (Imgur.Environment && Imgur.Environment.subscription.isSubscribed === false) {
+            return;
+        }
+        $.ajax({
+            url: 'https://api.imgur.com' + '/account/v1/accounts/me/subscriptions/coil/btp',
+            xhrFields: {
+                withCredentials: true,
+            },
+            displayGenericError : false,
+            success: successCallback
+        });
+    }
+
+    function setRefreshTimeout(refreshFunc) {
+        if (owmto) {
+            clearTimeout(owmto);
+        }
+        // refresh btpToken every 25 minutes.
+        owmto = setTimeout(refreshFunc, 1.5e+6);
+    }
+
+    function refreshBtp() {
+        var refreshCB = function(data) {
+            document.coilMonetizationPolyfill.refreshBtpToken(data.btp_token);
+            setRefreshTimeout(refreshBtp);
+        };
+
+        getBtpToken(refreshCB);
+    }
+
+    function initMonetizationFallback(){
+        var initCB = function(data) {
+            Imgur.getInstance().bindMonetizationStartListener();
+            document.coilMonetizationPolyfill.init({
+                btpToken: data.btp_token,
+                btpEndpoint: 'btp+wss://coil.com/btp'
+            });
+            window.addEventListener('focus', refreshBtp);
+            setRefreshTimeout(refreshBtp);
+        };
+
+        getBtpToken(initCB);
+    }
+
+    if (document.monetization) {
+        document.monetizationExtensionInstalled = true;
+    } else {
+        document.monetization = document.createElement('div');
+        document.monetization.state = 'stopped';
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.defer = true
+        script.src = 'https://cdn.coil.com/coil-oauth-wm.v7.beta.js';
+        script.onload = function() {
+            initMonetizationFallback();
+        };
+        head.appendChild(script);
+    }
+</script>
+
+    </body>
+</html>
