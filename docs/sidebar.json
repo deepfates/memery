@@ -1,10 +1,10 @@
 {
-  "Notebook": {
-    "Export to modules": "/export",
-    "Convert to html": "/export2html",
-    "Show doc": "/showdoc",
-    "Test functions": "/test",
-    "Core functions": "/core",
-    "Command line functions": "/cli"
+  "memery": {
+    "Overview": "/",
+    "Core": "core.html",
+    "Download memes": "download_memes.html",
+    "MemeFolder": "folder.html",
+    "File utils": "fileutils.html",
+    "Title": "Untitled1.html"
   }
 }

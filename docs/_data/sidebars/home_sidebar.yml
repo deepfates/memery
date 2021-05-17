@@ -7,24 +7,24 @@ entries:
 - folders:
   - folderitems:
     - output: web,pdf
-      title: Export to modules
-      url: /export.html
+      title: Overview
+      url: /
     - output: web,pdf
-      title: Convert to html
-      url: /export2html.html
+      title: Core
+      url: core.html
     - output: web,pdf
-      title: Show doc
-      url: /showdoc.html
+      title: Download memes
+      url: download_memes.html
     - output: web,pdf
-      title: Test functions
-      url: /test.html
+      title: MemeFolder
+      url: folder.html
     - output: web,pdf
-      title: Core functions
-      url: /core.html
+      title: File utils
+      url: fileutils.html
     - output: web,pdf
-      title: Command line functions
-      url: /cli.html
+      title: Title
+      url: Untitled1.html
     output: web
-    title: Notebook
+    title: memery
   output: web
   title: Sidebar
