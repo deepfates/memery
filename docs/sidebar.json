@@ -2,9 +2,11 @@
   "memery": {
     "Overview": "/",
     "Core": "core.html",
-    "Download memes": "download_memes.html",
-    "MemeFolder": "folder.html",
-    "File utils": "fileutils.html",
-    "Title": "Untitled1.html"
+    "Loader": "loader.html",
+    "Crafter": "crafter.html",
+    "Encoder": "encoder.html",
+    "Indexer": "indexer.html",
+    "Ranker": "ranker.html",
+    "File Utils": "fileutils.html"
   }
 }

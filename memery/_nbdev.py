@@ -2,12 +2,36 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"MemeFolder": "02_folder.ipynb",
-         "printi": "03_fileutils.ipynb",
-         "top_bottom": "03_fileutils.ipynb",
-         "copy_topn_images": "03_fileutils.ipynb"}
+index = {"indexFlow": "00_core.ipynb",
+         "queryFlow": "00_core.ipynb",
+         "slugify": "01_loader.ipynb",
+         "get_image_files": "01_loader.ipynb",
+         "archive_loader": "01_loader.ipynb",
+         "db_loader": "01_loader.ipynb",
+         "treemap_loader": "01_loader.ipynb",
+         "make_dataset": "02_crafter.ipynb",
+         "pil_loader": "02_crafter.ipynb",
+         "DatasetImagePaths": "02_crafter.ipynb",
+         "clip_transform": "02_crafter.ipynb",
+         "crafter": "02_crafter.ipynb",
+         "device": "03_encoder.ipynb",
+         "image_encoder": "03_encoder.ipynb",
+         "text_encoder": "03_encoder.ipynb",
+         "join_all": "04_indexer.ipynb",
+         "build_treemap": "04_indexer.ipynb",
+         "save_archives": "04_indexer.ipynb",
+         "ranker": "05_ranker.ipynb",
+         "printi": "06_fileutils.ipynb",
+         "top_bottom": "06_fileutils.ipynb",
+         "copy_topn_images": "06_fileutils.ipynb"}
 
-modules = ["core.py"]
+modules = ["core.py",
+           "loader.py",
+           "crafter.py",
+           "encoder.py",
+           "indexer.py",
+           "ranker.py",
+           "utils.py"]
 
 doc_url = "https://deepfates.github.io/memery/"
 

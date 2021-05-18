@@ -13,17 +13,23 @@ entries:
       title: Core
       url: core.html
     - output: web,pdf
-      title: Download memes
-      url: download_memes.html
+      title: Loader
+      url: loader.html
     - output: web,pdf
-      title: MemeFolder
-      url: folder.html
+      title: Crafter
+      url: crafter.html
     - output: web,pdf
-      title: File utils
+      title: Encoder
+      url: encoder.html
+    - output: web,pdf
+      title: Indexer
+      url: indexer.html
+    - output: web,pdf
+      title: Ranker
+      url: ranker.html
+    - output: web,pdf
+      title: File Utils
       url: fileutils.html
-    - output: web,pdf
-      title: Title
-      url: Untitled1.html
     output: web
     title: memery
   output: web
