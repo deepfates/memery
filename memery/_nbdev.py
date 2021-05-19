@@ -23,7 +23,10 @@ index = {"indexFlow": "00_core.ipynb",
          "ranker": "05_ranker.ipynb",
          "printi": "06_fileutils.ipynb",
          "top_bottom": "06_fileutils.ipynb",
-         "copy_topn_images": "06_fileutils.ipynb"}
+         "copy_topn_images": "06_fileutils.ipynb",
+         "app": "07_cli.ipynb",
+         "search_folder": "07_cli.ipynb",
+         "__main__": "07_cli.ipynb"}
 
 modules = ["core.py",
            "loader.py",
@@ -31,7 +34,8 @@ modules = ["core.py",
            "encoder.py",
            "indexer.py",
            "ranker.py",
-           "utils.py"]
+           "utils.py",
+           "cli.py"]
 
 doc_url = "https://deepfates.github.io/memery/"
 

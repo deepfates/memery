@@ -10,7 +10,7 @@ def printi(images, n = 3, w = 200, start_index = 0):
     for im in images[start_index:start_index + n]:
 #         print(f'{im}')
         try:
-            display(IMG(filename=im[0], width=w))
+            display(IMG(filename=im, width=w))
         except Exception as e:
             print(e)
 # printi(image_names, 1)

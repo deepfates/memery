@@ -52,6 +52,6 @@ def queryFlow(path, query):
     print(f"Searching {len(db)} images")
     query_vec = text_encoder(query, device)
     indexes = ranker(query_vec, treemap)
-    ranked_files = [[v['fpath'] for k,v in db.items() if v['index'] == ind] for ind in indexes]
+    ranked_files = [[v['fpath'] for k,v in db.items() if v['index'] == ind][0] for ind in indexes]
     return(ranked_files)
 
