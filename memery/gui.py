@@ -26,17 +26,17 @@ def get_grid(filepaths, n=4):
 
 # Cell
 def update_tabs(path, query, n_images, searches, tabs, inputs):
-    if query.value:
+    stem = Path(path.value).stem
+    slug = f"{stem}:{str(query.value)}"
+    if slug not in searches.keys():
         ranked = queryFlow(path.value, query.value)
-
-        stem = Path(path.value).stem
-        slug = f"{stem}:{str(query.value)}"
         searches[f'{slug}'] = ranked
 
     tabs.children = [get_grid(v, n=n_images.value) for v in searches.values()]
-    tabs.selected_index = len(searches)-1
     for i, k in enumerate(searches.keys()):
         tabs.set_title(i, k)
+    tabs.selected_index = len(searches)-1
+
 
 #     return(True)
 
