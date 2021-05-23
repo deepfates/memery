@@ -2,8 +2,6 @@
 > Search over large image datasets with natural language and computer vision!
 
 
----
-
 ## Install
 
 The necessary CLIP and torch packages will be installed by pip. You might want to make sure you have a sane CUDA environment before and after this step if you're trying to use GPU. If you don't have a GPU, `memery` should still work on your CPU. 
@@ -11,8 +9,6 @@ The necessary CLIP and torch packages will be installed by pip. You might want t
 If you have any trouble please **open an issue**! I want to make this package useful for as many people as possible. Help me know what's going wrong :)
 
 `pip install memery`
-
----
 
 ## How to use
 
