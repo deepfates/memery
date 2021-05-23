@@ -1,5 +1,5 @@
 annoy==1.17.0
-clip==1.0
+clip
 torchvision==0.8.2
 tqdm==4.49.0
 ipywidgets==7.5.1
