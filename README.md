@@ -6,7 +6,7 @@
 
 The necessary CLIP and torch packages will be installed by pip. You might want to make sure you have a sane CUDA environment before and after this step if you're trying to use GPU. If you don't have a GPU, `memery` should still work on your CPU. 
 
-If you have any trouble please **open an issue**! I want to make this package useful for as many people as possible. Help me know what's going wrong :)
+If you have any trouble please **open an issue on Github**! I want to make this package useful for as many people as possible. Help me know what's going wrong :)
 
 `pip install memery`
 
@@ -55,21 +55,9 @@ from memery.gui import get_grid
 
 ```python
 ranked = queryFlow('./images', 'dad joke')
-```
 
-    Searching 78 images
-
-
-```python
-get_grid(ranked, n=3)
-```
-
-```python
 print(ranked[:5])
 ```
-
-    ['images/Wholesome-Meme-68.jpg', 'images/Wholesome-Meme-74.jpg', 'images/Wholesome-Meme-88.jpg', 'images/Wholesome-Meme-78.jpg', 'images/Wholesome-Meme-23.jpg']
-
 
 ## TODO:
 
