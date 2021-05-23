@@ -31,7 +31,13 @@ entries:
       title: File Utils
       url: fileutils.html
     - output: web,pdf
-      title: Title
+      title: CLI
+      url: cli.html
+    - output: web,pdf
+      title: GUI
+      url: gui.html
+    - output: web,pdf
+      title: Voila app
       url: app.html
     output: web
     title: memery

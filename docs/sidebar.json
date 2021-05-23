@@ -8,6 +8,8 @@
     "Indexer": "indexer.html",
     "Ranker": "ranker.html",
     "File Utils": "fileutils.html",
-    "Title": "app.html"
+    "CLI": "cli.html",
+    "GUI": "gui.html",
+    "Voila app": "app.html"
   }
 }

@@ -1,6 +1,6 @@
 ---
 
-title: Title
+title: GUI
 
 
 keywords: fastai
@@ -62,7 +62,7 @@ nb_path: "08_gui.ipynb"
 <li>Searching by tags additively</li>
 <li>Filtering out by tags</li>
 </ul>
-<p>Tags and filter categories can both be simulated with CLIP vectors of text tokens like "green" or "noisy" or "illustration" or "menswear". Size of image can be inferred directly from filesize or recorded from bitmap data in the <a href="/memery/crafter.html"><code>crafter</code></a>. Images as search queries and visually similar image browser are the same function but in different user interaction modes. And image links can be to local files, rather than homepages. Saving images not as relevant in this context, though easily sending them somewhere else is.</p>
+<p>Tags and filter categories can both be simulated with CLIP vectors of text tokens like "green" or "noisy" or "illustration" or "menswear". Size of image can be inferred directly from filesize or recorded from bitmap data in the <a href="/memery/crafter.html#crafter"><code>crafter</code></a>. Images as search queries and visually similar image browser are the same function but in different user interaction modes. And image links can be to local files, rather than homepages. Saving images not as relevant in this context, though easily sending them somewhere else is.</p>
 <p>Thus there are really three projects here:</p>
 <ul>
 <li>Basic app functionality with search and grid</li>
@@ -331,7 +331,7 @@ nb_path: "08_gui.ipynb"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;width&quot;</span><span class="p">:</span><span class="s1">&#39;100%&#39;</span><span class="p">})</span>
 
 <span class="k">with</span> <span class="n">out</span><span class="p">:</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">page</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -396,7 +396,7 @@ nb_path: "08_gui.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">appPage</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">appPage</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -420,20 +420,17 @@ nb_path: "08_gui.ipynb"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Searching 78 images
+</pre>
 </div>
-    {% endraw %}
+</div>
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">inputs</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 

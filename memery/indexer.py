@@ -4,9 +4,9 @@ __all__ = ['join_all', 'build_treemap', 'save_archives']
 
 # Cell
 def join_all(db, new_files, new_embeddings):
+    start = len(db)
     for i, file in enumerate(new_files):
         path, slug = file
-        start = len(db)
         index = i + start
         db[slug] = {
             'slug': slug,

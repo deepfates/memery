@@ -27,17 +27,16 @@ If you're in a Jupyter environment, you can summon the GUI directly into an outp
 
 ```python
 from memery.gui import appPage
+
 ```
 
 ```python
-appPage()
+app = appPage()
+display(app)
 ```
 
 
-
-
-    <memery.gui.appPage at 0x7f71622f6410>
-
+    <memery.gui.appPage at 0x7f6c0e7c80d0>
 
 
 ### Use CLI
@@ -55,7 +54,7 @@ Simply use `queryFlow` to search over a folder recursively! The folder will be i
 
 ```python
 from memery.core import queryFlow
-from memery.gui import get_image, get_grid
+from memery.gui import get_grid
 ```
 
 ```python
@@ -66,8 +65,15 @@ ranked = queryFlow('./images', 'dad joke')
 
 
 ```python
-get_grid(ranked, n=5)
+get_grid(ranked, n=3)
 ```
+
+```python
+print(ranked[:5])
+```
+
+    ['images/Wholesome-Meme-68.jpg', 'images/Wholesome-Meme-74.jpg', 'images/Wholesome-Meme-88.jpg', 'images/Wholesome-Meme-78.jpg', 'images/Wholesome-Meme-23.jpg']
+
 
 ## TODO:
 

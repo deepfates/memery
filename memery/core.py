@@ -9,7 +9,7 @@ from .loader import get_image_files, archive_loader, db_loader, treemap_loader
 from .crafter import crafter
 from .encoder import image_encoder, text_encoder
 from .indexer import join_all, build_treemap, save_archives
-from .ranker import ranker
+from .ranker import ranker, nns_to_files
 
 # Cell
 def indexFlow(path):
@@ -52,6 +52,6 @@ def queryFlow(path, query):
     print(f"Searching {len(db)} images")
     query_vec = text_encoder(query, device)
     indexes = ranker(query_vec, treemap)
-    ranked_files = [[v['fpath'] for k,v in db.items() if v['index'] == ind][0] for ind in indexes]
+    ranked_files = nns_to_files(db, indexes)
     return(ranked_files)
 
