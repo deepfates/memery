@@ -40,14 +40,14 @@ def queryFlow(path, query):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     dbpath = root/'memery.pt'
-    db = db_loader(dbpath)
+    db = db_loader(dbpath, device)
     treepath = root/'memery.ann'
     treemap = treemap_loader(treepath)
 
     if treemap == None or db == {}:
         dbpath, treepath = indexFlow(root)
         treemap = treemap_loader(Path(treepath))
-        db = file
+        db = db_loader(dbpath, device)
 
     print(f"Searching {len(db)} images")
     query_vec = text_encoder(query, device)
