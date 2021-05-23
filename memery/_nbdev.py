@@ -31,16 +31,7 @@ index = {"indexFlow": "00_core.ipynb",
          "get_grid": "08_gui.ipynb",
          "update_tabs": "08_gui.ipynb",
          "page_update": "08_gui.ipynb",
-         "inputs_layout": "08_gui.ipynb",
-         "path": "08_gui.ipynb",
-         "query": "08_gui.ipynb",
-         "n_images": "08_gui.ipynb",
-         "go": "08_gui.ipynb",
-         "all_inputs_layout": "08_gui.ipynb",
-         "inputs": "08_gui.ipynb",
-         "tabs": "08_gui.ipynb",
-         "page": "08_gui.ipynb",
-         "searches": "08_gui.ipynb"}
+         "appPage": "08_gui.ipynb"}
 
 modules = ["core.py",
            "loader.py",
