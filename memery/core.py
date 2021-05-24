@@ -3,6 +3,7 @@
 __all__ = ['indexFlow', 'queryFlow']
 
 # Cell
+import time
 import torch
 from pathlib import Path
 from .loader import get_image_files, archive_loader, db_loader, treemap_loader
@@ -22,6 +23,9 @@ def indexFlow(path):
     archive_db, new_files = archive_loader(filepaths, root, device)
     print(f"Loaded {len(archive_db)} encodings")
     print(f"Encoding {len(new_files)} new images")
+
+    start_time = time.perf_counter()
+
     crafted_files = crafter(new_files, device)
     new_embeddings = image_encoder(crafted_files, device)
 
@@ -31,7 +35,8 @@ def indexFlow(path):
 
     print(f"Saving {len(db)}images")
     save_paths = save_archives(root, t, db)
-    print("Done")
+    print(f"Done in {time.perf_counter() - start_time} seconds")
+
     return(save_paths)
 
 # Cell
@@ -50,8 +55,13 @@ def queryFlow(path, query):
         db = db_loader(dbpath, device)
 
     print(f"Searching {len(db)} images")
+    start_time = time.perf_counter()
+
     query_vec = text_encoder(query, device)
     indexes = ranker(query_vec, treemap)
     ranked_files = nns_to_files(db, indexes)
+
+    print(f"Done in {time.perf_counter() - start_time} seconds")
+
     return(ranked_files)
 
