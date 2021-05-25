@@ -28,7 +28,7 @@ def archive_loader(filepaths, root, device):
     db = db_loader(dbpath, device)
 
     current_slugs = [slug for path, slug in filepaths]
-    archive_db = {k:db[k] for k in db if k in current_slugs}
+    archive_db = {i:db[item[0]] for i, item in enumerate(db.items()) if item[1]['slug'] in current_slugs}
     archive_slugs = [v['slug'] for v in archive_db.values()]
     new_files = [(str(path), slug) for path, slug in filepaths if slug not in archive_slugs]
 

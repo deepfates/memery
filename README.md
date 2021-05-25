@@ -16,7 +16,7 @@ If you have any trouble please **open an issue on Github**! I want to make this 
 
 The browser GUI is a Voilá app, which basically runs a Jupyter notebook without showing any of the code cells. To use this way, navigate to your `memery` folder in a terminal and run:
 
-`voila app.ipynb`
+`voila serve app.ipynb`
 
 If you're in a Jupyter environment, you can summon the GUI directly into an output cell like this:
 

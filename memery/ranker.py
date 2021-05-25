@@ -9,4 +9,5 @@ def ranker(query_vec, treemap):
 
 # Cell
 def nns_to_files(db, indexes):
-    return([[v['fpath'] for k,v in db.items() if v['index'] == ind][0] for ind in indexes])
+#     return([[v['fpath'] for k,v in db.items() if v['index'] == ind][0] for ind in indexes])
+    return([db[ind]['fpath'] for ind in indexes])

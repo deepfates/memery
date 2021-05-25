@@ -8,11 +8,10 @@ def join_all(db, new_files, new_embeddings):
     for i, file in enumerate(new_files):
         path, slug = file
         index = i + start
-        db[slug] = {
+        db[index] = {
             'slug': slug,
             'fpath': path,
             'embed': new_embeddings[i],
-            'index': index
         }
     return(db)
 
@@ -22,8 +21,8 @@ from annoy import AnnoyIndex
 # Cell
 def build_treemap(db):
     treemap = AnnoyIndex(512, 'angular')
-    for v in db.values():
-        treemap.add_item(v['index'], v['embed'])
+    for k, v in db.items():
+        treemap.add_item(k, v['embed'])
 
     # Build the treemap, with 5 trees rn
     treemap.build(5)

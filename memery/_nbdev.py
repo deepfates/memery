@@ -30,7 +30,6 @@ index = {"indexFlow": "00_core.ipynb",
          "get_image": "08_gui.ipynb",
          "get_grid": "08_gui.ipynb",
          "update_tabs": "08_gui.ipynb",
-         "page_update": "08_gui.ipynb",
          "appPage": "08_gui.ipynb"}
 
 modules = ["core.py",
