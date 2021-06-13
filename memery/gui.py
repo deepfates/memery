@@ -20,7 +20,7 @@ def get_image(file_loc):
 
 # Cell
 def get_grid(filepaths, n=4):
-    imgs = [get_image(f) for f in filepaths[:n]]
+    imgs = [get_image(f) for f in filepaths[:n] if Path(f).exists()]
     grid = widgets.GridBox(imgs, layout=widgets.Layout(grid_template_columns="repeat(auto-fit, 200px)"))
     return(grid)
 
