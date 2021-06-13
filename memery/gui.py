@@ -54,7 +54,7 @@ class appPage():
         self.n_images = widgets.IntSlider(description='#', value=4, layout=self.inputs_layout)
         self.go = widgets.Button(description="Search", layout=self.inputs_layout)
         self.logbox = widgets.Output(layout=widgets.Layout(max_width='80%', height="3rem", overflow="none"))
-        self.all_inputs_layout =  widgets.Layout(max_width='100%', min_height='40vh', flex_flow='row wrap', align_content='flex-start')
+        self.all_inputs_layout =  widgets.Layout(max_width='80vw', min_height='40vh', flex_flow='row wrap', align_content='flex-start')
 
         self.inputs = widgets.Box([self.path, self.query, self.n_images, self.go, self.logbox], layout=self.all_inputs_layout)
         self.tabs = widgets.Tab()

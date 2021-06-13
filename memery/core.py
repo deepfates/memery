@@ -49,7 +49,8 @@ def queryFlow(path, query):
     treepath = root/'memery.ann'
     treemap = treemap_loader(treepath)
 
-    if treemap == None or db == {}:
+    filepaths = get_image_files(root)
+    if treemap == None or len(db) != len(filepaths):
         dbpath, treepath = indexFlow(root)
         treemap = treemap_loader(Path(treepath))
         db = db_loader(dbpath, device)
