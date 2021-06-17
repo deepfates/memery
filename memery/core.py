@@ -7,8 +7,8 @@ import time
 import torch
 from pathlib import Path
 from .loader import get_image_files, archive_loader, db_loader, treemap_loader
-from .crafter import crafter
-from .encoder import image_encoder, text_encoder
+from .crafter import crafter, preproc
+from .encoder import image_encoder, text_encoder, image_query_encoder
 from .indexer import join_all, build_treemap, save_archives
 from .ranker import ranker, nns_to_files
 
@@ -40,7 +40,7 @@ def indexFlow(path):
     return(save_paths)
 
 # Cell
-def queryFlow(path, query):
+def queryFlow(path, query=None, image_query=None):
     root = Path(path)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -55,10 +55,21 @@ def queryFlow(path, query):
         treemap = treemap_loader(Path(treepath))
         db = db_loader(dbpath, device)
 
+    if image_query:
+        img = preproc(image_query[-1])
+    if query and image_query:
+        text_vec = text_encoder(query, device)
+        image_vec = image_query_encoder(img, device)
+        query_vec = text_vec + image_vec
+    elif query:
+        query_vec = text_encoder(query, device)
+    elif image_query:
+        query_vec = image_query_encoder(img, device)
+    else:
+        print('No query!')
+
     print(f"Searching {len(db)} images")
     start_time = time.perf_counter()
-
-    query_vec = text_encoder(query, device)
     indexes = ranker(query_vec, treemap)
     ranked_files = nns_to_files(db, indexes)
 
