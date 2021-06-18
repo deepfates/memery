@@ -56,7 +56,7 @@ def queryFlow(path, query=None, image_query=None):
         db = db_loader(dbpath, device)
 
     if image_query:
-        img = preproc(image_query[-1])
+        img = preproc(image_query)
     if query and image_query:
         text_vec = text_encoder(query, device)
         image_vec = image_query_encoder(img, device)
