@@ -26,6 +26,10 @@ def get_grid(filepaths, n=4):
     return(grid)
 
 # Cell
+from PIL import Image
+from io import BytesIO
+
+# Cell
 def update_tabs(path, query, n_images, searches, tabs, logbox, im_display_zone, image_query=None):
     stem = Path(path.value).stem
     slug = f"{stem}:{str(query.value)}"
@@ -40,7 +44,6 @@ def update_tabs(path, query, n_images, searches, tabs, logbox, im_display_zone, 
                 slug = slug + f'/{im_queries}'
 
                 if len(im_queries) > 0:
-#                     im_display = widgets.Image(value=img[-1].tobytes(), width='90%')
                     with im_display_zone:
                         clear_output()
                         display(img[-1])
@@ -66,14 +69,14 @@ class appPage():
         self.query = widgets.Text(placeholder='a funny dog meme', value='a funny dog meme', layout=self.inputs_layout)
 
         self.image_query = widgets.FileUpload()
-        self.im_display_zone = widgets.Output(min_height='3rem')
+        self.im_display_zone = widgets.Output(max_height='5rem')
 
         self.n_images = widgets.IntSlider(description='#', value=4, layout=self.inputs_layout)
         self.go = widgets.Button(description="Search", layout=self.inputs_layout)
         self.logbox = widgets.Output(layout=widgets.Layout(max_width='80%', height="3rem", overflow="none"))
         self.all_inputs_layout =  widgets.Layout(max_width='80vw', min_height='40vh', flex_flow='row wrap', align_content='flex-start')
 
-        self.inputs = widgets.Box([self.path, self.query, self.image_query, self.im_display_zone, self.n_images, self.go, self.logbox], layout=self.all_inputs_layout)
+        self.inputs = widgets.Box([self.path, self.query, self.image_query, self.n_images, self.go, self.im_display_zone, self.logbox], layout=self.all_inputs_layout)
         self.tabs = widgets.Tab()
         self.page = widgets.AppLayout(left_sidebar=self.inputs, center=self.tabs)
 
