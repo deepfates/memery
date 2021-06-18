@@ -13,7 +13,7 @@ app = typer.Typer()
 # Cell
 @app.command()
 def search_folder(path: str, query: str, n: int = 10):
-    ranked = queryFlow(path, query)
+    ranked = queryFlow(path, query=query)
     print(ranked[:n])
 #     return(ranked)
 

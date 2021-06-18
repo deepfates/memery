@@ -40,9 +40,10 @@ def update_tabs(path, query, n_images, searches, tabs, logbox, im_display_zone, 
                 slug = slug + f'/{im_queries}'
 
                 if len(im_queries) > 0:
-                    im_display = widgets.Image(value=img[-1], width='90%')
+#                     im_display = widgets.Image(value=img[-1].tobytes(), width='90%')
                     with im_display_zone:
-                        display(im_display)
+                        clear_output()
+                        display(img[-1])
             else:
                 ranked = queryFlow(path.value, query.value)
             searches[f'{slug}'] = ranked
