@@ -37,7 +37,10 @@ entries:
       title: GUI
       url: gui.html
     - output: web,pdf
-      title: Voila app
+      title: Title
+      url: Untitled.html
+    - output: web,pdf
+      title: Memery
       url: app.html
     output: web
     title: memery

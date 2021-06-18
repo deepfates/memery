@@ -58,22 +58,3 @@ ranked = queryFlow('./images', 'dad joke')
 
 print(ranked[:5])
 ```
-
-## TODO:
-
-- Documentation and tests in notebooks
-- Optimize GUI to cache results of searches
-- Optimize the image loader and number of trees based on memory and db size
-- Type annotations
-- Search/browse by image or image+text
-- Tags and filters
-- Native GUI frontend client for various platforms
-- Distributed server backend
-
-## DONE:
-- _Code for joining archived data to new data_
-- _Code for saving indexes to archive_
-- _Flows_
-- _Cleanup repo_
-- _CLI_
-- _interactive GUI_

@@ -1,13 +1,13 @@
 ---
 
-title: Voila app
+title: Memery
 
 
 keywords: fastai
 sidebar: home_sidebar
 
-
-
+summary: "Search your local images by text and image!"
+description: "Search your local images by text and image!"
 nb_path: "app.ipynb"
 ---
 <!--
@@ -29,6 +29,13 @@ nb_path: "app.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The app may take a moment to load.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -70,77 +77,10 @@ nb_path: "app.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">memery.core</span> <span class="kn">import</span> <span class="n">indexFlow</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">indexFlow</span><span class="p">(</span><span class="s1">&#39;/home/mage/Pictures/memes/&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>  0%|          | 0/1 [00:00&lt;?, ?it/s]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Loaded 3711 encodings
-Encoding 5 new images
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1/1 [00:00&lt;00:00,  3.42it/s]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Building treemap
-Saving 3716images
-Done in 18.821605610000006 seconds
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(&#39;/home/mage/Pictures/memes/memery.pt&#39;, &#39;/home/mage/Pictures/memes/memery.ann&#39;)</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
