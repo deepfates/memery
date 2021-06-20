@@ -43,6 +43,13 @@ nb_path: "07_cli.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sometimes you just want to be able to pipe information through the terminal. This is that command</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -54,7 +61,7 @@ nb_path: "07_cli.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="search_folder" class="doc_header"><code>search_folder</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>search_folder</code>(<strong><code>path</code></strong>:<code>str</code>, <strong><code>query</code></strong>:<code>str</code>, <strong><code>n</code></strong>:<code>int</code>=<em><code>10</code></em>)</p>
+<h4 id="recall" class="doc_header"><code>recall</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>recall</code>(<strong><code>path</code></strong>:<code>str</code>, <strong><code>query</code></strong>:<code>str</code>, <strong><code>n</code></strong>:<code>int</code>=<em><code>10</code></em>)</p>
 </blockquote>
 
 </div>
@@ -81,7 +88,7 @@ nb_path: "07_cli.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">search_folder</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">,</span> <span class="s1">&#39;a funny dog meme&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">recall</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">,</span> <span class="s1">&#39;a funny dog meme&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -94,8 +101,177 @@ nb_path: "07_cli.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Searching 78 images
+<pre>Searching 80 images
+Done in 0.004800149999937275 seconds
 [&#39;images/Wholesome-Meme-8.jpg&#39;, &#39;images/Wholesome-Meme-35.jpg&#39;, &#39;images/Wholesome-Meme-5.jpg&#39;, &#39;images/Wholesome-Meme-67.png&#39;, &#39;images/Wholesome-Meme-44.png&#39;, &#39;images/Wholesome-Meme-71.jpg&#39;, &#39;images/Wholesome-Meme-15.jpg&#39;, &#39;images/Wholesome-Meme-18.jpg&#39;, &#39;images/Wholesome-Meme-72.jpg&#39;, &#39;images/Wholesome-Meme-39.jpg&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>More often, though, you probably want to sift through image visually. The <code>memery serve</code> command will open a browser app on your local device, using Streamlit library.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="serve" class="doc_header"><code>serve</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>serve</code>()</p>
+</blockquote>
+<p>Runs the Hello World script.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">RuntimeError</span>                              Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-8-4f36a5ad7367&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>serve<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-7-4a5f33be7ce6&gt;</span> in <span class="ansi-cyan-fg">serve</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>     <span class="ansi-blue-fg">&#34;&#34;&#34;Runs the Hello World script.&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     path <span class="ansi-blue-fg">=</span> memery<span class="ansi-blue-fg">.</span>__file__<span class="ansi-blue-fg">.</span>replace<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;__init__.py&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;streamlit_app.py&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg">     </span>streamlit<span class="ansi-blue-fg">.</span>cli<span class="ansi-blue-fg">.</span>main<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;run&#39;</span><span class="ansi-blue-fg">,</span>path<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/click/core.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    827</span>     <span class="ansi-green-fg">def</span> __call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    828</span>         <span class="ansi-blue-fg">&#34;&#34;&#34;Alias for :meth:`main`.&#34;&#34;&#34;</span>
+<span class="ansi-green-fg">--&gt; 829</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>main<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    830</span> 
+<span class="ansi-green-intense-fg ansi-bold">    831</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/click/core.py</span> in <span class="ansi-cyan-fg">main</span><span class="ansi-blue-fg">(self, args, prog_name, complete_var, standalone_mode, **extra)</span>
+<span class="ansi-green-intense-fg ansi-bold">    780</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    781</span>                 <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>make_context<span class="ansi-blue-fg">(</span>prog_name<span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>extra<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> ctx<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 782</span><span class="ansi-red-fg">                     </span>rv <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>invoke<span class="ansi-blue-fg">(</span>ctx<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    783</span>                     <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> standalone_mode<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    784</span>                         <span class="ansi-green-fg">return</span> rv
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/click/core.py</span> in <span class="ansi-cyan-fg">invoke</span><span class="ansi-blue-fg">(self, ctx)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1257</span>                 sub_ctx <span class="ansi-blue-fg">=</span> cmd<span class="ansi-blue-fg">.</span>make_context<span class="ansi-blue-fg">(</span>cmd_name<span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">,</span> parent<span class="ansi-blue-fg">=</span>ctx<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1258</span>                 <span class="ansi-green-fg">with</span> sub_ctx<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1259</span><span class="ansi-red-fg">                     </span><span class="ansi-green-fg">return</span> _process_result<span class="ansi-blue-fg">(</span>sub_ctx<span class="ansi-blue-fg">.</span>command<span class="ansi-blue-fg">.</span>invoke<span class="ansi-blue-fg">(</span>sub_ctx<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1260</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1261</span>         <span class="ansi-red-fg"># In chain mode we create the contexts step by step, but after the</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/click/core.py</span> in <span class="ansi-cyan-fg">invoke</span><span class="ansi-blue-fg">(self, ctx)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1064</span>         _maybe_show_deprecated_notice<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1065</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>callback <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1066</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> ctx<span class="ansi-blue-fg">.</span>invoke<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>callback<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>ctx<span class="ansi-blue-fg">.</span>params<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1067</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1068</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/click/core.py</span> in <span class="ansi-cyan-fg">invoke</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    608</span>         <span class="ansi-green-fg">with</span> augment_usage_errors<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    609</span>             <span class="ansi-green-fg">with</span> ctx<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 610</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> callback<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    611</span> 
+<span class="ansi-green-intense-fg ansi-bold">    612</span>     <span class="ansi-green-fg">def</span> forward<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>  <span class="ansi-red-fg"># noqa: B902</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/streamlit/cli.py</span> in <span class="ansi-cyan-fg">main_run</span><span class="ansi-blue-fg">(target, args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    189</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> os<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>exists<span class="ansi-blue-fg">(</span>target<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    190</span>             <span class="ansi-green-fg">raise</span> click<span class="ansi-blue-fg">.</span>BadParameter<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;File does not exist: {}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>target<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 191</span><span class="ansi-red-fg">         </span>_main_run<span class="ansi-blue-fg">(</span>target<span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">,</span> flag_options<span class="ansi-blue-fg">=</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    192</span> 
+<span class="ansi-green-intense-fg ansi-bold">    193</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/streamlit/cli.py</span> in <span class="ansi-cyan-fg">_main_run</span><span class="ansi-blue-fg">(file, args, flag_options)</span>
+<span class="ansi-green-intense-fg ansi-bold">    217</span>     check_credentials<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    218</span> 
+<span class="ansi-green-fg">--&gt; 219</span><span class="ansi-red-fg">     </span>bootstrap<span class="ansi-blue-fg">.</span>run<span class="ansi-blue-fg">(</span>file<span class="ansi-blue-fg">,</span> command_line<span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">,</span> flag_options<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    220</span> 
+<span class="ansi-green-intense-fg ansi-bold">    221</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/streamlit/bootstrap.py</span> in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg">(script_path, command_line, args, flag_options)</span>
+<span class="ansi-green-intense-fg ansi-bold">    363</span>     <span class="ansi-red-fg"># Start the ioloop. This function will not return until the</span>
+<span class="ansi-green-intense-fg ansi-bold">    364</span>     <span class="ansi-red-fg"># server is shut down.</span>
+<span class="ansi-green-fg">--&gt; 365</span><span class="ansi-red-fg">     </span>ioloop<span class="ansi-blue-fg">.</span>start<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.7/site-packages/tornado/platform/asyncio.py</span> in <span class="ansi-cyan-fg">start</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    197</span>             self<span class="ansi-blue-fg">.</span>_setup_logging<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    198</span>             asyncio<span class="ansi-blue-fg">.</span>set_event_loop<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>asyncio_loop<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 199</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>asyncio_loop<span class="ansi-blue-fg">.</span>run_forever<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    200</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    201</span>             asyncio<span class="ansi-blue-fg">.</span>set_event_loop<span class="ansi-blue-fg">(</span>old_loop<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.7/asyncio/base_events.py</span> in <span class="ansi-cyan-fg">run_forever</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    529</span>         <span class="ansi-blue-fg">&#34;&#34;&#34;Run until stop() is called.&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">    530</span>         self<span class="ansi-blue-fg">.</span>_check_closed<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 531</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_check_runnung<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    532</span>         self<span class="ansi-blue-fg">.</span>_set_coroutine_origin_tracking<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_debug<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    533</span>         self<span class="ansi-blue-fg">.</span>_thread_id <span class="ansi-blue-fg">=</span> threading<span class="ansi-blue-fg">.</span>get_ident<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.7/asyncio/base_events.py</span> in <span class="ansi-cyan-fg">_check_runnung</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    521</span>     <span class="ansi-green-fg">def</span> _check_runnung<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    522</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>is_running<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 523</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> RuntimeError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;This event loop is already running&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    524</span>         <span class="ansi-green-fg">if</span> events<span class="ansi-blue-fg">.</span>_get_running_loop<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    525</span>             raise RuntimeError(
+
+<span class="ansi-red-fg">RuntimeError</span>: This event loop is already running</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+<span class="ansi-blue-intense-fg ansi-bold">  You can now view your Streamlit app in your browser.</span>
+
+<span class="ansi-blue-fg">  Local URL: </span><span class="ansi-bold">http://localhost:8501</span>
+<span class="ansi-blue-fg">  Network URL: </span><span class="ansi-bold">http://192.168.0.5:8501</span>
+
 </pre>
 </div>
 </div>
@@ -117,7 +293,7 @@ nb_path: "07_cli.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="__main__" class="doc_header"><code>__main__</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__main__</code>()</p>
+<h4 id="__main__" class="doc_header"><code>__main__</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L28" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__main__</code>()</p>
 </blockquote>
 
 </div>

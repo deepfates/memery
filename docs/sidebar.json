@@ -9,8 +9,7 @@
     "Ranker": "ranker.html",
     "File Utils": "fileutils.html",
     "CLI": "cli.html",
-    "GUI": "gui.html",
-    "Title": "Untitled.html",
-    "Memery": "app.html"
+    "GUI": "jupyter_gui.html",
+    "Streamlit app": "streamlit_app.html"
   }
 }

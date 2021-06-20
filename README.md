@@ -14,19 +14,21 @@ If you have any trouble please **open an issue on Github**! I want to make this 
 
 ### Use GUI
 
-The browser GUI is a Voilá app, which basically runs a Jupyter notebook without showing any of the code cells. To use this way, navigate to your `memery` folder in a terminal and run:
+The browser GUI is a Streamlit app. You can run it from the command line with 
 
-`voila serve app.ipynb`
+`memery serve`
+
+or set up a desktop shortcut to use it from your menu.
 
 If you're in a Jupyter environment, you can summon the GUI directly into an output cell like this:
 
 
-```python
+```
 from memery.gui import appPage
 
 ```
 
-```python
+```
 app = appPage()
 display(app)
 ```
@@ -48,12 +50,12 @@ Pass the --n flag to control how many images are returned (default 10).
 
 Simply use `queryFlow` to search over a folder recursively! The folder will be indexed, if an index doesn't already exist. Then any new images will be CLIP-encoded, an Annoy treemap built, and a list of ranked filenames returned.
 
-```python
+```
 from memery.core import queryFlow
 from memery.gui import get_grid
 ```
 
-```python
+```
 ranked = queryFlow('./images', 'dad joke')
 
 print(ranked[:5])

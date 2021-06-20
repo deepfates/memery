@@ -27,12 +27,24 @@ index = {"indexFlow": "00_core.ipynb",
          "top_bottom": "06_fileutils.ipynb",
          "copy_topn_images": "06_fileutils.ipynb",
          "app": "07_cli.ipynb",
-         "search_folder": "07_cli.ipynb",
+         "recall": "07_cli.ipynb",
+         "serve": "07_cli.ipynb",
          "__main__": "07_cli.ipynb",
-         "get_image": "08_gui.ipynb",
-         "get_grid": "08_gui.ipynb",
-         "update_tabs": "08_gui.ipynb",
-         "appPage": "08_gui.ipynb"}
+         "get_image": "08_jupyter_gui.ipynb",
+         "get_grid": "08_jupyter_gui.ipynb",
+         "update_tabs": "08_jupyter_gui.ipynb",
+         "appPage": "08_jupyter_gui.ipynb",
+         "st_redirect": "09_streamlit_app.ipynb",
+         "st_stdout": "09_streamlit_app.ipynb",
+         "st_stderr": "09_streamlit_app.ipynb",
+         "send_image_query": "09_streamlit_app.ipynb",
+         "send_text_query": "09_streamlit_app.ipynb",
+         "path": "09_streamlit_app.ipynb",
+         "text_query": "09_streamlit_app.ipynb",
+         "image_query": "09_streamlit_app.ipynb",
+         "im_display_zone": "09_streamlit_app.ipynb",
+         "logbox": "09_streamlit_app.ipynb",
+         "sizes": "09_streamlit_app.ipynb"}
 
 modules = ["core.py",
            "loader.py",
@@ -42,7 +54,8 @@ modules = ["core.py",
            "ranker.py",
            "utils.py",
            "cli.py",
-           "gui.py"]
+           "gui.py",
+           "streamlit_app.py"]
 
 doc_url = "https://deepfates.github.io/memery/"
 

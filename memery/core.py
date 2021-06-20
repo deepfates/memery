@@ -5,6 +5,7 @@ __all__ = ['indexFlow', 'queryFlow']
 # Cell
 import time
 import torch
+
 from pathlib import Path
 from .loader import get_image_files, archive_loader, db_loader, treemap_loader
 from .crafter import crafter, preproc

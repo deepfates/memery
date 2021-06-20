@@ -1,9 +1,9 @@
 package:
   name: memery
-  version: 0.0.2
+  version: 0.0.4
 source:
-  sha256: 16a027a9ef2ca9bc5890d7469412c5ec196ef052a1dbac4e93cc9f8a28c68068
-  url: https://files.pythonhosted.org/packages/9c/12/1bee7cb2ff26f781e3abad05fb505bb37831699f64026157d6283a45c926/memery-0.0.2.tar.gz
+  sha256: b271aa31173c18aaf550f034a532389aeaf039fa4645f7cf33dc751568bbf4ac
+  url: https://files.pythonhosted.org/packages/92/97/0f43a1cee9793b7ee0e6fce16e687dfcb01066a38c9f6116e406474f582b/memery-0.0.4.tar.gz
 about:
   dev_url: https://deepfates.github.io
   doc_url: https://deepfates.github.io
@@ -23,10 +23,30 @@ requirements:
   - pip
   - python
   - packaging
+  - annoy==1.17.0
+  - torchvision==0.8.2
+  - tqdm==4.49.0
+  - ipywidgets==7.5.1
+  - torch==1.7.1
+  - ipython==7.23.1
+  - Pillow==8.2.0
+  - typer==0.3.2
+  - voila==0.2.10
+  - clip-by-openai==0.1.1.5
   run:
   - pip
   - python
   - packaging
+  - annoy==1.17.0
+  - torchvision==0.8.2
+  - tqdm==4.49.0
+  - ipywidgets==7.5.1
+  - torch==1.7.1
+  - ipython==7.23.1
+  - Pillow==8.2.0
+  - typer==0.3.2
+  - voila==0.2.10
+  - clip-by-openai==0.1.1.5
 test:
   imports:
   - memery

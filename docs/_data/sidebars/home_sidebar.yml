@@ -35,13 +35,10 @@ entries:
       url: cli.html
     - output: web,pdf
       title: GUI
-      url: gui.html
+      url: jupyter_gui.html
     - output: web,pdf
-      title: Title
-      url: Untitled.html
-    - output: web,pdf
-      title: Memery
-      url: app.html
+      title: Streamlit app
+      url: streamlit_app.html
     output: web
     title: memery
   output: web
