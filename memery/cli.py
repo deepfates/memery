@@ -13,6 +13,7 @@ app = typer.Typer()
 # Cell
 @app.command()
 def recall(path: str, query: str, n: int = 10):
+    """Search recursively over a folder from the command line"""
     ranked = memery.core.queryFlow(path, query=query)
     print(ranked[:n])
 #     return(ranked)
@@ -20,7 +21,7 @@ def recall(path: str, query: str, n: int = 10):
 # Cell
 @app.command()
 def serve():
-    """Runs the Hello World script."""
+    """Runs the streamlit GUI in your browser"""
     path = memery.__file__.replace('__init__.py','streamlit_app.py')
     streamlit.cli.main(['run',path])
 

@@ -26,6 +26,21 @@ nb_path: "07_cli.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/mage/.local/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /pytorch/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -63,6 +78,7 @@ nb_path: "07_cli.ipynb"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="recall" class="doc_header"><code>recall</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>recall</code>(<strong><code>path</code></strong>:<code>str</code>, <strong><code>query</code></strong>:<code>str</code>, <strong><code>n</code></strong>:<code>int</code>=<em><code>10</code></em>)</p>
 </blockquote>
+<p>Search recursively over a folder from the command line</p>
 
 </div>
 
@@ -132,9 +148,9 @@ Done in 0.004800149999937275 seconds
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="serve" class="doc_header"><code>serve</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>serve</code>()</p>
+<h4 id="serve" class="doc_header"><code>serve</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>serve</code>()</p>
 </blockquote>
-<p>Runs the Hello World script.</p>
+<p>Runs the streamlit GUI in your browser</p>
 
 </div>
 
@@ -293,7 +309,7 @@ Done in 0.004800149999937275 seconds
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="__main__" class="doc_header"><code>__main__</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L28" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__main__</code>()</p>
+<h4 id="__main__" class="doc_header"><code>__main__</code><a href="https://github.com/deepfates/memery/tree/main/memery/cli.py#L29" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__main__</code>()</p>
 </blockquote>
 
 </div>
