@@ -42,9 +42,10 @@ class DatasetImagePaths(VisionDataset):
     def __getitem__(self, index):
         path, target = self.samples[index]
         sample = self.loader(path)
-        if self.transforms is not None:
-            sample = self.transforms(sample)
-        return sample, target
+        if sample is not None:
+            if self.transforms is not None:
+                sample = self.transforms(sample)
+            return sample, target
 
 # Cell
 from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize

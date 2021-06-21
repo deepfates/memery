@@ -32,6 +32,6 @@ def text_encoder(text, device):
 # Cell
 def image_query_encoder(image, device):
     with torch.no_grad():
-        image_embed = model.encode_image(image.unsqueeze(0))
+        image_embed = model.encode_image(image.unsqueeze(0).to(device))
     image_embed = image_embed / image_embed.norm(dim=-1, keepdim=True)
     return(image_embed)

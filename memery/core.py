@@ -34,7 +34,7 @@ def indexFlow(path):
     print("Building treemap")
     t = build_treemap(db)
 
-    print(f"Saving {len(db)}images")
+    print(f"Saving {len(db)} encodings")
     save_paths = save_archives(root, t, db)
 #     print(f"Done in {time.perf_counter() - start_time} seconds")
 
@@ -47,7 +47,7 @@ def queryFlow(path, query=None, image_query=None):
     root = Path(path)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    print("Loading db")
+    print("Checking files")
     dbpath = root/'memery.pt'
     db = db_loader(dbpath, device)
     treepath = root/'memery.ann'
