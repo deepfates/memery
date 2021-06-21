@@ -7,6 +7,7 @@ import torch
 from torchvision.datasets import VisionDataset
 from PIL import Image
 
+
 # Cell
 def make_dataset(new_files):
     '''Returns a list of samples of a form (path_to_sample, class) and in

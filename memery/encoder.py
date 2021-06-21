@@ -15,7 +15,7 @@ def image_encoder(img_loader, device):
     image_embeddings = torch.tensor(()).to(device)
     with torch.no_grad():
         for images, labels in tqdm(img_loader):
-            batch_features = model.encode_image(images)
+            batch_features = model.encode_image(images.to(device))
             image_embeddings = torch.cat((image_embeddings, batch_features)).to(device)
 
     image_embeddings = image_embeddings / image_embeddings.norm(dim=-1, keepdim=True)
