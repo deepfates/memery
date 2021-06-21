@@ -4,6 +4,7 @@ __all__ = ['slugify', 'get_image_files', 'device', 'archive_loader', 'db_loader'
 
 # Cell
 from pathlib import Path
+from PIL import Image
 
 # Cell
 def slugify(filepath):
@@ -11,7 +12,17 @@ def slugify(filepath):
 
 def get_image_files(path):
     img_extensions = ['.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif', '.tiff', '.webp']
-    return [(f, slugify(f)) for f in path.rglob('*') if f.suffix in img_extensions]
+
+    images = []
+    for f in path.rglob('*'):
+        if f.suffix in img_extensions:
+            try:
+                img = Image.open(f) # open the image file
+                img.verify() # verify that it is, in fact an image
+                images.append((str(f), slugify(f)))
+            except Exception as e:
+                print(f'Skipping bad file: {f}\ndue to {type(e)}')
+    return(images)
 
 # Cell
 import torch
