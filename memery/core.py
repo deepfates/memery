@@ -25,7 +25,7 @@ def indexFlow(path):
     print(f"Loaded {len(archive_db)} encodings")
     print(f"Encoding {len(new_files)} new images")
 
-    start_time = time.perf_counter()
+#     start_time = time.perf_counter()
 
     crafted_files = crafter(new_files, device)
     new_embeddings = image_encoder(crafted_files, device)
@@ -36,15 +36,18 @@ def indexFlow(path):
 
     print(f"Saving {len(db)}images")
     save_paths = save_archives(root, t, db)
-    print(f"Done in {time.perf_counter() - start_time} seconds")
+#     print(f"Done in {time.perf_counter() - start_time} seconds")
 
     return(save_paths)
 
 # Cell
 def queryFlow(path, query=None, image_query=None):
+    start_time = time.time()
+    print('starting timer')
     root = Path(path)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    print("Loading db")
     dbpath = root/'memery.pt'
     db = db_loader(dbpath, device)
     treepath = root/'memery.ann'
@@ -52,10 +55,12 @@ def queryFlow(path, query=None, image_query=None):
 
     filepaths = get_image_files(root)
     if treemap == None or len(db) != len(filepaths):
+        print('Indexing')
         dbpath, treepath = indexFlow(root)
         treemap = treemap_loader(Path(treepath))
         db = db_loader(dbpath, device)
 
+    print('Converting query')
     if image_query:
         img = preproc(image_query)
     if query and image_query:
@@ -70,11 +75,10 @@ def queryFlow(path, query=None, image_query=None):
         print('No query!')
 
     print(f"Searching {len(db)} images")
-    start_time = time.perf_counter()
     indexes = ranker(query_vec, treemap)
     ranked_files = nns_to_files(db, indexes)
 
-    print(f"Done in {time.perf_counter() - start_time} seconds")
+    print(f"Done in {time.time() - start_time} seconds")
 
     return(ranked_files)
 
