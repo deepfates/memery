@@ -48,7 +48,7 @@ From the command line, you can use `memery` on any folder and it will search for
 
 Pass the --n flag to control how many images are returned (default 10).
 
-`memery rank PATH/TO/IMAGE/FOLDER 'query' --n 20
+`memery recall PATH/TO/IMAGE/FOLDER 'query' --n 20
 `
 
 ### Use as a library
