@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+annoy = "*"
+torchvision = "==0.8.2"
+tqdm = "*"
+ipywidgets = "*"
+torch = "==1.7.1"
+ipython = "*"
+pillow = "*"
+typer = "*"
+streamlit = "*"
+clip-by-openai = "*"
+
+[dev-packages]
+nbdev = "*"
+pip-tools = "*"
+
+[requires]
+python_version = "3.7"
