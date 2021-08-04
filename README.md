@@ -2,6 +2,22 @@
 > Search over large image datasets with natural language and computer vision!
 
 
+![meme about having too many memes](images/E2GoeMyWEAAkcLz.jpeg)
+
+You know the problem. You have a huge folder of images: memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do. You have to scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, hoping you'll recognize it when you do see it. And amazingly, humans can do this pretty well! But local image search is still pretty much a manual effort - you're still sorting through folders of images, like an archivist of old. Computers haven't made it much easier.
+
+Until now.
+
+The `memery` package provides natural language search over local images. You can use it to search for things like "a line drawing of a woman facing to the left" and get _reasonably good results!_ 
+
+You can do this over thousands of images (it's not optimized for performance yet, but search times seem to scale well). 
+
+You can view the images in a browser GUI, or pipe them through command line tools. 
+
+You can use `memery` or its modules in Jupyter notebooks, including GUI functions! 
+
+Under the hood, `memery` makes use of **CLIP**, the [Contrastive Language-Image Pretraining transformer](https://github.com/openai/CLIP), released by OpenAI in 2021. CLIP trains a vision transformer and a language transformer to find the same latent space for images and their captions. This makes it perfect for the purpose of natural language image search. CLIP is a giant achievement, and `memery` stands on its shoulders.
+
 ## Install
 
 The necessary CLIP and torch packages will be installed by pip. You might want to make sure you have a sane CUDA environment before and after this step if you're trying to use GPU. If you don't have a GPU, `memery` should still work on your CPU. 
@@ -65,3 +81,25 @@ ranked = queryFlow('./images', 'dad joke')
 
 print(ranked[:5])
 ```
+
+---
+
+*Compile this notebook*
+
+```python
+from nbdev.export import notebook2script; notebook2script()
+
+```
+
+    Converted 00_core.ipynb.
+    Converted 01_loader.ipynb.
+    Converted 02_crafter.ipynb.
+    Converted 03_encoder.ipynb.
+    Converted 04_indexer.ipynb.
+    Converted 05_ranker.ipynb.
+    Converted 06_fileutils.ipynb.
+    Converted 07_cli.ipynb.
+    Converted 08_jupyter_gui.ipynb.
+    Converted 09_streamlit_app.ipynb.
+    Converted index.ipynb.
+
