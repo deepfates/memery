@@ -32,13 +32,50 @@ nb_path: "index.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img src="/memery/images/E2GoeMyWEAAkcLz.jpeg" alt="meme about having too many memes"></p>
-<p>You know the problem. You have a huge folder of images: memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do. You have to scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, hoping you'll recognize it when you do see it. And amazingly, humans can do this pretty well! But local image search is still pretty much a manual effort - you're still sorting through folders of images, like an archivist of old. Computers haven't made it much easier.</p>
+<p>You know the problem. You have a huge folder of images: memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do. You have to scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, hoping you'll recognize it when you do see it.</p>
+<p>Humans can do this amazingly well, all things considered. But even with computers, local image search is still pretty much a manual effort - you're still sorting through folders of images, like an archivist of old.</p>
 <p>Until now.</p>
 <p>The <code>memery</code> package provides natural language search over local images. You can use it to search for things like "a line drawing of a woman facing to the left" and get <em>reasonably good results!</em></p>
-<p>You can do this over thousands of images (it's not optimized for performance yet, but search times seem to scale well).</p>
+<p>You can do this over thousands of images (it's not optimized for performance yet, but search times scale well under O(n)).</p>
 <p>You can view the images in a browser GUI, or pipe them through command line tools.</p>
 <p>You can use <code>memery</code> or its modules in Jupyter notebooks, including GUI functions!</p>
 <p>Under the hood, <code>memery</code> makes use of <strong>CLIP</strong>, the <a href="https://github.com/openai/CLIP">Contrastive Language-Image Pretraining transformer</a>, released by OpenAI in 2021. CLIP trains a vision transformer and a language transformer to find the same latent space for images and their captions. This makes it perfect for the purpose of natural language image search. CLIP is a giant achievement, and <code>memery</code> stands on its shoulders.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Outline:</p>
+<ul>
+<li>Usage<ul>
+<li>Install locally</li>
+<li>Use GUI</li>
+<li>Use CLI</li>
+<li>Use in Jupyter</li>
+<li>Use the library</li>
+</ul>
+</li>
+<li>Development<ul>
+<li>Notebook-driven development</li>
+<li>Pull the repo</li>
+<li>Branch and install</li>
+<li>Notebook-driven development</li>
+<li>Change the notebooks</li>
+<li>Test the notebooks</li>
+<li>Notebook-driven development</li>
+<li>Tangle the source code</li>
+<li>Weave the documentation</li>
+</ul>
+</li>
+<li>Contributing<ul>
+<li>Who works on this project</li>
+<li>How you can help</li>
+<li>What we don't do</li>
+<li>Thanks</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>

@@ -4,19 +4,44 @@
 
 ![meme about having too many memes](images/E2GoeMyWEAAkcLz.jpeg)
 
-You know the problem. You have a huge folder of images: memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do. You have to scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, hoping you'll recognize it when you do see it. And amazingly, humans can do this pretty well! But local image search is still pretty much a manual effort - you're still sorting through folders of images, like an archivist of old. Computers haven't made it much easier.
+You know the problem. You have a huge folder of images: memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do. You have to scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, hoping you'll recognize it when you do see it. 
+
+Humans can do this amazingly well, all things considered. But even with computers, local image search is still pretty much a manual effort - you're still sorting through folders of images, like an archivist of old.
 
 Until now.
 
 The `memery` package provides natural language search over local images. You can use it to search for things like "a line drawing of a woman facing to the left" and get _reasonably good results!_ 
 
-You can do this over thousands of images (it's not optimized for performance yet, but search times seem to scale well). 
+You can do this over thousands of images (it's not optimized for performance yet, but search times scale well under O(n)). 
 
 You can view the images in a browser GUI, or pipe them through command line tools. 
 
 You can use `memery` or its modules in Jupyter notebooks, including GUI functions! 
 
 Under the hood, `memery` makes use of **CLIP**, the [Contrastive Language-Image Pretraining transformer](https://github.com/openai/CLIP), released by OpenAI in 2021. CLIP trains a vision transformer and a language transformer to find the same latent space for images and their captions. This makes it perfect for the purpose of natural language image search. CLIP is a giant achievement, and `memery` stands on its shoulders.
+
+Outline:
+- Usage
+  - Install locally
+  - Use GUI
+  - Use CLI
+  - Use in Jupyter
+  - Use the library
+- Development
+  - Notebook-driven development
+  - Pull the repo
+  - Branch and install
+  - Notebook-driven development
+  - Change the notebooks
+  - Test the notebooks
+  - Notebook-driven development
+  - Tangle the source code
+  - Weave the documentation
+- Contributing
+  - Who works on this project
+  - How you can help
+  - What we don't do
+  - Thanks
 
 ## Install
 
