@@ -19,6 +19,11 @@ nbdev_install_git_hooks
 * Ensure that your PR includes a test that fails without your patch, and pass with it.
 * Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
 
+## How to submit notebook PRs?
+
+* If your PR involves jupyter notebooks (.ipynb), then before submitting your PR you must first: run nbdev_build_lib if there are any library changes, and then clean the notebooks by running nbdev_clean_nbs.
+
+
 ## PR submission guidelines
 
 * Keep each PR focused. While it's more convenient, do not combine several unrelated fixes together. Create as many branches as needing to keep each PR focused.
