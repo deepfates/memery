@@ -32,6 +32,10 @@ nb_path: "00_core.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is the core module, which loads the CLIP model and the encodings of all the images in the folder, then tokenizes the search text or image, and finally returns a sorted list of filenames.</p>
+<p><em>Express this as a process and nouns, instead of a blob sentence. The next part doesn't count because it's a whole new heading and it's crufted with nerd talk. Say clearly what the core flow is here. Something like:</em></p>
+<p><em>Memery takes a folder of images, and a search query, and returns a list of nearest neighbors to the query.</em></p>
+<p><em>The query flow and index flow can be used separately, but by default the query flow calls the indexing flow on each search. Image encodings are saved to disk. Only new images will be encoded with each indexing.</em></p>
+<p>d</p>
 
 </div>
 </div>
@@ -62,6 +66,7 @@ nb_path: "00_core.ipynb"
 <p>Takes a query and processes it through either Indexing Flow or Querying Flow, passing along arguments. The main entrypoint for each iteration of the index/query process.</p>
 <p>Querying Flow can technically process either text or image search, becuase the CLIP encoder will put them into the same embedding space. So we might as well build in a method for either, and make it available to the user, since it's impressive and useful and relatively easy to build.</p>
 <p>Eventually the Gateway process probably needs to be quite complicated, for serving all the different users and for delivering REST APIs to different clients. We'll need a way to accept text and images as HTTP requests and return JSON dictionaries (especially at the encoder, which will remain server-bound more than any other executor).</p>
+<p><em>Do i actually need any of this? Perhaps if i'm going to implement it myself. But won't i just end up using Jina oonce it gets implemented fully? Or something similar? Well in any case this is meant to be a readable document, so i can explain how this is meant to owrk in the future without being so obtuse that it becomes an obstacle to reading further...</em></p>
 
 </div>
 </div>
@@ -69,6 +74,7 @@ nb_path: "00_core.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Usage">Usage<a class="anchor-link" href="#Usage"> </a></h3><p>For now, calling the <a href="/memery/core.html#queryFlow"><code>queryFlow</code></a> process directly is the simplest gateway.</p>
+<p><em>Meaningless. Explain how to use it closer to where it is implemented. Also show an example of it in use. Terrible sentence really.</em></p>
 
 </div>
 </div>
@@ -89,6 +95,7 @@ nb_path: "00_core.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The <a href="/memery/core.html#indexFlow"><code>indexFlow</code></a> checks the local directory for files with image extensions, loads the archive, splits out any new images to be encoded and encodes them, then finally builds a treemap and saves it along with the new archive. It returns a tuple with the locations of the archive and treemap.</p>
+<p><em>Split this up into small chunks with code tests. No blob sentences!</em></p>
 
 </div>
 </div>
@@ -181,6 +188,7 @@ nb_path: "00_core.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The <a href="/memery/core.html#queryFlow"><code>queryFlow</code></a> takes a path and a query, checks for an index, loads it and searches through the treemap if it exists, and calls <a href="/memery/core.html#indexFlow"><code>indexFlow</code></a> to index it first if it hasn't been.</p>
+<p><em>BLOB!</em></p>
 
 </div>
 </div>
@@ -216,6 +224,18 @@ nb_path: "00_core.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Then what?! What are the limitations of this system? What are its options? What configuration can i do if i'm a power user? Why did you organize things this way instead of a different way?</em></p>
+<p><em>This, and probably each of the following notebooks, would benefit from a small recording session where I try to explain it to an imaginary audience. So that I can get the narrative of how it works, and then arrange the code around that.</em></p>
+
+</div>
+</div>
+</div>
 </div>
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {}, "version_major": 2, "version_minor": 0}
+</script>
 
