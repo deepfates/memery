@@ -31,6 +31,12 @@ nb_path: "00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Rationale">Rationale<a class="anchor-link" href="#Rationale"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>This is the core module, which loads the CLIP model and the encodings of all the images in the folder, then tokenizes the search text or image, and finally returns a sorted list of filenames.</p>
 <p><em>Express this as a process and nouns, instead of a blob sentence. The next part doesn't count because it's a whole new heading and it's crufted with nerd talk. Say clearly what the core flow is here. Something like:</em></p>
 <p><em>Memery takes a folder of images, and a search query, and returns a list of nearest neighbors to the query.</em></p>
@@ -42,7 +48,13 @@ nb_path: "00_core.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Modular-flow-system">Modular flow system<a class="anchor-link" href="#Modular-flow-system"> </a></h2><p>I'm using the Neural Search design pattern as described by Han Xiao in e.g. <a href="https://hanxiao.io/2019/07/29/Generic-Neural-Elastic-Search-From-bert-as-service-and-Go-Way-Beyond">General Neural Elastic Search and Go Way Beyond</a>&amp;c.</p>
+<h2 id="Modular-flow-system">Modular flow system<a class="anchor-link" href="#Modular-flow-system"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I'm using the Neural Search design pattern as described by Han Xiao in e.g. <a href="https://hanxiao.io/2019/07/29/Generic-Neural-Elastic-Search-From-bert-as-service-and-Go-Way-Beyond">General Neural Elastic Search and Go Way Beyond</a>&amp;c.</p>
 <p>This is a system designed to be scalable and distributed if necessary. Even for a single-machine scenario, I like the functional style of it: grab data, transform it and pass it downstream, all the way from the folder to the output widget.</p>
 <p>There are two main types of operater in neural search: <strong>flows</strong> and <strong>executors</strong>.</p>
 <p><strong>Flows</strong> are specific patterns of data manipulation and storage. <strong>Executors</strong> are the operators that transform the data within the flow.</p>
@@ -73,8 +85,22 @@ nb_path: "00_core.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Usage">Usage<a class="anchor-link" href="#Usage"> </a></h3><p>For now, calling the <a href="/memery/core.html#queryFlow"><code>queryFlow</code></a> process directly is the simplest gateway.</p>
+<h3 id="Usage">Usage<a class="anchor-link" href="#Usage"> </a></h3><p>For now, calling the <code>queryFlow</code> process directly is the simplest gateway.</p>
 <p><em>Meaningless. Explain how to use it closer to where it is implemented. Also show an example of it in use. Terrible sentence really.</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Flows">Flows<a class="anchor-link" href="#Flows"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <a href="/memery/core.html#index_flow"><code>index_flow</code></a> checks the local directory for files with image extensions, loads the archive, splits out any new images to be encoded and encodes them, then finally builds a treemap and saves it along with the new archive. It returns a tuple with the locations of the archive and treemap.</p>
+<p><em>Split this up into small chunks with code tests. No blob sentences!</em></p>
 
 </div>
 </div>
@@ -88,15 +114,7 @@ nb_path: "00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Flows">Flows<a class="anchor-link" href="#Flows"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/memery/core.html#indexFlow"><code>indexFlow</code></a> checks the local directory for files with image extensions, loads the archive, splits out any new images to be encoded and encodes them, then finally builds a treemap and saves it along with the new archive. It returns a tuple with the locations of the archive and treemap.</p>
-<p><em>Split this up into small chunks with code tests. No blob sentences!</em></p>
-
+<h4 id="Indexing">Indexing<a class="anchor-link" href="#Indexing"> </a></h4>
 </div>
 </div>
 </div>
@@ -111,7 +129,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="indexFlow" class="doc_header"><code>indexFlow</code><a href="https://github.com/deepfates/memery/tree/main/memery/core.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>indexFlow</code>(<strong><code>path</code></strong>)</p>
+<h4 id="index_flow" class="doc_header"><code>index_flow</code><a href="https://github.com/deepfates/memery/tree/main/memery/core.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>index_flow</code>(<strong><code>path</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -141,7 +159,7 @@ nb_path: "00_core.ipynb"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;images/memery.pt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
 <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;images/memery.ann&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
 
-<span class="n">save_paths</span> <span class="o">=</span> <span class="n">indexFlow</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">)</span>
+<span class="n">save_paths</span> <span class="o">=</span> <span class="n">index_flow</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -187,7 +205,13 @@ nb_path: "00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/memery/core.html#queryFlow"><code>queryFlow</code></a> takes a path and a query, checks for an index, loads it and searches through the treemap if it exists, and calls <a href="/memery/core.html#indexFlow"><code>indexFlow</code></a> to index it first if it hasn't been.</p>
+<h4 id="Querying">Querying<a class="anchor-link" href="#Querying"> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <a href="/memery/core.html#query_flow"><code>query_flow</code></a> takes a path and a query, checks for an index, loads it and searches through the treemap if it exists, and calls <a href="/memery/core.html#index_flow"><code>index_flow</code></a> to index it first if it hasn't been.</p>
 <p><em>BLOB!</em></p>
 
 </div>
@@ -204,7 +228,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="queryFlow" class="doc_header"><code>queryFlow</code><a href="https://github.com/deepfates/memery/tree/main/memery/core.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>queryFlow</code>(<strong><code>path</code></strong>, <strong><code>query</code></strong>=<em><code>None</code></em>, <strong><code>image_query</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="query_flow" class="doc_header"><code>query_flow</code><a href="https://github.com/deepfates/memery/tree/main/memery/core.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>query_flow</code>(<strong><code>path</code></strong>, <strong><code>query</code></strong>=<em><code>None</code></em>, <strong><code>image_query</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>

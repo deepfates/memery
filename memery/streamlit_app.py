@@ -53,12 +53,12 @@ def st_stderr(dst):
 # Cell
 @st.cache
 def send_image_query(path, text_query, image_query):
-    ranked = core.queryFlow(path, text_query, image_query=img)
+    ranked = core.query_flow(path, text_query, image_query=img)
     return(ranked)
 
 @st.cache
 def send_text_query(path, text_query):
-    ranked = core.queryFlow(path, text_query)
+    ranked = core.query_flow(path, text_query)
     return(ranked)
 
 # Cell

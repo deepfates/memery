@@ -14,7 +14,7 @@ app = typer.Typer()
 @app.command()
 def recall(path: str, query: str, n: int = 10):
     """Search recursively over a folder from the command line"""
-    ranked = memery.core.queryFlow(path, query=query)
+    ranked = memery.core.query_flow(path, query=query)
     print(ranked[:n])
 #     return(ranked)
 

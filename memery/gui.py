@@ -5,7 +5,7 @@ __all__ = ['get_image', 'get_grid', 'update_tabs', 'appPage']
 # Cell
 import ipywidgets as widgets
 
-from .core import queryFlow
+from .core import query_flow
 from pathlib import Path
 from IPython.display import clear_output
 
@@ -40,7 +40,7 @@ def update_tabs(path, query, n_images, searches, tabs, logbox, im_display_zone, 
                 im_queries = [name for name, data in image_query.items()]
 
                 img = [Image.open(BytesIO(file_info['content'])).convert('RGB') for name, file_info in image_query.items()]
-                ranked = queryFlow(path.value, query.value, image_query=img[-1])
+                ranked = query_flow(path.value, query.value, image_query=img[-1])
                 slug = slug + f'/{im_queries}'
 
                 if len(im_queries) > 0:
@@ -48,7 +48,7 @@ def update_tabs(path, query, n_images, searches, tabs, logbox, im_display_zone, 
                         clear_output()
                         display(img[-1])
             else:
-                ranked = queryFlow(path.value, query.value)
+                ranked = query_flow(path.value, query.value)
             searches[f'{slug}'] = ranked
 
     tabs.children = [get_grid(v, n=n_images.value) for v in searches.values()]

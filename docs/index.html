@@ -6,8 +6,8 @@ title: memery
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Search over large image datasets with natural language and computer vision!"
-description: "Search over large image datasets with natural language and computer vision!"
+summary: "Use human language to search your image folders!"
+description: "Use human language to search your image folders!"
 nb_path: "index.ipynb"
 ---
 <!--
@@ -31,11 +31,10 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>^ that is so nerdy. can we do something like "Local-first AI image search"? or is that still too opaque</em></p>
 <p><img src="/memery/images/E2GoeMyWEAAkcLz.jpeg" alt="meme about having too many memes"></p>
-<p>The problem: you have a huge folder of images. Memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do buit scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, hoping you'll recognize it when you do see it.</p>
+<p>The problem: you have a huge folder of images. Memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do but scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, and that you'll recognize it when you do see it.</p>
 <p>Humans do this amazingly well. But even with computers, local image search is still a manual effort - you're still sorting through folders of images, like an archivist of old.</p>
-<p><strong>Until memery</strong>.</p>
+<p><strong>Now there's Memery</strong>.</p>
 <p>The <code>memery</code> package provides natural language search over local images. You can use it to search for things like "a line drawing of a woman facing to the left" and get <em>reasonably good results!</em></p>
 <p>You can do this over thousands of images (it's not optimized for performance yet, but search times scale well under O(n)).</p>
 <p>You can view the images in a browser GUI, or pipe them through command line tools.</p>
@@ -83,60 +82,49 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2><p>The necessary CLIP and torch packages will be installed by pip.</p>
-<p><em>what does this mean? why are you telling me this? what if they aren't?</em></p>
-<p>You might want to make sure you have a sane CUDA environment before and after this step if you're trying to use GPU. If you don't have a GPU, <code>memery</code> should still work on your CPU.</p>
-<p><em>this is backwards and also impenetrable if you're not a nerd</em></p>
-<p>If you have any trouble please <strong>open an issue on Github</strong>! I want to make this package useful for as many people as possible. Help me know what's going wrong :)</p>
-<p><em>still true, pretty clear. use emoji or go home though</em></p>
-<p><em>This is the crucial command, huh? Seems a little far down the page. Maybe a quick-start section earlier, then a more in-depth Installation section here</em></p>
-<p><code>pip install memery</code></p>
-<p>If you don't have a GPU for PyTorch, this command might help:
-<code>pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html</code></p>
-<p><em>did you scrape this from stackoverflow? or the CLIP source code or what. it looks very specific and arbitrary. I think it's meant to install pytorch CPU version, but the average user shouldn't have to know that! if you are trying to use CUDA and GPU it should be an easy toggle, and if you're a regular person wihtout a data science project you shouldn't have to go through a bunch of weird command line stuff.</em></p>
-<p><em>In fact, how can we package this in a way that you don't have to type a single command? There has to be ways to wrap up a whole python setup and install it on a different computer, with all the same dependencies. Right? Ugh, unfortunately this is Python, so it might not exist. But I can at least scale the difficulty level with the user story.</em></p>
+<h2 id="Installation">Installation<a class="anchor-link" href="#Installation"> </a></h2><p>With Python 3.6 or greater:
+<code>pip install memery</code></p>
+<p>Currently memery defaults to GPU installation. This will probably be switched in a future version. If you want to run CPU-only, run the following command after installing memery:</p>
+<p><code>pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html</code></p>
+<p>Someday memery will be packaged in an easy to use format, but since this is a Python project it is hard to predict when that day will be.</p>
+<p>If you want to help develop memery, you'll need to clone the repo. See below.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Yes, user stories. We have to think about the interface between human and computer as another API, and look for the endpoints we can serve to different users with different protocols.</em></p>
-<p><em>This means thinking about the reasons people come to the program, and how they expect it to respond. Currently I see three user stories:</em></p>
-<ul>
-<li><em>i have images and want to search them with a GUI app</em><ul>
-<li><em>streamlit GUI</em></li>
-</ul>
-</li>
-<li><em>i have a program/workflow and want to use image search as one part of it</em><ul>
-<li><em>CLI tool</em></li>
-<li><em>python module</em></li>
-<li><em>jupyter GUI</em></li>
-</ul>
-</li>
-<li><em>i want to improve on and/or contribute to memery development</em><ul>
-<li><em>clone the repo</em></li>
-</ul>
-</li>
-</ul>
-<p><em>Each one has an increasing level of complexity and expected knowledge.</em></p>
+<h2 id="Usage">Usage<a class="anchor-link" href="#Usage"> </a></h2><p>What's your use case?</p>
+<p><strong>I have images and want to search them with a GUI app</strong></p>
+<p>↳  Use the Browser GUI</p>
+<p><strong>i have a program/workflow and want to use image search as one part of it</strong></p>
+<p>↳ Use in Jupyter</p>
+<p>↳ Use as a Python module</p>
+<p>↳ Use from command line or shell scripts</p>
+<p><strong>i want to improve on and/or contribute to memery development</strong></p>
+<p>↳ Start by cloning the repo</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Use-GUI">Use GUI<a class="anchor-link" href="#Use-GUI"> </a></h3><p>The browser GUI is a Streamlit app. You can run it from the command line with</p>
+<h3 id="Use-GUI">Use GUI<a class="anchor-link" href="#Use-GUI"> </a></h3><p>Currently memery has a rough browser-based GUI. To launch it, run the following in a command line:</p>
 <p><code>memery serve</code></p>
-<p>or set up a desktop shortcut to use it from your menu.</p>
-<p><em>Why do I have to use a CLI to get a GUI? This is very annoying. In any case, this does not provide instructuions on how to use the GUI or any of its particular quirks. There should be a screenshot, also</em></p>
-<p>If you're in a Jupyter environment, you can summon an ipywidgets GUI directly into an output cell like this:</p>
+<p>or set up a desktop shortcut that points to the above command.</p>
+<p>Memery will open in a browser window. The interface is pretty straightforward, but it has some quirks.</p>
+<p><img src="/memery/./images/streamlit-screenshot.png" alt="screenshot of memery GUI displaying wholesome memes"></p>
+<p>The sidebar on the left controls the location and query for the search. The "Directory" box requires a full directory path; unfortunately, Streamlit does not yet have a folder-picker component. The path is relative to your current working directory when you run <code>memery serve</code>.</p>
+<p>The search will run once you enter a text or image query. If you enter both text and image queries, memery will search for the combination.</p>
+<p>Beneath these widgets is the output area for temporary messages displayed with each search. Mostly this can be ignored.</p>
+<p>The right hand panel displays the images and associated options. Major errors will appear here as giant stack traces; sometimes, changing variables in the other widgets will fix these errors live. If you get a large error here it's helpful to take a screenshot and share it with us in Github Issues.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Use-in-Jupyter">Use in Jupyter<a class="anchor-link" href="#Use-in-Jupyter"> </a></h3><p>If you're in a Jupyter environment, you can summon an ipywidgets GUI directly into an output cell like this:</p>
 
 </div>
 </div>
@@ -181,7 +169,7 @@ nb_path: "index.ipynb"
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;memery.gui.appPage at 0x7ff3072db110&gt;</pre>
+<pre>&lt;memery.gui.appPage at 0x7f829c87d290&gt;</pre>
 </div>
 
 </div>
@@ -194,18 +182,20 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>This doesn't transfer to the README, so it should be fixed or be scrapped. Screenshots would work fine. Also I'm not sure if the interactive widgets would make sense without a kernel behind them anyway.</em></p>
+<p><img src="/memery/./images/jupyter-screenshot.png" alt="screenshot of memery Jupyter GUI displaying wholesome memes"></p>
+<p>Unfortunately the widgets won't display without an active runtime, so the above is a screenshot. In a Jupyter environment, the GUI works just like the browser-based GUI.</p>
+<p>Opening new appPage instances in separate cells can be helpful for exploring a dataset, but it can also cause memory overruns. For this reason the Jupyter interface is tabbed and each search will appear in a new tab.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Use-CLI">Use CLI<a class="anchor-link" href="#Use-CLI"> </a></h3><p>From the command line, you can use <code>memery</code> on any folder and it will search for images recursively, returning a list object to stdout.</p>
-<p><em>Why is it that behavior? Is it possible to make it not recursive? What is the usual behavior of a search in POSIX? What is the use case for a CLI memery: is it shell scripts? in-console image browsing? risk-tolerant batch modification? Think about this further</em></p>
-<p><em>at least you can control how much output it spews to your terminal</em></p>
+<h3 id="Use-CLI">Use CLI<a class="anchor-link" href="#Use-CLI"> </a></h3><p>The memery command line is currently very rudimentary. So far you can use <code>memery</code> on any folder and it will search for images recursively, returning a list object to stdout.</p>
 <p>Pass the --n flag to control how many images are returned (default 10).</p>
 <p><code>memery recall PATH/TO/IMAGE/FOLDER 'query' --n 20</code></p>
+<p>I'm not clear yet on what behavior command-line users will expect from it. In the future we may want to make it non-recursive by default, and map the behavior more closely to POSIX standards. I would love feedback or help on this.
+`</p>
 
 </div>
 </div>
@@ -218,10 +208,7 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>the following paragrah cannot be comprehended by any human mind. if you can even read to the end of it you should go touch grass</em></p>
-<p>Simply use <a href="/memery/core.html#queryFlow"><code>queryFlow</code></a> to search over a folder recursively! The folder will be indexed, if an index doesn't already exist. Then any new images will be CLIP-encoded, an Annoy treemap built, and a list of ranked filenames returned.</p>
-<p><em>okay, we survived. What are we supposed to say here instead?</em></p>
-<p><em>I think what he's trying to get at is explaining the underlying mechanism of the search. Really all we need here is a function signature, as anyone who's going to use it as a library will probably also be looking at the docs for further information. Have a link here too, that goes to the <a href="/memery/core.html"><code>core</code></a> file where the main flows and executors are explained.</em></p>
+<p>The function currently called <a href="/memery/core.html#query_flow"><code>query_flow</code></a> (against all Python convention) accepts a folder name and a query and returns a ranked list of image files. This is also recursive by default, and prints too much information into stdout. And it calls index_flow every time, which can be annoying if you have corrupted files in the directory, as it will need to rebuild the tree-index each time despite the files not changing. This will be solved in a future release.</p>
 
 </div>
 </div>
@@ -233,8 +220,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">memery.core</span> <span class="kn">import</span> <span class="n">queryFlow</span>
-<span class="kn">from</span> <span class="nn">memery.gui</span> <span class="kn">import</span> <span class="n">get_grid</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">memery.core</span> <span class="kn">import</span> <span class="n">query_flow</span>
 </pre></div>
 
     </div>
@@ -251,7 +237,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ranked</span> <span class="o">=</span> <span class="n">queryFlow</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">,</span> <span class="s1">&#39;dad joke&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ranked</span> <span class="o">=</span> <span class="n">query_flow</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">,</span> <span class="s1">&#39;dad joke&#39;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">ranked</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
@@ -260,13 +246,173 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>89it [00:00, 44503.23it/s]
+89it [00:00, 37660.72it/s]
+0it [00:00, ?it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>starting timer
+Checking files
+Indexing
+Skipping bad file: images/memes/corrupted-file.jpeg
+due to &lt;class &#39;PIL.UnidentifiedImageError&#39;&gt;
+Skipping bad file: images/memes/.ipynb_checkpoints/corrupted-file-checkpoint.jpeg
+due to &lt;class &#39;PIL.UnidentifiedImageError&#39;&gt;
+Loaded 82 encodings
+Encoding 0 new images
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>0it [00:00, ?it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Building treemap
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Saving 82 encodings
+Converting query
+Searching 82 images
+Done in 0.5853581428527832 seconds
+[&#39;images/memes/Wholesome-Meme-68.jpg&#39;, &#39;images/memes/Wholesome-Meme-74.jpg&#39;, &#39;images/memes/Wholesome-Meme-88.jpg&#39;, &#39;images/memes/Wholesome-Meme-78.jpg&#39;, &#39;images/memes/Wholesome-Meme-23.jpg&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<p>*Okay, now we need a whole part about development.</p>
+<p>Here's the first result from that list:</p>
+<p><img src="/memery/images/memes/Wholesome-Meme-68.jpg" alt=""></p>
+<p>So that's how to use memery. Let's look at how you can help make it better.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Development">Development<a class="anchor-link" href="#Development"> </a></h2><p>Memery is a different beast than most pieces of code you've seen. It's a <em>literate program</em>: a program written for human beings to read.</p>
+<p>Nothing in this code is particularly special. The algorithms, data structures, and pipeline are either bog-standard or even subpar. The model was developed by OpenAI, and the tree indexer by Spotify. All I did was glue a bunch of disparate things together. The only reason nobody did it before me is that there's no money in it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Notebook-driven-development">Notebook-driven development<a class="anchor-link" href="#Notebook-driven-development"> </a></h3><p>The thing that makes this program interesting is that it was developed <em>in Jupyter notebooks</em>. Each component has its code and documentation in the same place, a <code>.ipynb</code> notebook.</p>
+<p>This is possible thanks to a new-ish project called <code>nbdev</code>. It provides literate programming functionality for notebooks. Specifically, it allows the programmer to automatically weave code and tangle documentation from the content of the notebooks!</p>
+<p>This means that relevant docs, code and tests for that code all live in the same location. And ideally, that place is a notebook <em>written for humans</em>. I'm still getting the hang of this, but it means explaining <em>why</em> something works, rather than simply how to do it.</p>
+<p>So that's the <em>why</em> of notebook-driven development. Let's look at <em>how</em> that works in practice.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pull-the-repo">Pull the repo<a class="anchor-link" href="#Pull-the-repo"> </a></h3><p>Clone this repository from Github:</p>
+<p><code>git clone https://github.com/deepfates/memery.git</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Install-dependencies">Install dependencies<a class="anchor-link" href="#Install-dependencies"> </a></h3><p>Enter the <code>memery</code> folder and install requirements:</p>
+
+<pre><code>cd memery
+pip install requirements.txt`</code></pre>
+<p>Feel free to use a virtual environment manager of your choosing. I ought to do this but I've been lucky too long and it's gone to my head.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Branch-the-code">Branch the code<a class="anchor-link" href="#Branch-the-code"> </a></h3><p>"Small branches, quickly merged" should be the motto here. Another tragic case of "do what I say, not what I do".</p>
+<p>For example, in updating the literate documentation for memery I created a branch called <code>literate</code>:</p>
+<p><code>git checkout -b literate</code></p>
+<p>Within this branch, I can work on different files and subtasks. I can commit several changes in a row, and double check all my tests, before trying to merge with the upstream <code>main</code> repo through a pull request.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Notebook-driven-development">Notebook-driven development<a class="anchor-link" href="#Notebook-driven-development"> </a></h2><p>To test memery as you work on it, you'll want to install it locally. This is as simple as using <code>pip</code> with "editable" enabled:</p>
+<p><code>pip install -e .</code></p>
+<p>The <code>.</code> refers to your local working directory; if this command doesn't work, try replacing that character with the full path of your memery repo.</p>
+<p>Now, within the main memery folder there is a subfolder <code>memery/memery</code>. This contains <code>.py</code> files, which are the source code for the repo. You might be tempted to edit these Python files directly, but you must hesitate.</p>
+<p>Remember: we are doing notebook-driven development. The Python files</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Change the notebooks</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Test the notebooks</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notebook-driven development</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tangle the source code</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Weave the documentation</p>
 
 </div>
 </div>

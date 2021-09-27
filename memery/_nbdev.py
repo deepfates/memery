@@ -2,8 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"indexFlow": "00_core.ipynb",
-         "queryFlow": "00_core.ipynb",
+index = {"index_flow": "00_core.ipynb",
+         "query_flow": "00_core.ipynb",
          "slugify": "01_loader.ipynb",
          "verify_image": "01_loader.ipynb",
          "get_image_files": "01_loader.ipynb",

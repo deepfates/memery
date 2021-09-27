@@ -39,9 +39,6 @@ entries:
     - output: web,pdf
       title: Streamlit app
       url: streamlit_app.html
-    - output: web,pdf
-      title: memery
-      url: index-Copy1.html
     output: web
     title: memery
   output: web
