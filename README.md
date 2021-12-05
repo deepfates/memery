@@ -1,7 +1,9 @@
-# memery
+# Memery
 > Use human language to search your image folders!
 
 
+
+## What is memery?
 
 ![meme about having too many memes](images/E2GoeMyWEAAkcLz.jpeg)
 
@@ -31,25 +33,29 @@ Outline:
 - Development
   - Notebook-driven development
   - Pull the repo
-  - Branch and install
   - Notebook-driven development
   - Change the notebooks
   - Test the notebooks
   - Notebook-driven development
   - Tangle the source code
   - Weave the documentation
+  - Commit your changes
 - Contributing
   - Who works on this project
-  - How you can help
-  - What we don't do
-  - Thanks
 
 ## Installation
 
 With Python 3.6 or greater:
-`pip install memery`
 
-Currently memery defaults to GPU installation. This will probably be switched in a future version. If you want to run CPU-only, run the following command after installing memery:
+```
+pip install memery
+pip install git+https://github.com/openai/CLIP.git
+```
+
+Currently memery defaults to GPU installation. This will 
+probably be switched in a future version. 
+
+For now, if you want to run CPU-only, run the following command after installing memery:
 
 `pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html`
 
@@ -134,7 +140,7 @@ I'm not clear yet on what behavior command-line users will expect from it. In th
 
 ### Use as a library
 
-The function currently called `query_flow` (against all Python convention) accepts a folder name and a query and returns a ranked list of image files. This is also recursive by default, and prints too much information into stdout. And it calls index_flow every time, which can be annoying if you have corrupted files in the directory, as it will need to rebuild the tree-index each time despite the files not changing. This will be solved in a future release.
+The function currently called `query_flow` accepts a folder name and a query and returns a ranked list of image files. This is also recursive by default, and prints too much information into stdout. And it calls index_flow every time, which can be annoying if you have corrupted files in the directory, as it will need to rebuild the tree-index each time despite the files not changing. This will be solved in a future release.
 
 ```python
 from memery.core import query_flow
@@ -187,12 +193,11 @@ So that's how to use memery. Let's look at how you can help make it better.
 
 Memery is a different beast than most pieces of code you've seen. It's a *literate program*: a program written for human beings to read.
 
-Nothing in this code is particularly special. The algorithms, data structures, and pipeline are either bog-standard or even subpar. The model was developed by OpenAI, and the tree indexer by Spotify. All I did was glue a bunch of disparate things together. The only reason nobody did it before me is that there's no money in it.
-
+Nothing in this code is particularly special. The algorithms, data structures, and pipeline are either bog-standard or even subpar. The model was developed by OpenAI, and the tree indexer by Spotify. All I did was glue a bunch of disparate things together. 
 
 ### Notebook-driven development
 
-The thing that makes this program interesting is that it was developed *in Jupyter notebooks*. Each component has its code and documentation in the same place, a `.ipynb` notebook.
+The thing that makes this program interesting is that it was developed **in Jupyter notebooks**. Each component has its code and documentation in the same place, a `.ipynb` notebook.
 
 This is possible thanks to a new-ish project called `nbdev`. It provides literate programming functionality for notebooks. Specifically, it allows the programmer to automatically weave code and tangle documentation from the content of the notebooks!
 
@@ -208,68 +213,83 @@ Clone this repository from Github:
 
 
 
-### Install dependencies
+### Install dependencies and memery
 Enter the `memery` folder and install requirements:
 
 ```
 cd memery
-pip install requirements.txt`
+pip install requirements.txt
 ```
 
-Feel free to use a virtual environment manager of your choosing. I ought to do this but I've been lucky too long and it's gone to my head.
+We also have to download the CLIP model directly from their git repo, as they decline to upload it to PyPi:
 
+`pip install git+https://github.com/openai/CLIP.git`
 
-
-### Branch the code
-
-"Small branches, quickly merged" should be the motto here. Another tragic case of "do what I say, not what I do".
-
-For example, in updating the literate documentation for memery I created a branch called `literate`:
-
-`git checkout -b literate`
-
-Within this branch, I can work on different files and subtasks. I can commit several changes in a row, and double check all my tests, before trying to merge with the upstream `main` repo through a pull request.
-
-## Notebook-driven development
-
-To test memery as you work on it, you'll want to install it locally. This is as simple as using `pip` with "editable" enabled:
+And finally install your local, editable copy of memery with 
 
 `pip install -e .`
 
-The `.` refers to your local working directory; if this command doesn't work, try replacing that character with the full path of your memery repo.
+### Notebook-driven development
 
-Now, within the main memery folder there is a subfolder `memery/memery`. This contains `.py` files, which are the source code for the repo. You might be tempted to edit these Python files directly, but you must hesitate.
+Within the main memery folder there is a subfolder `memery/memery`. This contains `.py` files, which are the source code for the repo. You might be tempted to edit these Python files directly, but you must hesitate.
 
-Remember: we are doing notebook-driven development. The Python files
+Remember: we are doing notebook-driven development. The Python files in that folder are auto-generated from the `.ipynb` files in this folder. If you edit them directly, the notebooks could overwrite your code in a future build. There are ways to backport code from the `.py` files to the notebooks, but it's not recommended.
 
-Change the notebooks
+The reason we write the code in notebooks is to keep documentation and tests right next to their code. This single source of truth will percolate to the docs, code packages and testing framework. 
 
-Test the notebooks
+ :warning: Always edit the notebook files, not the .py files! :warning:
 
-Notebook-driven development
+### Change the notebooks
 
-Tangle the source code
+This is the part you came here for. Change the code in the notebooks as you need. 
 
-Weave the documentation
+Change the **documentation** as well, to match your new code. Code should be documented as closely to the cell where it is used as possible. The more general design should be at the top of the notebook, and implementation-specific details further down.
 
----
+Each notebook should also contain **tests** for the code it defines. These can be simple assert statements which return True.
 
-*Compile this notebook*
 
-```python
-from nbdev.export import notebook2script; notebook2script()
+### Test the notebooks
 
-```
+The following command will run each notebook in the main folder and report if any cells return False or raise errors. We pause for a couple seconds between starting each notebook, to avoid collisions accessing the GPU.
 
-    Converted 00_core.ipynb.
-    Converted 01_loader.ipynb.
-    Converted 02_crafter.ipynb.
-    Converted 03_encoder.ipynb.
-    Converted 04_indexer.ipynb.
-    Converted 05_ranker.ipynb.
-    Converted 06_fileutils.ipynb.
-    Converted 07_cli.ipynb.
-    Converted 08_jupyter_gui.ipynb.
-    Converted 09_streamlit_app.ipynb.
-    Converted index.ipynb.
+`nbdev_test_nbs --pause 2`
+
+Always run tests before committing your changes.
+
+
+### Notebook-driven development
+
+As an interpreted language, Python doesn't usually have a "compile" step. But as a literate program, Memery is written for humans first and computers second. To get a clean Python module, free of documentation and tests, we **tangle** the source code into the `/memery` directory, then **weave** the documentation.
+
+Any code with the `#export` tag at the beginning of its cell will be tangled into the appropriate .py file. Any code cell with `#hide` will be hidden from the docs. 
+
+### Tangle the source code
+
+To tangle code into `/memery`, use the following in a command line:
+
+`nbdev_build_lib`
+
+I often use `nbdev_build_lib && pip install -e` (although I'm no longer sure if it's necessary to reinstall an editable module).
+
+### Weave the documentation
+
+To generate the documentation website, use `nbdev_build_docs`. Or, get a live preview using `make docs_serve`.
+
+### Commit your changes
+
+Before committing, clean useless metadata from your notebooks with `nbdev_clean_nbs`. Or, install the nbdev pre-commit hooks to do this automatically with `nbdev_install_git_hooks`.
+
+Then commit your changes to the repo and push! Make sure to include the `/docs` and `/memery` folders, and any notebooks you changed when you commit.
+
+## Contributing
+
+Memery is open source and you can contribute. See [CONTRIBUTING.md]('/CONTRIBUTING.md') for guidelines on how you can help.
+
+### Who works on this project
+
+Memery was first written by Max Anton Brewer aka @deepfates in the summer of 2021. Some commits are listed from @robotface-io but that was just me using the wrong account when I first started. 
+
+I wrote this to solve my own needs and learn notebook-based development. I hope it helps other people too. If you can help me make it better, please do. I welcome any contribution, guidance or criticism.
+
+**The ideal way to get support is to open an issue on Github**. However, the *fastest* way to get a response from me is probably to [direct message me on twitter](twitter.com/deepfates). This is my first attempt to coordinate an open-source project, bear with me.
 
