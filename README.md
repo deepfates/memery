@@ -107,12 +107,12 @@ The right hand panel displays the images and associated options. Major errors wi
 
 If you're in a Jupyter environment, you can summon an ipywidgets GUI directly into an output cell like this:
 
-```python
+```
 from memery.gui import appPage
 
 ```
 
-```python
+```
 app = appPage()
 display(app)
 ```
@@ -142,11 +142,11 @@ I'm not clear yet on what behavior command-line users will expect from it. In th
 
 The function currently called `query_flow` accepts a folder name and a query and returns a ranked list of image files. This is also recursive by default, and prints too much information into stdout. And it calls index_flow every time, which can be annoying if you have corrupted files in the directory, as it will need to rebuild the tree-index each time despite the files not changing. This will be solved in a future release.
 
-```python
+```
 from memery.core import query_flow
 ```
 
-```python
+```
 ranked = query_flow('./images', 'dad joke')
 
 print(ranked[:5])

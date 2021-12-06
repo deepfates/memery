@@ -15,9 +15,11 @@ from .ranker import ranker, nns_to_files
 
 # Cell
 def index_flow(path):
+    '''Indexes images in path, returns the location of save files'''
     root = Path(path)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    # Se
     filepaths = get_image_files(root)
     archive_db = {}
 
@@ -42,24 +44,37 @@ def index_flow(path):
 
 # Cell
 def query_flow(path, query=None, image_query=None):
+    '''
+    Indexes a folder and returns file paths ranked by query.
+
+    Parameters:
+        path (str): Folder to search
+        query (str): Search query text
+        image_query (Tensor): Search query image(s)
+
+    Returns:
+        list of file paths ranked by query
+    '''
     start_time = time.time()
-    print('starting timer')
     root = Path(path)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    # Check if we should re-index the files
     print("Checking files")
     dbpath = root/'memery.pt'
     db = db_loader(dbpath, device)
     treepath = root/'memery.ann'
     treemap = treemap_loader(treepath)
-
     filepaths = get_image_files(root)
+
+    # Rebuild the tree if it doesn't
     if treemap == None or len(db) != len(filepaths):
         print('Indexing')
         dbpath, treepath = index_flow(root)
         treemap = treemap_loader(Path(treepath))
         db = db_loader(dbpath, device)
 
+    # Convert queries to vector
     print('Converting query')
     if image_query:
         img = preproc(image_query)
@@ -74,6 +89,7 @@ def query_flow(path, query=None, image_query=None):
     else:
         print('No query!')
 
+    # Rank db by query
     print(f"Searching {len(db)} images")
     indexes = ranker(query_vec, treemap)
     ranked_files = nns_to_files(db, indexes)
