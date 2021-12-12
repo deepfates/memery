@@ -1,6 +1,6 @@
 ---
 
-title: memery
+title: Memery
 
 
 keywords: fastai
@@ -31,7 +31,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="/memery/images/E2GoeMyWEAAkcLz.jpeg" alt="meme about having too many memes"></p>
+<h2 id="What-is-memery?">What is memery?<a class="anchor-link" href="#What-is-memery?"> </a></h2><p><img src="/memery/images/E2GoeMyWEAAkcLz.jpeg" alt="meme about having too many memes"></p>
 <p>The problem: you have a huge folder of images. Memes, screenshots, datasets, product photos, inspo albums, anything. You know that somewhere in that folder is the exact image you want, but you can't remember the filename or what day you saved it. There's nothing you can do but scroll through the folder, skimming hundreds of thumbnails, hoping you don't accidentally miss it, and that you'll recognize it when you do see it.</p>
 <p>Humans do this amazingly well. But even with computers, local image search is still a manual effort - you're still sorting through folders of images, like an archivist of old.</p>
 <p><strong>Now there's Memery</strong>.</p>
@@ -59,20 +59,17 @@ nb_path: "index.ipynb"
 <li>Development<ul>
 <li>Notebook-driven development</li>
 <li>Pull the repo</li>
-<li>Branch and install</li>
 <li>Notebook-driven development</li>
 <li>Change the notebooks</li>
 <li>Test the notebooks</li>
 <li>Notebook-driven development</li>
 <li>Tangle the source code</li>
 <li>Weave the documentation</li>
+<li>Commit your changes</li>
 </ul>
 </li>
 <li>Contributing<ul>
 <li>Who works on this project</li>
-<li>How you can help</li>
-<li>What we don't do</li>
-<li>Thanks</li>
 </ul>
 </li>
 </ul>
@@ -82,9 +79,13 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Installation">Installation<a class="anchor-link" href="#Installation"> </a></h2><p>With Python 3.6 or greater:
-<code>pip install memery</code></p>
-<p>Currently memery defaults to GPU installation. This will probably be switched in a future version. If you want to run CPU-only, run the following command after installing memery:</p>
+<h2 id="Installation">Installation<a class="anchor-link" href="#Installation"> </a></h2><p>With Python 3.6 or greater:</p>
+
+<pre><code>pip install memery
+pip install git+https://github.com/openai/CLIP.git</code></pre>
+<p>Currently memery defaults to GPU installation. This will 
+probably be switched in a future version.</p>
+<p>For now, if you want to run CPU-only, run the following command after installing memery:</p>
 <p><code>pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html</code></p>
 <p>Someday memery will be packaged in an easy to use format, but since this is a Python project it is hard to predict when that day will be.</p>
 <p>If you want to help develop memery, you'll need to clone the repo. See below.</p>
@@ -208,7 +209,7 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The function currently called <a href="/memery/core.html#query_flow"><code>query_flow</code></a> (against all Python convention) accepts a folder name and a query and returns a ranked list of image files. This is also recursive by default, and prints too much information into stdout. And it calls index_flow every time, which can be annoying if you have corrupted files in the directory, as it will need to rebuild the tree-index each time despite the files not changing. This will be solved in a future release.</p>
+<p>The function currently called <a href="/memery/core.html#query_flow"><code>query_flow</code></a> accepts a folder name and a query and returns a ranked list of image files. This is also recursive by default, and prints too much information into stdout. And it calls index_flow every time, which can be annoying if you have corrupted files in the directory, as it will need to rebuild the tree-index each time despite the files not changing. This will be solved in a future release.</p>
 
 </div>
 </div>
@@ -327,14 +328,14 @@ Done in 0.5853581428527832 seconds
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Development">Development<a class="anchor-link" href="#Development"> </a></h2><p>Memery is a different beast than most pieces of code you've seen. It's a <em>literate program</em>: a program written for human beings to read.</p>
-<p>Nothing in this code is particularly special. The algorithms, data structures, and pipeline are either bog-standard or even subpar. The model was developed by OpenAI, and the tree indexer by Spotify. All I did was glue a bunch of disparate things together. The only reason nobody did it before me is that there's no money in it.</p>
+<p>Nothing in this code is particularly special. The algorithms, data structures, and pipeline are either bog-standard or even subpar. The model was developed by OpenAI, and the tree indexer by Spotify. All I did was glue a bunch of disparate things together.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Notebook-driven-development">Notebook-driven development<a class="anchor-link" href="#Notebook-driven-development"> </a></h3><p>The thing that makes this program interesting is that it was developed <em>in Jupyter notebooks</em>. Each component has its code and documentation in the same place, a <code>.ipynb</code> notebook.</p>
+<h3 id="Notebook-driven-development">Notebook-driven development<a class="anchor-link" href="#Notebook-driven-development"> </a></h3><p>The thing that makes this program interesting is that it was developed <strong>in Jupyter notebooks</strong>. Each component has its code and documentation in the same place, a <code>.ipynb</code> notebook.</p>
 <p>This is possible thanks to a new-ish project called <code>nbdev</code>. It provides literate programming functionality for notebooks. Specifically, it allows the programmer to automatically weave code and tangle documentation from the content of the notebooks!</p>
 <p>This means that relevant docs, code and tests for that code all live in the same location. And ideally, that place is a notebook <em>written for humans</em>. I'm still getting the hang of this, but it means explaining <em>why</em> something works, rather than simply how to do it.</p>
 <p>So that's the <em>why</em> of notebook-driven development. Let's look at <em>how</em> that works in practice.</p>
@@ -352,124 +353,88 @@ Done in 0.5853581428527832 seconds
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Install-dependencies">Install dependencies<a class="anchor-link" href="#Install-dependencies"> </a></h3><p>Enter the <code>memery</code> folder and install requirements:</p>
+<h3 id="Install-dependencies-and-memery">Install dependencies and memery<a class="anchor-link" href="#Install-dependencies-and-memery"> </a></h3><p>Enter the <code>memery</code> folder and install requirements:</p>
 
 <pre><code>cd memery
-pip install requirements.txt`</code></pre>
-<p>Feel free to use a virtual environment manager of your choosing. I ought to do this but I've been lucky too long and it's gone to my head.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Branch-the-code">Branch the code<a class="anchor-link" href="#Branch-the-code"> </a></h3><p>"Small branches, quickly merged" should be the motto here. Another tragic case of "do what I say, not what I do".</p>
-<p>For example, in updating the literate documentation for memery I created a branch called <code>literate</code>:</p>
-<p><code>git checkout -b literate</code></p>
-<p>Within this branch, I can work on different files and subtasks. I can commit several changes in a row, and double check all my tests, before trying to merge with the upstream <code>main</code> repo through a pull request.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Notebook-driven-development">Notebook-driven development<a class="anchor-link" href="#Notebook-driven-development"> </a></h2><p>To test memery as you work on it, you'll want to install it locally. This is as simple as using <code>pip</code> with "editable" enabled:</p>
+pip install requirements.txt</code></pre>
+<p>We also have to download the CLIP model directly from their git repo, as they decline to upload it to PyPi:</p>
+<p><code>pip install git+https://github.com/openai/CLIP.git</code></p>
+<p>And finally install your local, editable copy of memery with</p>
 <p><code>pip install -e .</code></p>
-<p>The <code>.</code> refers to your local working directory; if this command doesn't work, try replacing that character with the full path of your memery repo.</p>
-<p>Now, within the main memery folder there is a subfolder <code>memery/memery</code>. This contains <code>.py</code> files, which are the source code for the repo. You might be tempted to edit these Python files directly, but you must hesitate.</p>
-<p>Remember: we are doing notebook-driven development. The Python files</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Change the notebooks</p>
+<h3 id="Notebook-driven-development">Notebook-driven development<a class="anchor-link" href="#Notebook-driven-development"> </a></h3><p>Within the main memery folder there is a subfolder <code>memery/memery</code>. This contains <code>.py</code> files, which are the source code for the repo. You might be tempted to edit these Python files directly, but you must hesitate.</p>
+<p>Remember: we are doing notebook-driven development. The Python files in that folder are auto-generated from the <code>.ipynb</code> files in this folder. If you edit them directly, the notebooks could overwrite your code in a future build. There are ways to backport code from the <code>.py</code> files to the notebooks, but it's not recommended.</p>
+<p>The reason we write the code in notebooks is to keep documentation and tests right next to their code. This single source of truth will percolate to the docs, code packages and testing framework.</p>
+<p>:warning: Always edit the notebook files, not the .py files! :warning:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Test the notebooks</p>
+<h3 id="Change-the-notebooks">Change the notebooks<a class="anchor-link" href="#Change-the-notebooks"> </a></h3><p>This is the part you came here for. Change the code in the notebooks as you need.</p>
+<p>Change the <strong>documentation</strong> as well, to match your new code. Code should be documented as closely to the cell where it is used as possible. The more general design should be at the top of the notebook, and implementation-specific details further down.</p>
+<p>Each notebook should also contain <strong>tests</strong> for the code it defines. These can be simple assert statements which return True.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Notebook-driven development</p>
+<h3 id="Test-the-notebooks">Test the notebooks<a class="anchor-link" href="#Test-the-notebooks"> </a></h3><p>The following command will run each notebook in the main folder and report if any cells return False or raise errors. We pause for a couple seconds between starting each notebook, to avoid collisions accessing the GPU.</p>
+<p><code>nbdev_test_nbs --pause 2</code></p>
+<p>Always run tests before committing your changes.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Tangle the source code</p>
+<h3 id="Notebook-driven-development">Notebook-driven development<a class="anchor-link" href="#Notebook-driven-development"> </a></h3><p>As an interpreted language, Python doesn't usually have a "compile" step. But as a literate program, Memery is written for humans first and computers second. To get a clean Python module, free of documentation and tests, we <strong>tangle</strong> the source code into the <code>/memery</code> directory, then <strong>weave</strong> the documentation.</p>
+<p>Any code with the <code>#export</code> tag at the beginning of its cell will be tangled into the appropriate .py file. Any code cell with <code>#hide</code> will be hidden from the docs.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Weave the documentation</p>
+<h3 id="Tangle-the-source-code">Tangle the source code<a class="anchor-link" href="#Tangle-the-source-code"> </a></h3><p>To tangle code into <code>/memery</code>, use the following in a command line:</p>
+<p><code>nbdev_build_lib</code></p>
+<p>I often use <code>nbdev_build_lib &amp;&amp; pip install -e</code> (although I'm no longer sure if it's necessary to reinstall an editable module).</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<p><em>Compile this notebook</em></p>
+<h3 id="Weave-the-documentation">Weave the documentation<a class="anchor-link" href="#Weave-the-documentation"> </a></h3><p>To generate the documentation website, use <code>nbdev_build_docs</code>. Or, get a live preview using <code>make docs_serve</code>.</p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export</span> <span class="kn">import</span> <span class="n">notebook2script</span><span class="p">;</span> <span class="n">notebook2script</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Converted 00_core.ipynb.
-Converted 01_loader.ipynb.
-Converted 02_crafter.ipynb.
-Converted 03_encoder.ipynb.
-Converted 04_indexer.ipynb.
-Converted 05_ranker.ipynb.
-Converted 06_fileutils.ipynb.
-Converted 07_cli.ipynb.
-Converted 08_jupyter_gui.ipynb.
-Converted 09_streamlit_app.ipynb.
-Converted index.ipynb.
-</pre>
-</div>
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Commit-your-changes">Commit your changes<a class="anchor-link" href="#Commit-your-changes"> </a></h3><p>Before committing, clean useless metadata from your notebooks with <code>nbdev_clean_nbs</code>. Or, install the nbdev pre-commit hooks to do this automatically with <code>nbdev_install_git_hooks</code>.</p>
+<p>Then commit your changes to the repo and push! Make sure to include the <code>/docs</code> and <code>/memery</code> folders, and any notebooks you changed when you commit.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Contributing">Contributing<a class="anchor-link" href="#Contributing"> </a></h2><p>Memery is open source and you can contribute. See <a href="&#39;/CONTRIBUTING.md&#39;">CONTRIBUTING.md</a> for guidelines on how you can help.</p>
+<h3 id="Who-works-on-this-project">Who works on this project<a class="anchor-link" href="#Who-works-on-this-project"> </a></h3><p>Memery was first written by Max Anton Brewer aka @deepfates in the summer of 2021. Some commits are listed from @robotface-io but that was just me using the wrong account when I first started.</p>
+<p>I wrote this to solve my own needs and learn notebook-based development. I hope it helps other people too. If you can help me make it better, please do. I welcome any contribution, guidance or criticism.</p>
+<p><strong>The ideal way to get support is to open an issue on Github</strong>. However, the <em>fastest</em> way to get a response from me is probably to <a href="twitter.com/deepfates">direct message me on twitter</a>. This is my first attempt to coordinate an open-source project, bear with me.</p>
 
 </div>
-    {% endraw %}
-
+</div>
+</div>
 </div>
  
-
-<script type="application/vnd.jupyter.widget-state+json">
-{"state": {}, "version_major": 2, "version_minor": 0}
-</script>
 

@@ -7,7 +7,6 @@
     "Encoder": "encoder.html",
     "Indexer": "indexer.html",
     "Ranker": "ranker.html",
-    "File Utils": "fileutils.html",
     "CLI": "cli.html",
     "GUI": "jupyter_gui.html",
     "Streamlit app": "streamlit_app.html"

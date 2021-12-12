@@ -28,9 +28,6 @@ entries:
       title: Ranker
       url: ranker.html
     - output: web,pdf
-      title: File Utils
-      url: fileutils.html
-    - output: web,pdf
       title: CLI
       url: cli.html
     - output: web,pdf

@@ -6,8 +6,8 @@ title: Loader
 keywords: fastai
 sidebar: home_sidebar
 
-
-
+summary: "Functions for finding and loading image files and saved embeddings"
+description: "Functions for finding and loading image files and saved embeddings"
 nb_path: "01_loader.ipynb"
 ---
 <!--
@@ -26,6 +26,21 @@ nb_path: "01_loader.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/mage/.local/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /pytorch/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -42,6 +57,13 @@ nb_path: "01_loader.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>NB: A lot of this implementation is too specific, especially the slugified filenames being used for dictionary IDs. Should be replaced with a better database implementation. Right now if the length of the list of files is different than the length of the list of files in the database, we have to rebuild the entire tree. This means that if we index a folder with corrupted files, it rebuilds the tree every time, as the length of the file list with skipped files is always different than the db without them.</strong></p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -54,30 +76,6 @@ nb_path: "01_loader.ipynb"
 
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="slugify" class="doc_header"><code>slugify</code><a href="https://github.com/deepfates/memery/tree/main/memery/loader.py#L11" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>slugify</code>(<strong><code>filepath</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="verify_image" class="doc_header"><code>verify_image</code><a href="https://github.com/deepfates/memery/tree/main/memery/loader.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>verify_image</code>(<strong><code>f</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -118,9 +116,40 @@ nb_path: "01_loader.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="verify_image" class="doc_header"><code>verify_image</code><a href="https://github.com/deepfates/memery/tree/main/memery/loader.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>verify_image</code>(<strong><code>f</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Demonstrating the usage here, not a great test though:</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -248,7 +277,7 @@ nb_path: "01_loader.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/memery/loader.html#archive_loader"><code>archive_loader</code></a> is only called in <a href="/memery/core.html#indexFlow"><code>indexFlow</code></a>. It takes the list of image files and the folder they're in (and the torch device), opens an archive if there is one</p>
+<p>The <a href="/memery/loader.html#archive_loader"><code>archive_loader</code></a> is only called in <code>indexFlow</code>. It takes the list of image files and the folder they're in (and the torch device), opens an archive if there is one</p>
 
 </div>
 </div>
@@ -286,7 +315,7 @@ nb_path: "01_loader.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/memery/loader.html#db_loader"><code>db_loader</code></a> takes a location and returns either the archive dictionary or an empty dictionary. Decomposed to its own function so it can be called separately from <a href="/memery/loader.html#archive_loader"><code>archive_loader</code></a> or <a href="/memery/core.html#queryFlow"><code>queryFlow</code></a>.</p>
+<p>The <a href="/memery/loader.html#db_loader"><code>db_loader</code></a> takes a location and returns either the archive dictionary or an empty dictionary. Decomposed to its own function so it can be called separately from <a href="/memery/loader.html#archive_loader"><code>archive_loader</code></a> or <code>queryFlow</code>.</p>
 
 </div>
 </div>

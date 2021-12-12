@@ -6,6 +6,7 @@ __all__ = ['device', 'model', 'image_encoder', 'text_encoder', 'image_query_enco
 import torch
 import clip
 from tqdm import tqdm
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model, _ = clip.load("ViT-B/32", device, jit=False)
 model = model.float()
