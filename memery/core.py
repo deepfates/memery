@@ -7,11 +7,8 @@ import time
 import torch
 
 from pathlib import Path
-from .loader import get_image_files, archive_loader, db_loader, treemap_loader
-from .crafter import crafter, preproc
-from .encoder import image_encoder, text_encoder, image_query_encoder
-from .indexer import join_all, build_treemap, save_archives
-from .ranker import ranker, nns_to_files
+from memery import loader, crafter, encoder, indexer, ranker
+
 
 # Cell
 def index_flow(path):
@@ -19,26 +16,25 @@ def index_flow(path):
     root = Path(path)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Se
-    filepaths = get_image_files(root)
+    # Loading
+    filepaths = loader.get_image_files(root)
     archive_db = {}
 
-    archive_db, new_files = archive_loader(filepaths, root, device)
+    archive_db, new_files = loader.archive_loader(filepaths, root, device)
     print(f"Loaded {len(archive_db)} encodings")
     print(f"Encoding {len(new_files)} new images")
 
-#     start_time = time.perf_counter()
+    # Crafting and encoding
+    crafted_files = crafter.crafter(new_files, device)
+    new_embeddings = encoder.image_encoder(crafted_files, device)
 
-    crafted_files = crafter(new_files, device)
-    new_embeddings = image_encoder(crafted_files, device)
-
-    db = join_all(archive_db, new_files, new_embeddings)
+    # Reindexing
+    db = indexer.join_all(archive_db, new_files, new_embeddings)
     print("Building treemap")
-    t = build_treemap(db)
+    t = indexer.build_treemap(db)
 
     print(f"Saving {len(db)} encodings")
-    save_paths = save_archives(root, t, db)
-#     print(f"Done in {time.perf_counter() - start_time} seconds")
+    save_paths = indexer.save_archives(root, t, db)
 
     return(save_paths)
 
@@ -62,37 +58,37 @@ def query_flow(path, query=None, image_query=None):
     # Check if we should re-index the files
     print("Checking files")
     dbpath = root/'memery.pt'
-    db = db_loader(dbpath, device)
+    db = loader.db_loader(dbpath, device)
     treepath = root/'memery.ann'
-    treemap = treemap_loader(treepath)
-    filepaths = get_image_files(root)
+    treemap = loader.treemap_loader(treepath)
+    filepaths = loader.get_image_files(root)
 
-    # Rebuild the tree if it doesn't
-    if treemap == None or len(db) != len(filepaths):
-        print('Indexing')
-        dbpath, treepath = index_flow(root)
-        treemap = treemap_loader(Path(treepath))
-        db = db_loader(dbpath, device)
+    # # Rebuild the tree if it doesn't
+    # if treemap == None or len(db) != len(filepaths):
+    #     print('Indexing')
+    #     dbpath, treepath = index_flow(root)
+    #     treemap = loader.treemap_loader(Path(treepath))
+    #     db = loader.db_loader(dbpath, device)
 
     # Convert queries to vector
     print('Converting query')
     if image_query:
-        img = preproc(image_query)
+        img = crafter.preproc(image_query)
     if query and image_query:
-        text_vec = text_encoder(query, device)
-        image_vec = image_query_encoder(img, device)
+        text_vec = encoder.text_encoder(query, device)
+        image_vec = encoder.image_query_encoder(img, device)
         query_vec = text_vec + image_vec
     elif query:
-        query_vec = text_encoder(query, device)
+        query_vec = encoder.text_encoder(query, device)
     elif image_query:
-        query_vec = image_query_encoder(img, device)
+        query_vec = encoder.image_query_encoder(img, device)
     else:
         print('No query!')
 
     # Rank db by query
     print(f"Searching {len(db)} images")
-    indexes = ranker(query_vec, treemap)
-    ranked_files = nns_to_files(db, indexes)
+    indexes = ranker.ranker(query_vec, treemap)
+    ranked_files = ranker.nns_to_files(db, indexes)
 
     print(f"Done in {time.time() - start_time} seconds")
 
