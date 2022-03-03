@@ -3,6 +3,8 @@
 __all__ = ['app', 'recall', 'serve', '__main__']
 
 # Cell
+from typing import Optional
+import os
 import typer
 import memery.core
 import streamlit.cli
@@ -20,8 +22,10 @@ def recall(path: str, query: str, n: int = 10):
 
 # Cell
 @app.command()
-def serve():
+def serve(root: Optional[str] = typer.Argument(None)):
     """Runs the streamlit GUI in your browser"""
+    if root is not None and os.path.exists(root):
+        os.chdir(root)
     path = memery.__file__.replace('__init__.py','streamlit_app.py')
     streamlit.cli.main(['run',path])
 
