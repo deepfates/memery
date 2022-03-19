@@ -12,12 +12,12 @@ torch = "==1.7.1"
 ipython = "*"
 pillow = "*"
 typer = "*"
-streamlit = "*"
-clip-by-openai = "*"
+streamlit = "==1.3.1"
+clip = {git = "https://github.com/openai/CLIP.git"}
 
 [dev-packages]
-nbdev = "*"
 pip-tools = "*"
+importlib-metadata = "*"
 
 [requires]
 python_version = "3.7"

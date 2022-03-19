@@ -31,15 +31,6 @@ Outline:
   - Use in Jupyter
   - Use the library
 - Development
-  - Notebook-driven development
-  - Pull the repo
-  - Notebook-driven development
-  - Change the notebooks
-  - Test the notebooks
-  - Notebook-driven development
-  - Tangle the source code
-  - Weave the documentation
-  - Commit your changes
 - Contributing
   - Who works on this project
 
@@ -191,20 +182,6 @@ So that's how to use memery. Let's look at how you can help make it better.
 
 ## Development
 
-Memery is a different beast than most pieces of code you've seen. It's a *literate program*: a program written for human beings to read.
-
-Nothing in this code is particularly special. The algorithms, data structures, and pipeline are either bog-standard or even subpar. The model was developed by OpenAI, and the tree indexer by Spotify. All I did was glue a bunch of disparate things together. 
-
-### Notebook-driven development
-
-The thing that makes this program interesting is that it was developed **in Jupyter notebooks**. Each component has its code and documentation in the same place, a `.ipynb` notebook.
-
-This is possible thanks to a new-ish project called `nbdev`. It provides literate programming functionality for notebooks. Specifically, it allows the programmer to automatically weave code and tangle documentation from the content of the notebooks!
-
-This means that relevant docs, code and tests for that code all live in the same location. And ideally, that place is a notebook *written for humans*. I'm still getting the hang of this, but it means explaining *why* something works, rather than simply how to do it.
-
-So that's the *why* of notebook-driven development. Let's look at *how* that works in practice.
-
 ### Pull the repo
 
 Clone this repository from Github:
@@ -228,58 +205,6 @@ We also have to download the CLIP model directly from their git repo, as they de
 And finally install your local, editable copy of memery with 
 
 `pip install -e .`
-
-### Notebook-driven development
-
-Within the main memery folder there is a subfolder `memery/memery`. This contains `.py` files, which are the source code for the repo. You might be tempted to edit these Python files directly, but you must hesitate.
-
-Remember: we are doing notebook-driven development. The Python files in that folder are auto-generated from the `.ipynb` files in this folder. If you edit them directly, the notebooks could overwrite your code in a future build. There are ways to backport code from the `.py` files to the notebooks, but it's not recommended.
-
-The reason we write the code in notebooks is to keep documentation and tests right next to their code. This single source of truth will percolate to the docs, code packages and testing framework. 
-
- :warning: Always edit the notebook files, not the .py files! :warning:
-
-### Change the notebooks
-
-This is the part you came here for. Change the code in the notebooks as you need. 
-
-Change the **documentation** as well, to match your new code. Code should be documented as closely to the cell where it is used as possible. The more general design should be at the top of the notebook, and implementation-specific details further down.
-
-Each notebook should also contain **tests** for the code it defines. These can be simple assert statements which return True.
-
-
-### Test the notebooks
-
-The following command will run each notebook in the main folder and report if any cells return False or raise errors. We pause for a couple seconds between starting each notebook, to avoid collisions accessing the GPU.
-
-`nbdev_test_nbs --pause 2`
-
-Always run tests before committing your changes.
-
-
-### Notebook-driven development
-
-As an interpreted language, Python doesn't usually have a "compile" step. But as a literate program, Memery is written for humans first and computers second. To get a clean Python module, free of documentation and tests, we **tangle** the source code into the `/memery` directory, then **weave** the documentation.
-
-Any code with the `#export` tag at the beginning of its cell will be tangled into the appropriate .py file. Any code cell with `#hide` will be hidden from the docs. 
-
-### Tangle the source code
-
-To tangle code into `/memery`, use the following in a command line:
-
-`nbdev_build_lib`
-
-I often use `nbdev_build_lib && pip install -e` (although I'm no longer sure if it's necessary to reinstall an editable module).
-
-### Weave the documentation
-
-To generate the documentation website, use `nbdev_build_docs`. Or, get a live preview using `make docs_serve`.
-
-### Commit your changes
-
-Before committing, clean useless metadata from your notebooks with `nbdev_clean_nbs`. Or, install the nbdev pre-commit hooks to do this automatically with `nbdev_install_git_hooks`.
-
-Then commit your changes to the repo and push! Make sure to include the `/docs` and `/memery` folders, and any notebooks you changed when you commit.
 
 ## Contributing
 
