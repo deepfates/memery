@@ -8,8 +8,12 @@ def slugify(filepath):
     return f'{filepath.stem}_{str(filepath.stat().st_mtime).split(".")[0]}'
 
 def get_image_files(path):
-    img_extensions = ['.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif', '.tiff', '.webp']
+    img_extensions = {'.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif', '.tiff', '.webp'}
     return [(f, slugify(f)) for f in tqdm(path.rglob('*')) if f.suffix in img_extensions]
+
+def get_valid_images(path):
+    filepaths = get_image_files(path)
+    return [f for f in filepaths if verify_image(f[0])]
 
 # This returns boolean and should be called is_valid_image or something like that
 def verify_image(f):

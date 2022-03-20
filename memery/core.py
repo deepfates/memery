@@ -4,8 +4,11 @@ import time
 import torch
 
 from pathlib import Path
-from memery import loader, crafter, encoder, indexer, ranker
-
+from .loader import get_image_files, get_valid_images, archive_loader, db_loader, treemap_loader
+from .crafter import crafter, preproc
+from .encoder import image_encoder, text_encoder, image_query_encoder
+from .indexer import join_all, build_treemap, save_archives
+from .ranker import ranker, nns_to_files
 
 def index_flow(path):
     '''Indexes images in path, returns the location of save files'''
@@ -55,8 +58,8 @@ def query_flow(path, query=None, image_query=None):
     dbpath = root/'memery.pt'
     db = loader.db_loader(dbpath, device)
     treepath = root/'memery.ann'
-    treemap = loader.treemap_loader(treepath)
-    filepaths = loader.get_image_files(root)
+    treemap = treemap_loader(treepath)
+    filepaths = get_valid_images(root)
 
     # # Rebuild the tree if it doesn't
     # if treemap == None or len(db) != len(filepaths):
