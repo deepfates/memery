@@ -3,10 +3,10 @@ __all__ = ['join_all', 'build_treemap', 'save_archives']
 def join_all(db, new_files, new_embeddings):
     start = len(db)
     for i, file in enumerate(new_files):
-        path, slug = file
+        path, hash = file
         index = i + start
         db[index] = {
-            'slug': slug,
+            'hash': hash,
             'fpath': path,
             'embed': new_embeddings[i],
         }
