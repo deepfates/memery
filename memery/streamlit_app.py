@@ -1,6 +1,7 @@
 __all__ = ['st_redirect', 'st_stdout', 'st_stderr', 'send_image_query', 'send_text_query', 'path', 'text_query',
            'image_query', 'im_display_zone', 'logbox', 'sizes']
 
+import argparse
 import streamlit as st
 from memery import core
 
@@ -12,6 +13,13 @@ from threading import current_thread
 from contextlib import contextmanager
 from io import StringIO
 import sys
+
+def parse_args(args):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('root', help='starting directory to search', default='./images')
+    return parser.parse_args(args)
+
+args = parse_args(sys.argv[1:])
 
 @contextmanager
 def st_redirect(src, dst):
@@ -58,7 +66,7 @@ def send_text_query(path, text_query):
 
 st.sidebar.title("Memery")
 
-path = st.sidebar.text_input(label='Directory', value='./images')
+path = st.sidebar.text_input(label='Directory', value=args.root)
 text_query = st.sidebar.text_input(label='Text query', value='')
 image_query = st.sidebar.file_uploader(label='Image query')
 im_display_zone = st.sidebar.container()

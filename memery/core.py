@@ -57,12 +57,12 @@ def query_flow(path, query=None, image_query=None):
     treemap = loader.treemap_loader(treepath)
     filepaths = loader.get_image_files(root)
 
-    # # Rebuild the tree if it doesn't
-    # if treemap == None or len(db) != len(filepaths):
-    #     print('Indexing')
-    #     dbpath, treepath = index_flow(root)
-    #     treemap = loader.treemap_loader(Path(treepath))
-    #     db = loader.db_loader(dbpath, device)
+    # Rebuild the tree if it doesn't
+    if treemap == None or len(db) != len(filepaths):
+        print('Indexing')
+        dbpath, treepath = index_flow(root)
+        treemap = loader.treemap_loader(Path(treepath))
+        db = loader.db_loader(dbpath, device)
 
     # Convert queries to vector
     print('Converting query')

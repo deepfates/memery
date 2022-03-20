@@ -3,7 +3,7 @@ __all__ = ['app', 'recall', 'serve', '__main__']
 import typer
 import memery.core
 import streamlit.cli
-
+from typing import Optional
 # Sometimes you just want to be able to pipe information through the terminal. This is that command
 
 app = typer.Typer()
@@ -16,10 +16,13 @@ def recall(path: str, query: str, n: int = 10):
 #     return(ranked)
 
 @app.command()
-def serve():
+def serve(root: Optional[str] = typer.Argument(None)):
     """Runs the streamlit GUI in your browser"""
-    path = memery.__file__.replace('__init__.py','streamlit_app.py')
-    streamlit.cli.main(['run',path])
+    app_path = memery.__file__.replace('__init__.py','streamlit_app.py')
+    if root is None:
+        streamlit.cli.main(['run',app_path])
+    else:
+        streamlit.cli.main(['run',app_path, f'{root}'])
 
 def __main__():
     app()
