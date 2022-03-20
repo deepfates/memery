@@ -65,3 +65,6 @@ def treemap_loader(treepath):
     else:
         treemap = None
     return(treemap)
+
+if __name__ == '__main__':
+    print('TESTING')

@@ -4,6 +4,8 @@ import typer
 import memery.core
 import streamlit.cli
 
+# Sometimes you just want to be able to pipe information through the terminal. This is that command
+
 app = typer.Typer()
 
 @app.command()

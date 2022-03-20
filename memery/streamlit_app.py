@@ -84,10 +84,19 @@ if text_query or image_query:
                 ranked = send_image_query(path, text_query, image_query)
             else:
                 ranked = send_text_query(path, text_query)
-    ims = [Image.open(o).convert('RGB') for o in ranked[:num_images]]
-    names = [o.replace(path, '') for o in ranked[:num_images]]
+    # ims = [Image.open(o).convert('RGB') for o in ranked[:num_images]]
+    # names = [o.replace(path, '') for o in ranked[:num_images]]
+
+    ims_to_display = {}
+    for o in ranked[:num_images]:
+        name = o.replace(path, '')
+        try:
+            ims_to_display[name] = Image.open(o).convert('RGB')
+        except Exception as e:
+            print(e)
+            pass
 
     if captions_on:
-        images = st.image(ims, width=sizes[size_choice], channels='RGB', caption=names)
+        images = st.image([o for o in ims_to_display.values()], width=sizes[size_choice], channels='RGB', caption=[o for o in ims_to_display.keys()])
     else:
-        images = st.image(ims, width=sizes[size_choice], channels='RGB')
+        images = st.image([o for o in ims_to_display.values()], width=sizes[size_choice], channels='RGB')
