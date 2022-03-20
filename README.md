@@ -82,6 +82,19 @@ Currently memery has a rough browser-based GUI. To launch it, run the following 
 
 or set up a desktop shortcut that points to the above command.
 
+You can pass a directory to open on startup, like so:
+
+```memery serve home/user/Pictures/memes```
+
+Relative directories will also work:
+
+```
+cd ~/Pictures
+memery serve memes
+```
+
+The default directory passed will be `./images`, which is memery's example meme directory.
+
 Memery will open in a browser window. The interface is pretty straightforward, but it has some quirks.
 
 ![screenshot of memery GUI displaying wholesome memes](images/streamlit-screenshot.png)
