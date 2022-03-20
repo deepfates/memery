@@ -1,3 +1,0 @@
----
-BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries"
-BUNDLE_BUILD__UNF_EXT: "--use-system-libraries"
