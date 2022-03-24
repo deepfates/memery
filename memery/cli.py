@@ -20,9 +20,9 @@ def serve(root: Optional[str] = typer.Argument(None)):
     """Runs the streamlit GUI in your browser"""
     app_path = memery.__file__.replace('__init__.py','streamlit_app.py')
     if root is None:
-        streamlit.cli.main(['run',app_path])
+        streamlit.cli.main(['run', app_path, './images'])
     else:
-        streamlit.cli.main(['run',app_path, f'{root}'])
+        streamlit.cli.main(['run', app_path, f'{root}'])
 
 def __main__():
     app()
