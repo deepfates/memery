@@ -2,9 +2,8 @@ __all__ = ['st_redirect', 'st_stdout', 'st_stderr', 'send_image_query', 'send_te
            'image_query', 'im_display_zone', 'logbox', 'sizes']
 
 import argparse
-from multiprocessing.sharedctypes import Value
-from os import F_ULOCK
-from unittest import skip
+# from os import F_ULOCK
+# from unittest import skip
 import streamlit as st
 from memery import core
 
@@ -17,21 +16,17 @@ from contextlib import contextmanager
 from io import StringIO
 import sys
 
+# Parses the args from the command line
+def parse_args(args):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('root', help='starting directory to search')
+    return parser.parse_args(args)
+
 # Initalize session state
-if "image_settings_changed" not in st.session_state:
-    st.session_state.image_settings_changed = False
-if "do_search" not in st.session_state:
-    st.session_state.do_search = False
+args = parse_args(sys.argv[1:])
 
 # Configs
 st.set_page_config(page_title='Memery', layout="centered")
-
-# Setters
-def settings_changed():
-    st.session_state.image_settings_changed = True
-
-def set_search():
-    st.session_state.do_search = True
 
 # Index the directory
 def index(logbox, path):
@@ -46,7 +41,6 @@ def index(logbox, path):
 
 # Clears out the database and treemap files
 def clear_cache(path, logbox):
-    # Look for .pt and .ann files in path
     root = Path(path)
     if root.exists():
         db = root/'memery.pt'
@@ -55,7 +49,7 @@ def clear_cache(path, logbox):
             db.unlink(), treemap.unlink()
             with logbox:
                 with st_stdout('info'):
-                    print("Cleared cache")
+                    print("Cache emptied! Removed memery.pt and memery.ann")
         else:
             with logbox:
                 st.warning("No cached files found!")
@@ -102,13 +96,6 @@ def search(path, text_query, image_query, image_query_display, image_display_zon
             with st_stdout('warning'):
                 print(f'{path} does not exist!')
 
-# Parses the args from the command line
-def parse_args(args):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('root', help='starting directory to search')
-    return parser.parse_args(args)
-
-args = parse_args(sys.argv[1:])
 
 @contextmanager
 def st_redirect(src, dst):
@@ -156,20 +143,23 @@ def send_text_query(path, text_query):
 # Draw the sidebar
 st.sidebar.title("Memery")
 
+settings = st.sidebar.expander(label="Settings", expanded=False)
+with settings:
+    do_clear_cache = st.button(label="Clear Cache")
+
 dir_l, dir_r = st.sidebar.columns([3,1])
 with dir_l:
     path = st.text_input(label='Directory', value=args.root)
 with dir_r:
     st.title("")
-    st.button(label="Index", key='do_index')
-st.sidebar.button(label="Clear Cache", key='clear_cache')
+    do_index = st.button(label="Index", key='do_index')
 
 search_l, search_r = st.sidebar.columns([3,1])
 with search_l:
-    text_query = st.text_input(label='Text query', value='', on_change=set_search)
+    text_query = st.text_input(label='Text query', value='')
 with search_r:
     st.title("")
-    st.button(label="Search", key="search_button", on_click=set_search)
+    search_button = st.button(label="Search", key="search_button")
 
 
 image_query = st.sidebar.file_uploader(label='Image query')
@@ -177,23 +167,22 @@ image_query_display = st.sidebar.container()
 logbox = st.sidebar.container()
 skipped_files_box = st.sidebar.expander(label='Skipped files', expanded=False)
 
-st.session_state.do_search = True
 # Draw the main page
 sizes = {'small': 115, 'medium':230, 'large':332, 'xlarge':600}
 l, m, r = st.columns([4,1,1])
 with l:
-    num_images = st.slider(label='Number of images',value=12, on_change=settings_changed)
+    num_images = st.slider(label='Number of images',value=12)
 
 with m:
-    size_choice = st.selectbox(label='Image width', options=[k for k in sizes.keys()], index=1, on_change=settings_changed)
+    size_choice = st.selectbox(label='Image width', options=[k for k in sizes.keys()], index=1)
 with r:
-    captions_on = st.checkbox(label="Caption filenames", value=False, on_change=settings_changed)
+    captions_on = st.checkbox(label="Caption filenames", value=False)
 image_display_zone = st.container()
 
 # Decide which actions to take
-if st.session_state.do_search or st.session_state.image_settings_changed:
+if search_button or text_query or image_query and not do_clear_cache:
     search(path, text_query, image_query, image_query_display, image_display_zone, logbox, skipped_files_box, num_images, captions_on, sizes, size_choice)
-if st.session_state.do_index:
+if do_index:
     index(logbox, path)
-if st.session_state.clear_cache:
+if do_clear_cache:
     clear_cache(path, logbox)
