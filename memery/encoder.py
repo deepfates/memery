@@ -2,13 +2,20 @@ __all__ = ['device', 'model', 'image_encoder', 'text_encoder', 'image_query_enco
 
 import torch
 import clip
+from clip.model import CLIP
 from tqdm import tqdm
+from torch.utils.data import DataLoader
+from torch import device
+from torchvision.transforms import Compose
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model, _ = clip.load("ViT-B/32", device, jit=False)
-model = model.float()
 
-def image_encoder(img_loader, device):
+def load_model(device):
+    model, _ = clip.load("ViT-B/32", device, jit=False)
+    model = model.float()
+    return(model)
+
+def image_encoder(img_loader: DataLoader, device: device, model: CLIP):
     image_embeddings = torch.tensor(()).to(device)
     with torch.no_grad():
         for images, labels in tqdm(img_loader):
@@ -18,14 +25,14 @@ def image_encoder(img_loader, device):
     image_embeddings = image_embeddings / image_embeddings.norm(dim=-1, keepdim=True)
     return(image_embeddings)
 
-def text_encoder(text, device):
+def text_encoder(text, device: device, model: CLIP):
     with torch.no_grad():
         text = clip.tokenize(text).to(device)
         text_features = model.encode_text(text)
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
     return(text_features)
 
-def image_query_encoder(image, device):
+def image_query_encoder(image, device: device, model: CLIP):
     with torch.no_grad():
         image_embed = model.encode_image(image.unsqueeze(0).to(device))
     image_embed = image_embed / image_embed.norm(dim=-1, keepdim=True)

@@ -2,7 +2,8 @@ __all__ = ['hash_path', 'get_image_files', 'verify_image', 'device', 'archive_lo
 
 from pathlib import Path
 from PIL import Image
-from tqdm import tqdm
+
+from torch import device
 
 # We take the filename and last modified time to check for modified images
 def hash_path(filepath):
@@ -25,12 +26,7 @@ def verify_image(f):
         print(f'Skipping bad file: {f}\ndue to {type(e)}')
         pass
 
-
 import torch
-import torchvision
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device
 
 def archive_loader(filepaths, root, device):
     dbpath = root/'memery.pt'
@@ -43,7 +39,7 @@ def archive_loader(filepaths, root, device):
 
     return(archive_db, new_files)
 
-def db_loader(dbpath, device):
+def db_loader(dbpath: str, device: device):
     if Path(dbpath).exists():
         db = torch.load(dbpath, device)
     else:

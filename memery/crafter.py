@@ -1,11 +1,14 @@
 __all__ = ['make_dataset', 'pil_loader', 'DatasetImagePaths', 'clip_transform', 'crafter', 'preproc']
 
 import torch
+from torch import Tensor, device
 from torchvision.datasets import VisionDataset
 from PIL import Image
+from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
+from torch.utils.data import Dataset, DataLoader
 
 
-def make_dataset(new_files):
+def make_dataset(new_files: list[str]):
     '''Returns a list of samples of a form (path_to_sample, class) and in
     this case the class is just the filename'''
     samples = []
@@ -41,9 +44,7 @@ class DatasetImagePaths(VisionDataset):
                 sample = self.transforms(sample)
             return sample, target
 
-from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
-
-def clip_transform(n_px):
+def clip_transform(n_px: int) -> Compose:
     return Compose([
         Resize(n_px, interpolation=Image.BICUBIC),
         CenterCrop(n_px),
@@ -51,12 +52,12 @@ def clip_transform(n_px):
         Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)),
     ])
 
-def crafter(new_files, device, batch_size=128, num_workers=4):
+def crafter(new_files: list[str], device: device, batch_size: int=128, num_workers: int=4):
     with torch.no_grad():
         imagefiles=DatasetImagePaths(new_files, clip_transform(224))
-        img_loader=torch.utils.data.DataLoader(imagefiles, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+        img_loader=DataLoader(imagefiles, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     return(img_loader)
 
-def preproc(img):
+def preproc(img: Tensor) -> Compose:
     transformed = clip_transform(224)(img)
     return(transformed)
