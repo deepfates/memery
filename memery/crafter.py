@@ -26,6 +26,7 @@ def pil_loader(path: str) -> Image.Image:
         return img.convert('RGB')
 
 class DatasetImagePaths(VisionDataset):
+    
     def __init__(self, new_files, transforms = None):
         super(DatasetImagePaths, self).__init__(new_files, transforms=transforms)
         samples, slugs = make_dataset(new_files)

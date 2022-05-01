@@ -14,9 +14,14 @@ from memery import loader, crafter, encoder, indexer, ranker
 
 class Memery():
     def __init__(self):
+        self.index_file = 'memery.ann'
+        self.db_file = 'memery.pt'
         self.index = None
         self.db = None
         self.model = None
+        # Gonna try keeping multiple indexes and dbs loaded and see if we get memory issues
+        self.db_dict = dict()
+        self.index_dict = dict()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
 
@@ -28,9 +33,9 @@ class Memery():
 
         # Check if we should re-index the files
         print("Checking files")
-        dbpath = root/'memery.pt'
+        dbpath = root/self.index_file
         db = loader.db_loader(dbpath, device)
-        treepath = root/'memery.ann'
+        treepath = root/self.db_file
         treemap = loader.treemap_loader(treepath)
         filepaths = loader.get_valid_images(root)
         
@@ -62,7 +67,6 @@ class Memery():
 
         return(save_paths)
 
-
     def query_flow(self, path: str, query: str=None, image_query: Tensor=None, reindex: bool=False):
         '''
         Indexes a folder and returns file paths ranked by query.
@@ -79,8 +83,8 @@ class Memery():
         root = Path(path)
         device = self.device
 
-        dbpath = root/'memery.pt'
-        treepath = root/'memery.ann'
+        dbpath = root/self.db_file
+        treepath = root/self.index_file
         treemap = loader.treemap_loader(Path(treepath))
         db = loader.db_loader(dbpath, device)
 
@@ -114,26 +118,32 @@ class Memery():
 
         return(ranked_files)
 
+    def clear_cache(self):
+        '''
+        Clears the cache of the memery object
+        TODO TODO TODO
+        '''
+        self.index = None
+        self.db = None
+        self.model = None
+
     def get_model(self):
         '''
         Gets a new clip model if not initialized
-
-        Parameters:
-            path (str): Path to model
         '''
         if self.model == None:
             self.model = encoder.load_model(self.device)
         return self.model
 
-    def get_index(self):
+    def get_index(self, treepath: str):
         '''
         Gets a new index if not initialized
 
         Parameters:
             path (str): Path to index
         '''
-        if self.index == None:
-            self.index = loader.treemap_loader(self.treepath)
+        if treepath not in self.index_dict:
+            self.index = loader.treemap_loader(treepath)
         return self.index
 
     def get_db(self, dbpath: str):

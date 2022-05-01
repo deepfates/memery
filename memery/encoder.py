@@ -8,9 +8,7 @@ from torch.utils.data import DataLoader
 from torch import device
 from torchvision.transforms import Compose
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-def load_model(device):
+def load_model(device: device) -> CLIP:
     model, _ = clip.load("ViT-B/32", device, jit=False)
     model = model.float()
     return(model)
@@ -25,7 +23,7 @@ def image_encoder(img_loader: DataLoader, device: device, model: CLIP):
     image_embeddings = image_embeddings / image_embeddings.norm(dim=-1, keepdim=True)
     return(image_embeddings)
 
-def text_encoder(text, device: device, model: CLIP):
+def text_encoder(text: str, device: device, model: CLIP):
     with torch.no_grad():
         text = clip.tokenize(text).to(device)
         text_features = model.encode_text(text)

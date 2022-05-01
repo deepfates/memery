@@ -1,15 +1,23 @@
 __all__ = ['hash_path', 'get_image_files', 'verify_image', 'device', 'archive_loader', 'db_loader', 'treemap_loader']
 
+# Builtins
 from pathlib import Path
+
+# Images
 from PIL import Image
 
+# Machine learning
+import torch
 from torch import device
 
+# Indexing
+from annoy import AnnoyIndex
+
 # We take the filename and last modified time to check for modified images
-def hash_path(filepath):
+def hash_path(filepath: str):
     return f'{filepath.stem}_{str(filepath.stat().st_mtime).split(".")[0]}'
 
-def get_image_files(path):
+def get_image_files(path: Path):
     img_extensions = {'.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif', '.tiff', '.webp'}
     return [(f, hash_path(f)) for f in path.rglob('*') if f.suffix in img_extensions]
 
@@ -17,7 +25,7 @@ def get_valid_images(path):
     filepaths = get_image_files(path)
     return [f for f in filepaths if verify_image(f[0])]
 
-def verify_image(f):
+def verify_image(f: str):
     try:
         img = Image.open(f)
         img.verify()
@@ -25,8 +33,6 @@ def verify_image(f):
     except Exception as e:
         print(f'Skipping bad file: {f}\ndue to {type(e)}')
         pass
-
-import torch
 
 def archive_loader(filepaths, root, device):
     dbpath = root/'memery.pt'
@@ -46,9 +52,7 @@ def db_loader(dbpath: str, device: device):
         db = {}
     return(db)
 
-from annoy import AnnoyIndex
-
-def treemap_loader(treepath):
+def treemap_loader(treepath) -> AnnoyIndex:
     treemap = AnnoyIndex(512, 'angular')
 
     if treepath.exists():
