@@ -3,6 +3,7 @@ __all__ = ['index_flow', 'query_flow']
 # Builtins 
 import time
 from pathlib import Path
+import logging
 
 # Machine Learning
 import torch
@@ -28,7 +29,7 @@ class Memery():
 
     def index_flow(self, root: str):
         '''Indexes images in path, returns the location of save files'''
-        
+
         start_time = time.time()
         if self.root != root:
             self.root = root
@@ -39,10 +40,10 @@ class Memery():
 
         # Check if we should re-index the files
         print("Checking files")
-        dbpath = path/self.index_file
-        db = loader.db_loader(dbpath, device)
-        treepath = path/self.db_file
-        treemap = loader.treemap_loader(treepath)
+        dbpath = path/self.db_file
+        db = self.get_db(str(dbpath))
+        treepath = path/self.index_file
+        treemap = self.get_index(str(treepath))
         filepaths = loader.get_valid_images(path)
         
         db_set = set([o['hash'] for o in db.values()])
@@ -51,13 +52,14 @@ class Memery():
         if treemap == None or db_set != fp_set:
             archive_db = {}
 
-            archive_db, new_files = loader.archive_loader(filepaths, path, device)
+            archive_db, new_files = loader.archive_loader(filepaths, db)
             print(f"Loaded {len(archive_db)} encodings")
             print(f"Encoding {len(new_files)} new images")
 
             # Crafting and encoding
             crafted_files = crafter.crafter(new_files, device)
-            new_embeddings = encoder.image_encoder(crafted_files, device)
+            model = self.get_model()
+            new_embeddings = encoder.image_encoder(crafted_files, device, model)
 
             # Reindexing
             db = indexer.join_all(archive_db, new_files, new_embeddings)
@@ -66,6 +68,7 @@ class Memery():
 
             print(f"Saving {len(db)} encodings")
             save_paths = indexer.save_archives(path, treemap, db)
+            self.reset_state()
         else:
             save_paths = (str(dbpath), str(treepath))
 
@@ -73,7 +76,7 @@ class Memery():
 
         return(save_paths)
 
-    def query_flow(self, path: str, query: str=None, image_query: Tensor=None, reindex: bool=False):
+    def query_flow(self, root: str, query: str=None, image_query: Tensor=None, reindex: bool=False):
         '''
         Indexes a folder and returns file paths ranked by query.
 
@@ -89,34 +92,35 @@ class Memery():
         if self.root != root:
             self.root = root
             self.reset_state()
-        root = Path(path)
+        path = Path(root)
         device = self.device
 
-        dbpath = root/self.db_file
-        treepath = root/self.index_file
+        dbpath = path/self.db_file
+        treepath = path/self.index_file
         treemap = self.get_index(treepath)
         db = self.get_db(dbpath)
 
         # Rebuild the tree if it doesn't exist
         if reindex==True or len(db) == 0 or treemap == None:
             print('Indexing')
-            dbpath, treepath = self.index_flow(root)
+            dbpath, treepath = self.index_flow(path)
             self.reset_state()
             treemap = self.get_index(treepath)
             db = self.get_db(dbpath)
 
+        model = self.get_model()
         # Convert queries to vector
         print('Converting query')
         if image_query:
             img = crafter.preproc(image_query)
         if query and image_query:
-            text_vec = encoder.text_encoder(query, device)
-            image_vec = encoder.image_query_encoder(img, device)
+            text_vec = encoder.text_encoder(query, device, model)
+            image_vec = encoder.image_query_encoder(img, device, model)
             query_vec = text_vec + image_vec
         elif query:
-            query_vec = encoder.text_encoder(query, device)
+            query_vec = encoder.text_encoder(query, device, model)
         elif image_query:
-            query_vec = encoder.image_query_encoder(img, device)
+            query_vec = encoder.image_query_encoder(img, device, model)
         else:
             print('No query!')
 
@@ -152,7 +156,7 @@ class Memery():
         Parameters:
             path (str): Path to index
         '''
-        if treepath == None:
+        if self.index == None:
             self.index = loader.treemap_loader(treepath)
         return self.index
 

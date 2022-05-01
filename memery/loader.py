@@ -34,9 +34,7 @@ def verify_image(f: str):
         print(f'Skipping bad file: {f}\ndue to {type(e)}')
         pass
 
-def archive_loader(filepaths, root, device):
-    dbpath = root/'memery.pt'
-    db = db_loader(dbpath, device)
+def archive_loader(filepaths, db):
 
     current_hashes = [hash for path, hash in filepaths]
     archive_db = {i:db[item[0]] for i, item in enumerate(db.items()) if item[1]['hash'] in current_hashes}
