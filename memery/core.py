@@ -16,17 +16,13 @@ from memery import loader, crafter, encoder, indexer, ranker
 class Memery():
     def __init__(self, root: str = None):
         self.index_file = 'memery.ann'
-        self.root = None
         self.db_file = 'memery.pt'
+        self.root = None
         self.index = None
         self.db = None
         self.model = None
-        # Gonna try keeping multiple indexes and dbs loaded and see if we get memory issues
-        self.db_dict = dict()
-        self.index_dict = dict()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
-
     def index_flow(self, root: str):
         '''Indexes images in path, returns the location of save files'''
 
@@ -57,7 +53,7 @@ class Memery():
             print(f"Encoding {len(new_files)} new images")
 
             # Crafting and encoding
-            crafted_files = crafter.crafter(new_files, device)
+            crafted_files = crafter.crafter(new_files, device, num_workers=0)
             model = self.get_model()
             new_embeddings = encoder.image_encoder(crafted_files, device, model)
 
@@ -131,15 +127,6 @@ class Memery():
         print(f"Done in {time.time() - start_time} seconds")
 
         return(ranked_files)
-
-    def clear_cache(self):
-        '''
-        Clears the cache of the memery object
-        TODO TODO TODO
-        '''
-        self.index = None
-        self.db = None
-        self.model = None
 
     def get_model(self):
         '''

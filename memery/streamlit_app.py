@@ -3,7 +3,7 @@ __all__ = ['st_redirect', 'st_stdout', 'st_stderr', 'send_image_query', 'send_te
 
 import argparse
 import streamlit as st
-from memery import core
+from memery.core import Memery
 
 from pathlib import Path
 from PIL import Image
@@ -14,6 +14,7 @@ from contextlib import contextmanager
 from io import StringIO
 import sys
 
+
 # Parses the args from the command line
 def parse_args(args):
     parser = argparse.ArgumentParser()
@@ -22,6 +23,9 @@ def parse_args(args):
 
 # Initalize session state
 args = parse_args(sys.argv[1:])
+if 'memery' not in st.session_state:
+    st.session_state['memery'] = Memery()
+memery: Memery = st.session_state['memery']
 
 # Configs
 st.set_page_config(page_title='Memery', layout="centered")
@@ -31,7 +35,8 @@ def index(logbox, path):
     if Path(path).exists():
         with logbox:
             with st_stdout('info'):
-                    core.index_flow(path)
+                    memery.index_flow(str(path))
+                    pass
     else:
         with logbox:
             with st_stdout('warning'):
@@ -57,42 +62,23 @@ def clear_cache(path, logbox):
                 print(f'{path} does not exist!')
 
 # Runs a search
-def search(path, text_query, image_query, image_query_display, image_display_zone, logbox, skipped_files_box, num_images, captions_on, sizes, size_choice):
-    if Path(path).exists():
-        if text_query or image_query:
-            with logbox:
-                with st_stdout('info'):
-                    if image_query is not None:
-                        img = Image.open(image_query).convert('RGB')
-                        with image_query_display:
-                            st.image(img)
-                        ranked = send_image_query(path, text_query, img)
-                    else:
-                        ranked = send_text_query(path, text_query)
-
-            ims_to_display = {}
-            for o in ranked[:num_images]:
-                name = o.replace(path, '')
-                try:
-                    ims_to_display[name] = Image.open(o).convert('RGB')
-                except Exception as e:
-                    with skipped_files_box:
-                        st.warning(f'Skipping bad file: {name}\ndue to {type(e)}')
-                        pass
-            
-            with image_display_zone:
-                if captions_on:
-                    images = st.image([o for o in ims_to_display.values()], width=sizes[size_choice], channels='RGB', caption=[o for o in ims_to_display.keys()])
-                else:
-                    images = st.image([o for o in ims_to_display.values()], width=sizes[size_choice], channels='RGB')
+def search(root, text_query, image_query, image_query_display, image_display_zone, logbox, skipped_files_box, num_images, captions_on, sizes, size_choice):
+    ranked = memery.query_flow(root, text_query, image_query, reindex = False)
+    ims_to_display = {}
+    for o in ranked[:num_images]:
+        name = o.replace(path, '')
+        try:
+            ims_to_display[name] = Image.open(o).convert('RGB')
+        except Exception as e:
+            with skipped_files_box:
+                st.warning(f'Skipping bad file: {name}\ndue to {type(e)}')
+                pass
+    
+    with image_display_zone:
+        if captions_on:
+            images = st.image([o for o in ims_to_display.values()], width=sizes[size_choice], channels='RGB', caption=[o for o in ims_to_display.keys()])
         else:
-            with logbox:
-                with st_stdout('warning'):
-                    print('Use a text or image query!')
-    else:
-        with logbox:
-            with st_stdout('warning'):
-                print(f'{path} does not exist!')
+            images = st.image([o for o in ims_to_display.values()], width=sizes[size_choice], channels='RGB')
 
 
 @contextmanager
@@ -130,13 +116,15 @@ def st_stderr(dst):
 
 @st.cache
 def send_image_query(path, text_query, image_query):
-    ranked = core.query_flow(path, text_query, image_query)
-    return(ranked)
+    # ranked = core.query_flow(path, text_query, image_query)
+    # return(ranked)
+    return
 
 @st.cache
 def send_text_query(path, text_query):
-    ranked = core.query_flow(path, text_query)
-    return(ranked)
+    # ranked = core.query_flow(path, text_query)
+    # return(ranked)
+    return
 
 # Draw the sidebar
 st.sidebar.title("Memery")
@@ -182,5 +170,5 @@ if search_button or text_query or image_query and not do_clear_cache:
     search(path, text_query, image_query, image_query_display, image_display_zone, logbox, skipped_files_box, num_images, captions_on, sizes, size_choice)
 if do_index:
     index(logbox, path)
-if do_clear_cache:
-    clear_cache(path, logbox)
+# if do_clear_cache:
+#     clear_cache(path, logbox)
