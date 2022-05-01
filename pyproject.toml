@@ -10,8 +10,6 @@ torch = "^1.11.0"
 annoy = "^1.17.0"
 torchvision = "^0.12.0"
 tqdm = "^4.64.0"
-ipywidgets = "^7.7.0"
-ipython = "^8.3.0"
 Pillow = "^9.1.0"
 typer = "^0.4.1"
 streamlit = "1.3.1"
@@ -23,6 +21,8 @@ regex = "^2022.4.24"
 memery = "memery.cli:__main__"
 
 [tool.poetry.dev-dependencies]
+ipywidgets = "^7.7.0"
+ipython = "^8.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
