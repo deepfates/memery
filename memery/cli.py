@@ -1,5 +1,3 @@
-__all__ = ['app', 'recall', 'serve', '__main__']
-
 import typer
 from memery.core import Memery
 import memery
