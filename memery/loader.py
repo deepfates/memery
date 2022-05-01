@@ -52,9 +52,9 @@ def db_loader(dbpath: str, device: device):
         db = {}
     return(db)
 
-def treemap_loader(treepath) -> AnnoyIndex:
+def treemap_loader(treepath: str) -> AnnoyIndex:
     treemap = AnnoyIndex(512, 'angular')
-
+    treepath = Path(treepath)
     if treepath.exists():
         treemap.load(str(treepath))
     else:

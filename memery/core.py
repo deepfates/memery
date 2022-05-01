@@ -13,8 +13,9 @@ from torchvision.transforms import Compose
 from memery import loader, crafter, encoder, indexer, ranker
 
 class Memery():
-    def __init__(self):
+    def __init__(self, root: str = None):
         self.index_file = 'memery.ann'
+        self.root = None
         self.db_file = 'memery.pt'
         self.index = None
         self.db = None
@@ -25,19 +26,24 @@ class Memery():
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
 
-    def index_flow(self, path: str):
+    def index_flow(self, root: str):
         '''Indexes images in path, returns the location of save files'''
+        
         start_time = time.time()
-        root = Path(path)
+        if self.root != root:
+            self.root = root
+            self.reset_state()
+        
+        path = Path(root)
         device = self.device
 
         # Check if we should re-index the files
         print("Checking files")
-        dbpath = root/self.index_file
+        dbpath = path/self.index_file
         db = loader.db_loader(dbpath, device)
-        treepath = root/self.db_file
+        treepath = path/self.db_file
         treemap = loader.treemap_loader(treepath)
-        filepaths = loader.get_valid_images(root)
+        filepaths = loader.get_valid_images(path)
         
         db_set = set([o['hash'] for o in db.values()])
         fp_set = set([o for _, o in filepaths])
@@ -45,7 +51,7 @@ class Memery():
         if treemap == None or db_set != fp_set:
             archive_db = {}
 
-            archive_db, new_files = loader.archive_loader(filepaths, root, device)
+            archive_db, new_files = loader.archive_loader(filepaths, path, device)
             print(f"Loaded {len(archive_db)} encodings")
             print(f"Encoding {len(new_files)} new images")
 
@@ -59,7 +65,7 @@ class Memery():
             treemap = indexer.build_treemap(db)
 
             print(f"Saving {len(db)} encodings")
-            save_paths = indexer.save_archives(root, treemap, db)
+            save_paths = indexer.save_archives(path, treemap, db)
         else:
             save_paths = (str(dbpath), str(treepath))
 
@@ -80,20 +86,24 @@ class Memery():
             list of file paths ranked by query
         '''
         start_time = time.time()
+        if self.root != root:
+            self.root = root
+            self.reset_state()
         root = Path(path)
         device = self.device
 
         dbpath = root/self.db_file
         treepath = root/self.index_file
-        treemap = loader.treemap_loader(Path(treepath))
-        db = loader.db_loader(dbpath, device)
+        treemap = self.get_index(treepath)
+        db = self.get_db(dbpath)
 
-        # Rebuild the tree if it doesn't
+        # Rebuild the tree if it doesn't exist
         if reindex==True or len(db) == 0 or treemap == None:
             print('Indexing')
             dbpath, treepath = self.index_flow(root)
-            treemap = loader.treemap_loader(Path(treepath))
-            db = loader.db_loader(dbpath, device)
+            self.reset_state()
+            treemap = self.get_index(treepath)
+            db = self.get_db(dbpath)
 
         # Convert queries to vector
         print('Converting query')
@@ -142,7 +152,7 @@ class Memery():
         Parameters:
             path (str): Path to index
         '''
-        if treepath not in self.index_dict:
+        if treepath == None:
             self.index = loader.treemap_loader(treepath)
         return self.index
 
@@ -156,3 +166,10 @@ class Memery():
         if self.db == None:
             self.db = loader.db_loader(dbpath, self.device)
         return self.db
+
+    def reset_state(self):
+        '''
+        Resets the index and db
+        '''
+        self.index = None
+        self.db = None
