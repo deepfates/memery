@@ -36,7 +36,7 @@ def index(logbox, path):
         with logbox:
             with st_stdout('info'):
                     memery.index_flow(str(path))
-                    pass
+                    memery.reset_state()
     else:
         with logbox:
             with st_stdout('warning'):
