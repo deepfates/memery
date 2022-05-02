@@ -1,5 +1,3 @@
-__all__ = ['device', 'model', 'image_encoder', 'text_encoder', 'image_query_encoder']
-
 import torch
 import clip
 from clip.model import CLIP
