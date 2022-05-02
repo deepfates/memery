@@ -3,10 +3,12 @@ import time
 from pathlib import Path
 import logging
 
-# Machine Learning
+# Dependencies
 import torch
 from torch import Tensor, device
 from torchvision.transforms import Compose
+from PIL import Image
+
 
 # Local imports
 from memery import loader, crafter, encoder, indexer, ranker
@@ -21,7 +23,7 @@ class Memery():
         self.model = None
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
-    def index_flow(self, root: str):
+    def index_flow(self, root: str, num_workers=0):
         '''Indexes images in path, returns the location of save files'''
 
         start_time = time.time()
@@ -51,7 +53,7 @@ class Memery():
             print(f"Encoding {len(new_files)} new images")
 
             # Crafting and encoding
-            crafted_files = crafter.crafter(new_files, device, num_workers=0)
+            crafted_files = crafter.crafter(new_files, device, num_workers=num_workers)
             model = self.get_model()
             new_embeddings = encoder.image_encoder(crafted_files, device, model)
 
@@ -62,15 +64,15 @@ class Memery():
 
             print(f"Saving {len(db)} encodings")
             save_paths = indexer.save_archives(path, treemap, db)
-            self.reset_state()
+
         else:
             save_paths = (str(dbpath), str(treepath))
-
+        self.reset_state()
         print(f"Done in {time.time() - start_time} seconds")
 
         return(save_paths)
 
-    def query_flow(self, root: str, query: str=None, image_query: Tensor=None, reindex: bool=False):
+    def query_flow(self, root: str, query: str=None, image_query: str=None, reindex: bool=False):
         '''
         Indexes a folder and returns file paths ranked by query.
 
@@ -83,6 +85,7 @@ class Memery():
             list of file paths ranked by query
         '''
         start_time = time.time()
+
         if self.root != root:
             self.root = root
             self.reset_state()
@@ -106,6 +109,7 @@ class Memery():
         # Convert queries to vector
         print('Converting query')
         if image_query:
+            image_query = Image.open(image_query).convert('RGB')
             img = crafter.preproc(image_query)
         if query and image_query:
             text_vec = encoder.text_encoder(query, device, model)
