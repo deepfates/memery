@@ -1,8 +1,8 @@
 ### Core
-    Need a way to reload the db and index if the root changes
-        We want to allow the root to change in the same instance
-            So somehow detect if root changes?
-            I guess we could keep a dict that tracks multiple indexes and and databases but that could use a lot of memory. Is that bad design?
+    General stability improvements, be wary of invalid inputs
+    We might be able to do tqdm more cleverer
+    Implement clear_cache in a sane way
 
 ### GUI
-    Should create memery object and keep it open
+    Add a slider for num_workers to the GUI
+    Figure out best way to capture and display stdout information
