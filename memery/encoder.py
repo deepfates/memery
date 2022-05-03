@@ -3,7 +3,7 @@ import clip
 from clip.model import CLIP
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from torch import device
+from torch import Tensor, device
 from torchvision.transforms import Compose
 
 def load_model(device: device) -> CLIP:
@@ -28,7 +28,7 @@ def text_encoder(text: str, device: device, model: CLIP):
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
     return(text_features)
 
-def image_query_encoder(image, device: device, model: CLIP):
+def image_query_encoder(image: Tensor, device: device, model: CLIP):
     with torch.no_grad():
         image_embed = model.encode_image(image.unsqueeze(0).to(device))
     image_embed = image_embed / image_embed.norm(dim=-1, keepdim=True)

@@ -23,7 +23,7 @@ class Memery():
         self.model = None
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
-    def index_flow(self, root: str, num_workers=0):
+    def index_flow(self, root: str, num_workers=0) -> tuple[str, str]:
         '''Indexes images in path, returns the location of save files'''
 
         start_time = time.time()
@@ -72,7 +72,7 @@ class Memery():
 
         return(save_paths)
 
-    def query_flow(self, root: str, query: str=None, image_query: str=None, reindex: bool=False):
+    def query_flow(self, root: str, query: str=None, image_query: str=None, reindex: bool=False) -> list[str]:
         '''
         Indexes a folder and returns file paths ranked by query.
 

@@ -8,7 +8,7 @@ from typing import Optional
 app = typer.Typer()
 
 @app.command()
-def recall(path: str, query: str, n: int = 10):
+def recall(path: str, query: str, n: int = 10) -> list[str]:
     """Search recursively over a folder from the command line"""
     memery = Memery()
     ranked = memery.query_flow(path, query=query, reindex=True)

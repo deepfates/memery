@@ -1,4 +1,7 @@
-def join_all(db, new_files, new_embeddings):
+from annoy import AnnoyIndex
+import torch
+
+def join_all(db, new_files, new_embeddings) -> dict:
     start = len(db)
     for i, file in enumerate(new_files):
         path, hash = file
@@ -10,9 +13,7 @@ def join_all(db, new_files, new_embeddings):
         }
     return(db)
 
-from annoy import AnnoyIndex
-
-def build_treemap(db):
+def build_treemap(db) -> AnnoyIndex:
     treemap = AnnoyIndex(512, 'angular')
     for k, v in db.items():
         treemap.add_item(k, v['embed'])
@@ -23,9 +24,7 @@ def build_treemap(db):
     return(treemap)
 
 
-import torch
-
-def save_archives(root, treemap, db):
+def save_archives(root, treemap, db) -> tuple[str, str]:
     dbpath = root/'memery.pt'
     if dbpath.exists():
 #         dbpath.rename(root/'memery-bak.pt')

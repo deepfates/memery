@@ -6,7 +6,7 @@ from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normal
 from torch.utils.data import Dataset, DataLoader
 
 
-def make_dataset(new_files: list[str]):
+def make_dataset(new_files: list[str]) -> tuple[list[str], list[str]]:
     '''Returns a list of samples of a form (path_to_sample, class) and in
     this case the class is just the filename'''
     samples = []

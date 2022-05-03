@@ -1,25 +1,22 @@
 # Builtins
 from pathlib import Path
+from typing import Any
 
-# Images
+# External
 from PIL import Image
-
-# Machine learning
 import torch
 from torch import device
-
-# Indexing
 from annoy import AnnoyIndex
 
 # We take the filename and last modified time to check for modified images
-def hash_path(filepath: str):
+def hash_path(filepath: str) -> str:
     return f'{filepath.stem}_{str(filepath.stat().st_mtime).split(".")[0]}'
 
-def get_image_files(path: Path):
+def get_image_files(path: Path) -> list[str]:
     img_extensions = {'.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif', '.tiff', '.webp'}
     return [(f, hash_path(f)) for f in path.rglob('*') if f.suffix in img_extensions]
 
-def get_valid_images(path):
+def get_valid_images(path: Path) -> list[str]:
     filepaths = get_image_files(path)
     return [f for f in filepaths if verify_image(f[0])]
 
@@ -32,7 +29,7 @@ def verify_image(f: str):
         print(f'Skipping bad file: {f}\ndue to {type(e)}')
         pass
 
-def archive_loader(filepaths, db):
+def archive_loader(filepaths: list[str], db: Any) -> tuple[ set[str], list[str] ]: # Just guessing on the return type
 
     current_hashes = [hash for path, hash in filepaths]
     archive_db = {i:db[item[0]] for i, item in enumerate(db.items()) if item[1]['hash'] in current_hashes}
@@ -41,7 +38,10 @@ def archive_loader(filepaths, db):
 
     return(archive_db, new_files)
 
-def db_loader(dbpath: str, device: device):
+def db_loader(dbpath: str, device: device) -> Any:
+    '''
+    Loads a .pt file
+    '''
     if Path(dbpath).exists():
         db = torch.load(dbpath, device)
     else:
@@ -49,6 +49,9 @@ def db_loader(dbpath: str, device: device):
     return(db)
 
 def treemap_loader(treepath: str) -> AnnoyIndex:
+    '''
+    Loads a .ann file
+    '''
     treemap = AnnoyIndex(512, 'angular')
     treepath = Path(treepath)
     if treepath.exists():
