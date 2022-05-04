@@ -32,6 +32,8 @@ class Memery():
             self.reset_state()
         
         path = Path(root)
+        if not path.is_dir():
+            logging.error("Invalid path: %s", root)
         device = self.device
 
         # Check if we should re-index the files
@@ -90,6 +92,8 @@ class Memery():
             self.root = root
             self.reset_state()
         path = Path(root)
+        if not path.is_dir():
+            logging.error("Invalid path: %s", root)
         device = self.device
 
         dbpath = path/self.db_file
@@ -134,9 +138,9 @@ class Memery():
         '''
         Removes all files produced by Memery
         '''
-        if not root:
-            return
         path = Path(root)
+        if not path.is_dir():
+            logging.error("Invalid path: %s", root)
         db_path = path/Path(self.db_file)
         treemap_path = path/Path(self.index_file)
         db_path.unlink(missing_ok=True), treemap_path.unlink(missing_ok=True)

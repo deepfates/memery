@@ -58,7 +58,7 @@ if image_query: # Display the image query if there is one
     img = Image.open(image_query).convert('RGB')
     with image_query_display:
         st.image(img)
-logbox = st.sidebar.container()
+logbox = st.sidebar.empty()
 skipped_files_box = st.sidebar.expander(label='Skipped files', expanded=False)
 
 # Draw the main page
@@ -93,7 +93,9 @@ def clear_cache(root, logbox):
 
 # Runs a search
 def search(root, text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice):
-    ranked = memery.query_flow(root, text_query, image_query)
+    with logbox:
+        with st_stdout('info'):
+            ranked = memery.query_flow(root, text_query, image_query)
     ims_to_display = {}
     size = sizes[size_choice]
     for o in ranked[:num_images]:
@@ -145,9 +147,10 @@ def st_stderr(dst):
         yield
 
 # Decide which actions to take
-if search_button or text_query or image_query and not do_clear_cache:
-    search(path, text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice)
-if do_index:
-    index(logbox, path, num_workers)
 if do_clear_cache:
     clear_cache(path, logbox)
+elif do_index:
+    index(logbox, path, num_workers)
+elif search_button or text_query or image_query and not do_clear_cache:
+    search(path, text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice)
+
