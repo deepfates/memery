@@ -14,6 +14,7 @@ from memery.core import Memery
 import streamlit as st
 from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
 
+
 # Parses the args from the command line
 def parse_args(args: list[str]):
     parser = argparse.ArgumentParser()
@@ -78,7 +79,7 @@ def index(logbox, path, num_workers):
     if Path(path).exists():
         with logbox:
             with st_stdout('info'):
-                    memery.index_flow(str(path), num_workers)
+                    memery.index_flow(path, num_workers)
     else:
         with logbox:
             with st_stdout('warning'):
@@ -93,6 +94,11 @@ def clear_cache(root, logbox):
 
 # Runs a search
 def search(root, text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice):
+    if not Path(path).exists():
+        with logbox:
+            with st_stdout('warning'):
+                print(f'{path} does not exist!')
+                return
     with logbox:
         with st_stdout('info'):
             ranked = memery.query_flow(root, text_query, image_query)
@@ -151,6 +157,6 @@ if do_clear_cache:
     clear_cache(path, logbox)
 elif do_index:
     index(logbox, path, num_workers)
-elif search_button or text_query or image_query and not do_clear_cache:
+elif search_button or text_query or image_query:
     search(path, text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice)
 

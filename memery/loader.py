@@ -7,6 +7,7 @@ from PIL import Image
 import torch
 from torch import device
 from annoy import AnnoyIndex
+import logging
 
 # We take the filename and last modified time to check for modified images
 def hash_path(filepath: str) -> str:
@@ -26,7 +27,7 @@ def verify_image(f: str):
         img.verify()
         return(True)
     except Exception as e:
-        print(f'Skipping bad file: {f}\ndue to {type(e)}')
+        logging.exception('Skipping bad file: %s\ndue to %s', f, e)
         pass
 
 def archive_loader(filepaths: list[str], db: Any) -> tuple[ set[str], list[str] ]: # Just guessing on the return type

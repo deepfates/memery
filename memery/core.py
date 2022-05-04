@@ -34,10 +34,11 @@ class Memery():
         path = Path(root)
         if not path.is_dir():
             logging.error("Invalid path: %s", root)
+            return
         device = self.device
 
         # Check if we should re-index the files
-        print("Checking files")
+        print("Checking files...")
         dbpath = path/self.db_file
         db = self.get_db(str(dbpath))
         treepath = path/self.index_file
@@ -94,6 +95,7 @@ class Memery():
         path = Path(root)
         if not path.is_dir():
             logging.error("Invalid path: %s", root)
+            return
         device = self.device
 
         dbpath = path/self.db_file
@@ -125,6 +127,7 @@ class Memery():
             query_vec = encoder.image_query_encoder(img, device, model)
         else:
             print('No query!')
+            return ""
 
         # Rank db by query
         print(f"Searching {len(db)} images")
