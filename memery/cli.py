@@ -15,12 +15,12 @@ def recall(
     root: str = typer.Argument(None, help="Image folder to search"),
     text: str = typer.Option(None, *("-t", "--text"), help="Text query"),
     image: str = typer.Option(None, *("-i", "--image"), help="Filepath to image query") ,
-    count: int = typer.Option(10, *("-c", "--count"), help="Number of results to return")
+    number: int = typer.Option(10, *("-n", "--number"), help="Number of results to return")
     ) -> list[str]:
     """Search recursively over a folder from the command line"""
     memery = Memery()
     ranked = memery.query_flow(root, query=text, image_query=image)
-    print(ranked[:count])
+    print(ranked[:number])
 
 @app.command()
 def serve(root: Optional[str] = typer.Argument(None)):
