@@ -3,7 +3,7 @@ from torch import Tensor, device
 from torchvision.datasets import VisionDataset
 from PIL import Image
 from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 
 
 def make_dataset(new_files: list[str]) -> tuple[list[str], list[str]]:

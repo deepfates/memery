@@ -23,5 +23,12 @@ def serve(root: Optional[str] = typer.Argument(None)):
     else:
         streamlit.cli.main(['run', app_path, f'{root}'])
 
+@app.command()
+def purge(root: str = typer.Argument(None)):
+    """
+    Cleans out all files saved by Memery
+    """
+    return None
+
 def __main__():
     app()

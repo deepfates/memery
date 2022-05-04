@@ -130,6 +130,12 @@ class Memery():
 
         return(ranked_files)
 
+    def clean(self, root: str) -> None:
+        '''
+        Removes all files produced by Memery
+        '''
+        return None
+
     def get_model(self):
         '''
         Gets a new clip model if not initialized
@@ -160,7 +166,7 @@ class Memery():
             self.db = loader.db_loader(dbpath, self.device)
         return self.db
 
-    def reset_state(self):
+    def reset_state(self) -> None:
         '''
         Resets the index and db
         '''
