@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "memery"
-version = "0.13.0"
+version = "0.15.0"
 description = ""
 authors = ["deepfates <deepfates@gmail.com>", "wkrettek <warrenkrettek@gmail.com>"]
 
@@ -18,7 +18,7 @@ ftfy = "^6.1.1"
 regex = "^2022.4.24"
 
 [tool.poetry.scripts]
-memery = "memery.cli:__main__"
+memery = "memery.cli:main"
 
 [tool.poetry.dev-dependencies]
 ipywidgets = "^7.7.0"

@@ -1,6 +1,6 @@
-from annoy import AnnoyIndex, _Vector
+from annoy import AnnoyIndex
 
-def ranker(query_vec: _Vector, treemap: AnnoyIndex) -> list[int]:
+def ranker(query_vec, treemap: AnnoyIndex) -> list[int]:
     nn_indexes = treemap.get_nns_by_vector(query_vec[0], treemap.get_n_items())
     return(nn_indexes)
 

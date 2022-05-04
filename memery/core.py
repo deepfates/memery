@@ -134,7 +134,12 @@ class Memery():
         '''
         Removes all files produced by Memery
         '''
-        return None
+        if not root:
+            return
+        path = Path(root)
+        db_path = path/Path(self.db_file)
+        treemap_path = path/Path(self.index_file)
+        db_path.unlink(missing_ok=True), treemap_path.unlink(missing_ok=True)
 
     def get_model(self):
         '''
