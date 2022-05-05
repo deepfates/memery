@@ -14,10 +14,10 @@ from PIL import Image
 from memery import loader, crafter, encoder, indexer, ranker
 
 class Memery():
-    def __init__(self, root: str = None):
+    def __init__(self, root: str = '.'):
         self.index_file = 'memery.ann'
         self.db_file = 'memery.pt'
-        self.root = None
+        self.root = root
         self.index = None
         self.db = None
         self.model = None

@@ -12,7 +12,7 @@ def main():
 
 @app.command()
 def recall(
-    root: str = typer.Argument(None, help="Image folder to search"),
+    root: str = typer.Argument('.', help="Image folder to search"),
     text: str = typer.Option(None, *("-t", "--text"), help="Text query"),
     image: str = typer.Option(None, *("-i", "--image"), help="Filepath to image query") ,
     number: int = typer.Option(10, *("-n", "--number"), help="Number of results to return")
@@ -33,7 +33,7 @@ def serve(root: Optional[str] = typer.Argument(None)):
 
 @app.command()
 def build(
-    root: str = typer.Argument(None),
+    root: str = typer.Argument('.'),
     workers: int = typer.Option(default=0)
     ):
     '''
@@ -44,7 +44,7 @@ def build(
     return None
 
 @app.command()
-def purge(root: str = typer.Argument(None)):
+def purge(root: str = typer.Argument('.')):
     """
     Cleans out all files saved by memery
     """
