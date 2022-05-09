@@ -195,7 +195,9 @@ Memery is open source and you can contribute. See [CONTRIBUTING.md](CONTRIBUTING
 
 Memery was first written by Max Anton Brewer aka @deepfates in the summer of 2021. Some commits are listed from @robotface-io but that was just me using the wrong account when I first started. 
 
+Many UI and back-end improvements were added by @wkrettek in 2022! 🙌🎉🌟 
+
 I wrote this to solve my own needs and learn notebook-based development. I hope it helps other people too. If you can help me make it better, please do. I welcome any contribution, guidance or criticism.
 
-**The ideal way to get support is to open an issue on Github**. However, the *fastest* way to get a response from me is probably to [direct message me on twitter](twitter.com/deepfates). This is my first attempt to coordinate an open-source project, bear with me.
+**The ideal way to get support is to open an issue on Github**. However, the *fastest* way to get a response from me is probably to [direct message me on twitter](twitter.com/deepfates).
 
