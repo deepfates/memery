@@ -1,19 +1,26 @@
-__all__ = ['app', 'recall', 'serve', '__main__']
-
 import typer
-import memery.core
+from memery.core import Memery
+import memery
 import streamlit.cli
 from typing import Optional
 # Sometimes you just want to be able to pipe information through the terminal. This is that command
 
 app = typer.Typer()
 
+def main():
+    app()
+
 @app.command()
-def recall(path: str, query: str, n: int = 10):
+def recall(
+    root: str = typer.Argument('.', help="Image folder to search"),
+    text: str = typer.Option(None, *("-t", "--text"), help="Text query"),
+    image: str = typer.Option(None, *("-i", "--image"), help="Filepath to image query") ,
+    number: int = typer.Option(10, *("-n", "--number"), help="Number of results to return")
+    ) -> list[str]:
     """Search recursively over a folder from the command line"""
-    ranked = memery.core.query_flow(path, query=query, reindex=True)
-    print(ranked[:n])
-#     return(ranked)
+    memery = Memery()
+    ranked = memery.query_flow(root, query=text, image_query=image)
+    print(ranked[:number])
 
 @app.command()
 def serve(root: Optional[str] = typer.Argument(None)):
@@ -24,5 +31,26 @@ def serve(root: Optional[str] = typer.Argument(None)):
     else:
         streamlit.cli.main(['run', app_path, f'{root}'])
 
-def __main__():
-    app()
+@app.command()
+def build(
+    root: str = typer.Argument('.'),
+    workers: int = typer.Option(default=0)
+    ):
+    '''
+    Indexes the directory and all subdirectories
+    '''
+    memery = Memery()
+    memery.index_flow(root, num_workers=workers)
+    return None
+
+@app.command()
+def purge(root: str = typer.Argument('.')):
+    """
+    Cleans out all files saved by memery
+    """
+    memery = Memery()
+    memery.clean(root)
+    print("Purged files!")
+
+if __name__ == "__main__":
+    main()
