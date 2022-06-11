@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "memery"
-version = "0.15.0"
+version = "0.1.0"
 description = ""
 authors = ["deepfates <deepfates@gmail.com>", "wkrettek <warrenkrettek@gmail.com>"]
 
