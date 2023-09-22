@@ -37,8 +37,7 @@ if __name__ == "__main__":
         print("Poetry is already installed.")
     else:
         print("Poetry is not installed. Installing...")
-        install_poetry()
-    # Poetry install 
+        install_poetry()    
 
     # check if cuda is installed
     # cuda_check("11.3.0")
