@@ -31,6 +31,10 @@ Outline:
 - Contributing
   - Who works on this project
 
+## Quickstart-Windows
+- Run the `windows-install.bat` file
+- Run the `windows-run.bat` file
+
 ## Installation
 
 With Python 3.9 or greater:
