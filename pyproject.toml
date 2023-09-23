@@ -16,6 +16,7 @@ streamlit = "1.3.1"
 clip = {git = "https://github.com/openai/CLIP", rev = "main"}
 ftfy = "^6.1.1"
 regex = "^2022.4.24"
+altair = "^4.0.0"
 
 [tool.poetry.scripts]
 memery = "memery.cli:main"
