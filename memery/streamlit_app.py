@@ -48,6 +48,7 @@ with dir_r:
 search_l, search_r = st.sidebar.columns([3,1])
 with search_l:
     text_query = st.text_input(label='Text query', value='')
+    negative_text_query = st.text_input(label='Negative Text query', value='')
 with search_r:
     st.title("")
     search_button = st.button(label="Search", key="search_button")
@@ -93,7 +94,7 @@ def clear_cache(root, logbox):
             print("Cleaned database and index files")
 
 # Runs a search
-def search(root, text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice):
+def search(root, text_query, negative_text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice):
     if not Path(path).exists():
         with logbox:
             with st_stdout('warning'):
@@ -101,7 +102,7 @@ def search(root, text_query, image_query, image_display_zone, skipped_files_box,
                 return
     with logbox:
         with st_stdout('info'):
-            ranked = memery.query_flow(root, text_query, image_query)
+            ranked = memery.query_flow(root, text_query, negative_text_query, image_query)  # Modified line
     ims_to_display = {}
     size = sizes[size_choice]
     for o in ranked[:num_images]:
@@ -158,5 +159,5 @@ if do_clear_cache:
 elif do_index:
     index(logbox, path, num_workers)
 elif search_button or text_query or image_query:
-    search(path, text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice)
+    search(path, text_query, negative_text_query, image_query, image_display_zone, skipped_files_box, num_images, captions_on, sizes, size_choice)  # Modified line
 
