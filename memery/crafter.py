@@ -1,7 +1,7 @@
 import torch
 from torch import Tensor, device
 from torchvision.datasets import VisionDataset
-from PIL import Image
+from PIL import Image, ImageFile
 from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
 from torch.utils.data import DataLoader
 
@@ -18,10 +18,15 @@ def make_dataset(new_files: list[str]) -> tuple[list[str], list[str]]:
     return(samples, slugs)
 
 def pil_loader(path: str) -> Image.Image:
-    # open path as file to avoid ResourceWarning (https://github.com/python-pillow/Pillow/issues/835)
-    with open(path, 'rb') as f:
-        img = Image.open(f)
-        return img.convert('RGB')
+    ImageFile.LOAD_TRUNCATED_IMAGES = True  # Allow truncated images
+    try:
+        # open path as file to avoid ResourceWarning (https://github.com/python-pillow/Pillow/issues/835)
+        with open(path, 'rb') as f:            
+            img = Image.open(f)
+            return img.convert('RGB')
+    except Exception as e:
+        print(f"Skipping image {path}: {e}")
+        return None
 
 class DatasetImagePaths(VisionDataset):
     
@@ -37,11 +42,15 @@ class DatasetImagePaths(VisionDataset):
 
     def __getitem__(self, index):
         path, target = self.samples[index]
-        sample = self.loader(path)
-        if sample is not None:
-            if self.transforms is not None:
-                sample = self.transforms(sample)
-            return sample, target
+        try:
+            sample = self.loader(path)
+            if sample is not None:
+                if self.transforms is not None:
+                    sample = self.transforms(sample)
+                return sample, target
+        except Exception as e:
+            print(f"Skipping file {path} due to error: {e}")
+            return None
 
 def clip_transform(n_px: int) -> Compose:
     return Compose([
