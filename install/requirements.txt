@@ -1,0 +1,4 @@
+packaging>=20.0
+poetry>=1.6.1
+protobuf==3.20.*
+setuptools>=68.2.2
