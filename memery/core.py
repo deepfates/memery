@@ -22,7 +22,8 @@ class Memery():
         self.db = None
         self.model = None
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        
+        print(f"Using {self.device} for computation.")
+
     def index_flow(self, root: str, num_workers=0) -> tuple[str, str]:
         '''Indexes images in path, returns the location of save files'''
 
@@ -75,13 +76,14 @@ class Memery():
 
         return(save_paths)
 
-    def query_flow(self, root: str, query: str=None, image_query: str=None, reindex: bool=False) -> list[str]:
+    def query_flow(self, root: str, query: str=None, negative_query: str=None, image_query: str=None, reindex: bool=False) -> list[str]:
         '''
         Indexes a folder and returns file paths ranked by query.
 
         Parameters:
             path (str): Folder to search
-            query (str): Search query text
+            query (str): Positive search query text
+            negative_query (str): Negative search query text
             image_query (Tensor): Search query image(s)
             reindex (bool): Reindex the folder if True
         Returns:
@@ -123,6 +125,9 @@ class Memery():
             query_vec = text_vec + image_vec
         elif query:
             query_vec = encoder.text_encoder(query, device, model)
+            if negative_query:
+                negative_query_vec = encoder.text_encoder(negative_query, self.device, model)
+                query_vec = query_vec - negative_query_vec  # Subtract negative query vector from positive query vector
         elif image_query:
             query_vec = encoder.image_query_encoder(img, device, model)
         else:
