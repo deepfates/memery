@@ -55,6 +55,12 @@ pip install memery
 pip install git+https://github.com/openai/CLIP.git
 ```
 
+From Docker
+```
+docker build -t memery .
+docker run -it -p 8501:8501 -v /path/to/images:/app/images
+```
+
 Currently memery defaults to GPU installation. This will 
 probably be switched in a future version. 
 
