@@ -6,9 +6,9 @@ authors = ["deepfates <deepfates@gmail.com>", "wkrettek <warrenkrettek@gmail.com
 
 [tool.poetry.dependencies]
 python = "^3.9"
-torch = "^1.11.0"
+torch = "^2.2.0"
 annoy = "^1.17.0"
-torchvision = "^0.12.0"
+torchvision = "^0.17.0"
 tqdm = "^4.64.0"
 Pillow = "^9.1.0"
 typer = "^0.4.1"
@@ -17,6 +17,8 @@ clip = {git = "https://github.com/openai/CLIP", rev = "main"}
 ftfy = "^6.1.1"
 regex = "^2022.4.24"
 altair = "^4.0.0"
+numpy = "^1.24.0"
+protobuf = "^3.20.0"
 
 [tool.poetry.scripts]
 memery = "memery.cli:main"
