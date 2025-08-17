@@ -1,11 +1,12 @@
 # Builtins
 from pathlib import Path
 from PIL import Image
-from io import StringIO
+from io import StringIO, BytesIO
 import sys
 import argparse
 from threading import current_thread
 from contextlib import contextmanager
+import zipfile
 
 # Local
 from memery.core import Memery
@@ -116,6 +117,27 @@ def search(root, text_query, negative_text_query, image_query, image_display_zon
                 st.warning(f'Skipping bad file: {name}\ndue to {type(e)}')
                 pass
     with image_display_zone:
+        # Add Download All button at the top if there are results
+        if ims_to_display:
+            # Create a zip file in memory with all the images
+            zip_buffer = BytesIO()
+            with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+                for name, img in ims_to_display.items():
+                    original_file_path = full_paths[name]
+                    # Use just the filename for the zip entry to avoid path issues
+                    filename = Path(original_file_path).name
+                    with open(original_file_path, 'rb') as f:
+                        zip_file.writestr(filename, f.read())
+            
+            zip_buffer.seek(0)
+            st.download_button(
+                label="⬇ Download All as ZIP",
+                data=zip_buffer.getvalue(),
+                file_name="memery_results.zip",
+                mime="application/zip",
+                key="download_all"
+            )
+        
         if captions_on:
             # Display images with captions and download buttons
             cols = st.columns(min(3, len(ims_to_display)))  # Create columns for layout
