@@ -104,18 +104,37 @@ def search(root, text_query, negative_text_query, image_query, image_display_zon
         with st_stdout('info'):
             ranked = memery.query_flow(root, text_query, negative_text_query, image_query)  # Modified line
     ims_to_display = {}
+    full_paths = {}  # Store full paths for download functionality
     size = sizes[size_choice]
     for o in ranked[:num_images]:
         name = o.replace(path, '')
         try:
             ims_to_display[name] = Image.open(o).convert('RGB')
+            full_paths[name] = o  # Store the full path
         except Exception as e:
             with skipped_files_box:
                 st.warning(f'Skipping bad file: {name}\ndue to {type(e)}')
                 pass
     with image_display_zone:
         if captions_on:
-            st.image([o for o in ims_to_display.values()], width=size, channels='RGB', caption=[o for o in ims_to_display.keys()])
+            # Display images with captions and download buttons
+            cols = st.columns(min(3, len(ims_to_display)))  # Create columns for layout
+            for idx, (name, img) in enumerate(ims_to_display.items()):
+                col_idx = idx % min(3, len(ims_to_display))
+                with cols[col_idx]:
+                    st.image(img, width=size, channels='RGB', caption=name)
+                    # Add download button for each image - use full path to get original file
+                    original_file_path = full_paths[name]
+                    with open(original_file_path, 'rb') as file:
+                        file_bytes = file.read()
+                        filename = Path(original_file_path).name
+                        st.download_button(
+                            label="⬇ Download",
+                            data=file_bytes,
+                            file_name=filename,
+                            mime=f"image/{Path(original_file_path).suffix[1:]}",
+                            key=f"download_{idx}"
+                        )
         else:
             st.image([o for o in ims_to_display.values()], width=sizes[size_choice], channels='RGB')
 
