@@ -195,11 +195,6 @@ And finally install your local, editable copy of memery with
 
 Memery is open source and you can contribute. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how you can help.
 
-### Who works on this project
-
-Memery was first written by Max Anton Brewer aka @deepfates in the summer of 2021. Some commits are listed from @robotface-io but that was just me using the wrong account when I first started. 
-
-Many UI and back-end improvements were added by @wkrettek in 2022! 🙌🎉🌟 
 
 I wrote this to solve my own needs and learn notebook-based development. I hope it helps other people too. If you can help me make it better, please do. I welcome any contribution, guidance or criticism.
 
