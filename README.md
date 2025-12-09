@@ -86,7 +86,7 @@ What's your use case?
 
 ### Use GUI
 
-Currently memery has a rough browser-based GUI. To launch it, run the following in a command line: 
+Currently memery has a rough browser-based GUI. To launch it, run the following in a command line:
 
 ```memery serve```
 
@@ -116,6 +116,18 @@ The search will run once you enter a text or image query. If you enter both text
 Beneath these widgets is the output area for temporary messages displayed with each search. Mostly this can be ignored.
 
 The right hand panel displays the images and associated options. Major errors will appear here as giant stack traces; sometimes, changing variables in the other widgets will fix these errors live. If you get a large error here it's helpful to take a screenshot and share it with us in Github Issues.
+
+### Use the native desktop app (MVP)
+
+For a quick "just run it" desktop experience without opening your browser, memery now ships a minimal Tkinter shell. Launch it from a terminal with:
+
+```
+memery-native
+```
+
+Pick a folder, type a text query (or pick an image to search by similarity), set how many results you want, and click **Search**. Double-click a result to open it with your operating system's default viewer.
+
+The first search in a folder will take longer while CLIP downloads and the index is built. After that, searches run from the cached index in the selected folder.
 
 ### Use CLI
 
