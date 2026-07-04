@@ -37,7 +37,7 @@ Outline:
 
 ## Installation
 
-With Python 3.9 or greater:
+With Python 3.10, 3.11, or 3.12:
 
 From github (recommended)
 ```
@@ -60,7 +60,7 @@ probably be switched in a future version.
 
 For now, if you want to run CPU-only, run the following command after installing memery:
 
-`pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html`
+`pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu`
 
 Someday memery will be packaged in an easy to use format, but since this is a Python project it is hard to predict when that day will be.
 
