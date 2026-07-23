@@ -9,6 +9,7 @@ from PIL import Image
 
 # Local
 from memery.core import Memery
+from memery.downloads import file_download, results_archive
 
 
 # Parses the args from the command line
@@ -104,22 +105,42 @@ def search(root, text_query, negative_text_query, image_query,
         logbox.info('No results.')
         return
 
-    ims_to_display = {}
+    display_items = []
     size = sizes[size_choice]
     for o in ranked[:num_images]:
         name = o.replace(root, '')
         try:
-            ims_to_display[name] = Image.open(o).convert('RGB')
+            display_items.append((name, Image.open(o).convert('RGB'), o))
         except Exception as e:
             with skipped_files_box:
                 st.warning(f'Skipping bad file: {name}\ndue to {type(e)}')
+    if not display_items:
+        logbox.warning('No readable images in the results.')
+        return
     with image_display_zone:
+        originals = [path for _, _, path in display_items]
+        st.download_button(
+            label="Download all as ZIP",
+            data=results_archive(originals, root),
+            file_name="memery-results.zip",
+            mime="application/zip",
+            key="download_all",
+        )
         if captions_on:
-            st.image(list(ims_to_display.values()),
-                     width=size, channels='RGB',
-                     caption=list(ims_to_display.keys()))
+            columns = st.columns(min(3, len(display_items)))
+            for index, (name, image, original) in enumerate(display_items):
+                data, filename, mime = file_download(original)
+                with columns[index % len(columns)]:
+                    st.image(image, width=size, channels='RGB', caption=name)
+                    st.download_button(
+                        label="Download",
+                        data=data,
+                        file_name=filename,
+                        mime=mime,
+                        key=f"download_{index}",
+                    )
         else:
-            st.image(list(ims_to_display.values()),
+            st.image([image for _, image, _ in display_items],
                      width=size, channels='RGB')
     logbox.success(f'Found {len(ranked)} matches.')
 
